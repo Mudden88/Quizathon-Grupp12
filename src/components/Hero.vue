@@ -1,4 +1,24 @@
 <script setup>
+import { onMounted } from 'vue'
+import axios from 'axios'
+
+const data = []
+
+const fetchData = () => {
+  axios.get('http://avancera.app/cities')
+    .then(response => {
+
+      data.push(response.data)
+    })
+}
+
+onMounted(() => {
+  fetchData()
+  console.log(data)
+
+
+})
+
 
 function randomQuiz() {
   alert('Här kommer det grejjer sen')
