@@ -1,11 +1,14 @@
 <script setup>
 
+function randomQuiz() {
+  console.log('Här kommer det grejjer sen')
+}
 
 </script>
 
 <template>
   <div class="container">
-    <div class="startQuiz">
+    <div class="startQuiz" @click="randomQuiz">
       <img class="qm1" src="../assets/Vectorqmark.png">
       <img class="qm2" src="../assets/Vectorqmark.png">
       <img class="qm3" src="../assets/Vectorqmark.png">
@@ -61,6 +64,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .startQuiz h2 {
