@@ -6,3 +6,9 @@
   --Pop-color: #e6c16b;
   --Dark-color: #272727;
 }
+
+* {
+  font-family: "Mouse Memoirs", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
