@@ -47,10 +47,6 @@ img {
   transform: rotate(25deg);
 }
 
-.container {
-  width: 100vw;
-}
-
 .startQuiz {
   background: var(--Main-lighter-color);
   color: var(--Light-color);
