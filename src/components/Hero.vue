@@ -1,35 +1,12 @@
 <script setup>
-import { onMounted } from 'vue'
-import axios from 'axios'
-
-const data = []
-
-const fetchData = () => {
-  axios.get('http://avancera.app/cities')
-    .then(response => {
-
-      data.push(response.data)
-    })
-}
-
-onMounted(() => {
-  fetchData()
-  console.log(data)
-
-
-})
-
-
-function randomQuiz() {
-  alert('Här kommer det grejjer sen')
-}
-
+//Lägg in router link på .blur elementet, till component
+//som kommer köra ett random quiz
 </script>
 
 <template>
   <div class="container">
     <div class="hero">
-      <div class="blur" @click="randomQuiz">
+      <div class="blur"> <!--  RouterLink till component -->
         <h2>Welcome</h2>
         <p>Start random quiz</p>
       </div>
