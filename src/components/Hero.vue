@@ -8,7 +8,7 @@ function randomQuiz() {
 
 <template>
   <div class="container">
-    <div class="startQuiz" @click="randomQuiz">
+    <div class="hero" @click="randomQuiz">
       <img class="qm1" src="../assets/Vectorqmark.png">
       <img class="qm2" src="../assets/Vectorqmark.png">
       <img class="qm3" src="../assets/Vectorqmark.png">
@@ -55,7 +55,7 @@ img {
   transform: rotate(25deg);
 }
 
-.startQuiz {
+.hero {
   background: var(--Main-lighter-color);
   color: var(--Light-color);
   width: 338px;
@@ -67,7 +67,7 @@ img {
   cursor: pointer;
 }
 
-.startQuiz h2 {
+.hero h2 {
   font-size: 40px;
   position: relative;
   right: 60px;
