@@ -1,7 +1,7 @@
 <script setup>
 
 function randomQuiz() {
-  console.log('Här kommer det grejjer sen')
+  alert('Här kommer det grejjer sen')
 }
 
 </script>
