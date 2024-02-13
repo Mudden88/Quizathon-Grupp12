@@ -32,7 +32,7 @@ img {
 .qm3 {
   bottom: 60px;
   left: 130px;
-  transform: rotate(-25deg);
+  transform: rotate(-28deg);
 }
 
 .qm4 {
