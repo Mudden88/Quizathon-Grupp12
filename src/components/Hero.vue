@@ -8,68 +8,58 @@ function randomQuiz() {
 
 <template>
   <div class="container">
-    <div class="hero" @click="randomQuiz">
-      <img class="qm1" src="../assets/Vectorqmark.png">
-      <img class="qm2" src="../assets/Vectorqmark.png">
-      <img class="qm3" src="../assets/Vectorqmark.png">
-      <img class="qm4" src="../assets/Vectorqmark.png">
-      <img class="qm5" src="../assets/Vectorqmark.png">
-      <h2>Welcome</h2>
+    <div class="hero">
+      <div class="blur" @click="randomQuiz">
+        <h2>Welcome</h2>
+        <p>Start random quiz</p>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-img {
-  width: 20px;
-  position: relative;
-}
-
-.qm1 {
-  bottom: 40px;
-  right: 30px;
-  transform: rotate(10deg);
-}
-
-.qm2 {
-  top: 30px;
-  right: 70px;
-  transform: rotate(-20deg);
-}
-
-.qm3 {
-  bottom: 60px;
-  left: 130px;
-  transform: rotate(-28deg);
-}
-
-.qm4 {
-  top: 60px;
-  left: 80px;
-  transform: rotate(-10deg);
-}
-
-.qm5 {
-  right: 30px;
-  bottom: 20px;
-  transform: rotate(25deg);
+.container {
+  max-width: fit-content;
+  padding: 10px 0;
 }
 
 .hero {
   background: var(--Main-lighter-color);
+  background-image: url(../assets/pattern.png);
+  background-size: contain;
   color: var(--Light-color);
   width: 338px;
   height: 214px;
   border-radius: 40px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  cursor: pointer;
+  justify-content: center;
 }
 
-.hero h2 {
+h2 {
   font-size: 40px;
-  position: relative;
-  right: 60px;
+}
+
+h2,
+p {
+  color: var(--Main-color);
+  margin: 0;
+}
+
+p {
+  font-size: 20px;
+}
+
+.blur {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 158px;
+  height: 96px;
+  backdrop-filter: blur(3px);
+  border-radius: 20px;
+  filter: drop-shadow(-2px 2px 0.2rem rgba(0, 0, 0, 0.2));
+  cursor: pointer;
 }
 </style>
