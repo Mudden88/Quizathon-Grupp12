@@ -1,49 +1,100 @@
 <script setup>
 import axios from 'axios'
-import { onMounted } from 'vue'
+import { onMounted, watch, ref } from 'vue'
 
-const questions = []
-const fetchData = () => {
+const questions = ref([])
+
+const fetchData = async () => {
   try {
-    axios.get('https://opentdb.com/api.php?amount=10')
-      .then(response => {
-        questions.push(...response.data.results)
+    const response = await axios.get('https://opentdb.com/api.php?amount=10')
 
-      })
+    questions.value.push(...response.data.results)
 
   } catch (error) {
-    console.error('Error while fetching', error)
+    console.error('Error while fetching:', error)
   }
-
 }
-
 onMounted(() => {
 
   fetchData()
 })
 
+watch(questions, (newQuestion) => {
+  if (newQuestion.length > 0) {
+    console.log('Questions after push', newQuestion)
+  }
+})
+
 </script>
 
 <template>
-  <h1>RandomQuiz Component</h1>
-  <ul v-for="question in questions" :key="question.question">
+  <div class="container">
+    <h1>RandomQuiz Component</h1>
+    <ul v-if="questions.length > 0">
+      <li v-for="(question, index) in questions" :key="question.question">
+        <h3>Question {{ index + 1 }} <span class="difficulty">{{ question.difficulty }}</span>
+        </h3>
 
-  </ul>
+
+        <hr>
+        <p class="mainQuestion"> {{ question.question }}</p>
+        <div class="answerContainer">
+          <p class="answer" v-html="question.correct_answer"></p>
+          <p class="answer" v-for="answer in question.incorrect_answers" :key="answer" v-html="answer"></p>
+
+        </div>
+      </li>
+    </ul>
+    <p v-else>Loading question...</p>
+  </div>
 </template>
 
 <style scoped>
-.questionBox {
-  height: 80px;
-  width: 300px;
-  padding: 20px;
-  margin: 10px;
-  color: var(--Dark-color);
+.container {
+  width: 390px;
+  height: fit-content;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+
+}
+
+hr {
+  width: 338px;
+  margin-left: 0;
+  color: rgba(128, 128, 128, 0.2);
+}
+
+p {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 30px;
 }
 
 .answer {
+  width: 321px;
+  height: 63px;
   background-color: var(--Accent-color);
-  border-radius: 10px;
-  padding: 10px;
-  margin: 5px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px;
+  font-size: 36px;
+}
+
+.answer:hover {
+  transform: scale(1);
+  background-color: var(--Pop-color);
+}
+
+.difficulty {
+  font-size: 15px;
+  color: var(--Accent-color);
 }
 </style>

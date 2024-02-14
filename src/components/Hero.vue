@@ -1,6 +1,5 @@
 <script setup>
-//Lägg in router link på .blur elementet, till component
-//som kommer köra ett random quiz
+import RandomQuiz from './RandomQuiz.vue';
 </script>
 
 <template>
@@ -11,6 +10,7 @@
         <p>Start random quiz</p>
       </div>
     </div>
+    <RandomQuiz />
   </div>
 </template>
 
