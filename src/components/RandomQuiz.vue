@@ -67,8 +67,8 @@ onMounted(() => {
             @click="() => handleAnswerClick(question, answer)">{{
               answer }}</p>
 
+          <div class="button">Confirm</div>
         </div>
-        <button>Submit Answer</button>
       </li>
     </ul>
     <p v-else>Loading question...</p>
@@ -103,7 +103,7 @@ h3 {
 
 .answer {
   width: 321px;
-  height: 63px;
+  min-height: 63px;
   background-color: var(--Accent-color);
   border-radius: 20px;
   display: flex;
@@ -122,5 +122,19 @@ h3 {
 .difficulty {
   font-size: 15px;
   color: var(--Accent-color);
+}
+
+.button {
+  width: 291px;
+  height: 63px;
+  border-radius: 20px;
+  background-color: var(--Main-lighter-color);
+  color: var(--Light-color);
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  margin-top: 1.5em;
 }
 </style>
