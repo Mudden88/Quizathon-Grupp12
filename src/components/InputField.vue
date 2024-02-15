@@ -1,12 +1,9 @@
 <script setup>
-import { ref } from "vue";
 const props = defineProps({
   labelProp: { type: String, required: true },
   placeholderProp: { type: String, required: true },
   idProp: { type: String, required: true },
 });
-
-const input = ref("");
 </script>
 
 <template>
@@ -20,8 +17,7 @@ const input = ref("");
       class="input-field"
       type="text"
       :id="idProp"
-      :placeholder="placeholderProp"
-      v-model="input" />
+      :placeholder="placeholderProp" />
   </div>
 </template>
 
