@@ -7,6 +7,6 @@ import Hero from "./components/Hero.vue";
   <RouterLink to="/">Home</RouterLink>
   <RouterLink to="/page">Page</RouterLink>
   <RouterLink to="/logIn">Log In</RouterLink>
-  <Hero />
+  <!-- <Hero /> -->
   <RouterView></RouterView>
 </template>

@@ -5,7 +5,7 @@ import InputField from "../components/InputField.vue";
 <template>
   <h1>Log in</h1>
 
-  <form action="#">
+  <form class="login-form">
     <InputField
       label-prop="Username"
       placeholder-prop="Username"
@@ -16,3 +16,13 @@ import InputField from "../components/InputField.vue";
       id-prop="password" />
   </form>
 </template>
+
+<style scoped>
+.login-form {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 23px;
+}
+</style>
