@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
 
+const apiUrl = 'https://opentdb.com/api.php?amount=10'
 const questions = ref([])
 const shuffledAnswers = (question) => {
 
@@ -14,7 +15,7 @@ const shuffledAnswers = (question) => {
 }
 
 async function fetchData() {
-  let response = await axios.get('https://opentdb.com/api.php?amount=10')
+  let response = await axios.get(apiUrl)
 
   questions.value = response.data.results
 
@@ -60,13 +61,14 @@ onMounted(() => {
         <h3>Question {{ index + 1 }} <span class="difficulty">{{ question.difficulty }}</span>
         </h3>
         <hr>
-        <p class="mainQuestion"> {{ question.question }}</p>
+        <p class="mainQuestion" v-html="question.question"></p>
         <div class="answerContainer">
           <p class="answer" v-for="answer in shuffledAnswers(question)" :key="answer"
             @click="() => handleAnswerClick(question, answer)">{{
               answer }}</p>
 
         </div>
+        <button>Submit Answer</button>
       </li>
     </ul>
     <p v-else>Loading question...</p>
