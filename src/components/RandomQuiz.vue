@@ -3,22 +3,52 @@ import axios from 'axios'
 import { onMounted, ref } from 'vue'
 
 const questions = ref([])
+const shuffledAnswers = (question) => {
 
-const fetchData = async () => {
-  try {
-    const response = await axios.get('https://opentdb.com/api.php?amount=10')
+  const answers = [...question.incorrect_answers, question.correct_answer]
 
-    questions.value.push(...response.data.results)
+  shuffleArray(answers)
+  console.log(answers)
+  return answers
 
-  } catch (error) {
-    console.error('Error while fetching:', error)
+}
+
+async function fetchData() {
+  let response = await axios.get('https://opentdb.com/api.php?amount=10')
+
+  questions.value = response.data.results
+
+  return questions
+}
+console.log(questions)
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+function selectedAnswer(question, answer) {
+  console.log('Selected answer:', answer)
+  if (question.correct_answer === answer) {
+    console.log('CORRECT!')
+    return question.correct_answer
+  } else {
+    console.log('INCORRECT')
+    return null
+  }
+}
+
+function handleAnswerClick(question, answer) {
+  const correctAnswer = selectedAnswer(question, answer)
+  console.log('Correct Answer:', correctAnswer)
+}
+
 onMounted(() => {
 
   fetchData()
-})
 
+})
 
 </script>
 
@@ -29,13 +59,12 @@ onMounted(() => {
       <li v-for="(question, index) in questions" :key="question.question">
         <h3>Question {{ index + 1 }} <span class="difficulty">{{ question.difficulty }}</span>
         </h3>
-
-
         <hr>
         <p class="mainQuestion"> {{ question.question }}</p>
         <div class="answerContainer">
-          <p class="answer" v-html="question.correct_answer"></p>
-          <p class="answer" v-for="answer in question.incorrect_answers" :key="answer" v-html="answer"></p>
+          <p class="answer" v-for="answer in shuffledAnswers(question)" :key="answer"
+            @click="() => handleAnswerClick(question, answer)">{{
+              answer }}</p>
 
         </div>
       </li>
