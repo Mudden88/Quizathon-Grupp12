@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios'
-import { onMounted, watch, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const questions = ref([])
 
@@ -19,11 +19,6 @@ onMounted(() => {
   fetchData()
 })
 
-watch(questions, (newQuestion) => {
-  if (newQuestion.length > 0) {
-    console.log('Questions after push', newQuestion)
-  }
-})
 
 </script>
 
