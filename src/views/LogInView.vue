@@ -16,6 +16,7 @@ function logIn() {
       console.log("yes");
     } else {
       console.log("nope");
+      error.value = true;
     }
   } else {
     error.value = true;
@@ -43,13 +44,13 @@ function testPassword(input) {
       id-prop="username"
       type-prop="text"
       @onInput="testUsername" />
-    <p v-if="error">Error</p>
     <InputField
       label-prop="Password"
       placeholder-prop="Password"
       id-prop="password"
       type-prop="password"
       @onInput="testPassword" />
+    <p v-if="error">Wrong username or password</p>
     <button
       class="login-btn"
       type="submit"
