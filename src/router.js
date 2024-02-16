@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import HomeView from "./views/HomeView.vue";
 import PageView from "./views/PageView.vue";
+import AllCategories from "./components/AllCategories.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -13,6 +14,11 @@ export default createRouter({
     {
       component: PageView,
       path: "/page",
+    },
+    {
+      component: AllCategories,
+      path: "/categoryId",
+      props: true,
     },
   ],
 });
