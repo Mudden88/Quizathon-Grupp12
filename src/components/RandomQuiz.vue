@@ -5,15 +5,15 @@ import { onMounted, ref } from 'vue'
 const apiUrl = 'https://opentdb.com/api.php?amount=10'
 const questions = ref([])
 
-
-
 const shuffledAnswers = (question) => {
 
   const answers = [...question.incorrect_answers, question.correct_answer]
 
   shuffleArray(answers)
+
   return answers
 }
+
 async function fetchData() {
   let response = await axios.get(apiUrl)
 
@@ -31,8 +31,10 @@ function shuffleArray(array) {
 
 function selectedAnswer(question, answer) {
   if (question.correct_answer === answer) {
+    console.log('COrrECt', answer)
     return question.correct_answer
   } else {
+    console.log('INCORRECT', answer)
     return null
   }
 }
@@ -73,8 +75,8 @@ onMounted(() => {
           <hr>
           <p class="mainQuestion" v-html="question.question"></p>
           <div class="answerContainer">
-            <p class="answer" v-for="answer in shuffledAnswers(question)" :key="answer"
-              @click="() => handleAnswerClick(question, answer)">{{
+            <p id="answer" :class="clicked ? 'popColor' : 'accentColor'" v-for="answer in shuffledAnswers(question)"
+              :key="answer" @click="() => handleAnswerClick(question, answer)">{{
                 answer }}</p>
 
             <div class="button" @click="() => handleConfirmClick(question)">Confirm</div>
@@ -112,7 +114,7 @@ h3 {
   font-size: 30px;
 }
 
-.answer {
+#answer {
   width: 321px;
   min-height: 63px;
   background-color: var(--Accent-color);
@@ -125,8 +127,8 @@ h3 {
   font-size: 36px;
 }
 
-.answer:hover {
-  transform: scale(1);
+#answer:hover {
+  transform: scale(1.1);
   background-color: var(--Pop-color);
 }
 
@@ -147,5 +149,6 @@ h3 {
   align-items: center;
   margin-left: 20px;
   margin-top: 1.5em;
+  cursor: pointer;
 }
 </style>
