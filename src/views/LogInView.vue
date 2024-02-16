@@ -1,14 +1,33 @@
 <script setup>
+import { ref } from "vue";
+
 import InputField from "../components/InputField.vue";
 import users from "../users.json";
 
+const error = ref(false),
+  inputUserName = ref(""),
+  inputPassword = ref("");
+
 function logIn() {
-  console.log("logged in");
-  console.log(users);
+  if (inputUserName.value in users) {
+    error.value = false;
+    let user = users[inputUserName.value];
+    if (inputPassword.value === user.password) {
+      console.log("yes");
+    } else {
+      console.log("nope");
+    }
+  } else {
+    error.value = true;
+  }
 }
 
-function logInput(i) {
-  console.log(i);
+function testUsername(input) {
+  inputUserName.value = input;
+}
+
+function testPassword(input) {
+  inputPassword.value = input;
 }
 </script>
 
@@ -23,13 +42,14 @@ function logInput(i) {
       placeholder-prop="Username"
       id-prop="username"
       type-prop="text"
-      @onInput="logInput" />
+      @onInput="testUsername" />
+    <p v-if="error">Error</p>
     <InputField
       label-prop="Password"
       placeholder-prop="Password"
       id-prop="password"
       type-prop="password"
-      @onInput="logInput" />
+      @onInput="testPassword" />
     <button
       class="login-btn"
       type="submit"
