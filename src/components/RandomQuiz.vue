@@ -4,12 +4,14 @@ import { onMounted, ref } from 'vue'
 
 const apiUrl = 'https://opentdb.com/api.php?amount=10'
 const questions = ref([])
+
+
+
 const shuffledAnswers = (question) => {
 
   const answers = [...question.incorrect_answers, question.correct_answer]
 
   shuffleArray(answers)
-  console.log('Answers = ', answers)
   return answers
 }
 async function fetchData() {
@@ -20,8 +22,6 @@ async function fetchData() {
   return questions
 }
 
-console.log('Questions = ', questions)
-
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -30,19 +30,28 @@ function shuffleArray(array) {
 }
 
 function selectedAnswer(question, answer) {
-  console.log('Selected answer:', answer)
   if (question.correct_answer === answer) {
-    console.log('CORRECT!')
     return question.correct_answer
   } else {
-    console.log('INCORRECT')
     return null
   }
 }
 
 function handleAnswerClick(question, answer) {
   const correctAnswer = selectedAnswer(question, answer)
-  console.log('Correct Answer:', correctAnswer)
+  return correctAnswer
+}
+
+const currentIndex = ref(0)
+
+function newIndex() {
+
+  currentIndex.value += 1
+
+}
+
+function handleConfirmClick() {
+  newIndex()
 }
 
 onMounted(() => {
@@ -58,16 +67,18 @@ onMounted(() => {
     <h1>RandomQuiz Component</h1>
     <ul v-if="questions.length > 0">
       <li v-for="(question, index) in questions" :key="question.question">
-        <h3>Question {{ index + 1 }} <span class="difficulty">{{ question.difficulty }}</span>
-        </h3>
-        <hr>
-        <p class="mainQuestion" v-html="question.question"></p>
-        <div class="answerContainer">
-          <p class="answer" v-for="answer in shuffledAnswers(question)" :key="answer"
-            @click="() => handleAnswerClick(question, answer)">{{
-              answer }}</p>
+        <div class="checkIndex" v-if="index === currentIndex">
+          <h3>Question {{ index + 1 }} <span class="difficulty">{{ question.difficulty }}</span>
+          </h3>
+          <hr>
+          <p class="mainQuestion" v-html="question.question"></p>
+          <div class="answerContainer">
+            <p class="answer" v-for="answer in shuffledAnswers(question)" :key="answer"
+              @click="() => handleAnswerClick(question, answer)">{{
+                answer }}</p>
 
-          <div class="button">Confirm</div>
+            <div class="button" @click="() => handleConfirmClick(question)">Confirm</div>
+          </div>
         </div>
       </li>
     </ul>
