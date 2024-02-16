@@ -29,18 +29,24 @@ function shuffleArray(array) {
   }
 }
 
-function selectedAnswer(question, answer) {
+function selectedAnswer(question, answer, event) {
+
+  const element = event.target
+  element.style.backgroundColor = "var(--Pop-color)"
+
   if (question.correct_answer === answer) {
-    console.log('COrrECt', answer)
+    console.log('CORRECT', answer)
     return question.correct_answer
   } else {
     console.log('INCORRECT', answer)
     return null
   }
+
 }
 
-function handleAnswerClick(question, answer) {
-  const correctAnswer = selectedAnswer(question, answer)
+function handleAnswerClick(question, answer, event) {
+
+  const correctAnswer = selectedAnswer(question, answer, event)
   return correctAnswer
 }
 
@@ -75,9 +81,8 @@ onMounted(() => {
           <hr>
           <p class="mainQuestion" v-html="question.question"></p>
           <div class="answerContainer">
-            <p id="answer" :class="clicked ? 'popColor' : 'accentColor'" v-for="answer in shuffledAnswers(question)"
-              :key="answer" @click="() => handleAnswerClick(question, answer)">{{
-                answer }}</p>
+            <p id="answer" v-for="answer in shuffledAnswers(question)" :key="answer"
+              @click="handleAnswerClick(question, answer, $event)" v-html="answer"></p>
 
             <div class="button" @click="() => handleConfirmClick(question)">Confirm</div>
           </div>
