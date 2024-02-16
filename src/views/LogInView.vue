@@ -2,10 +2,13 @@
 import InputField from "../components/InputField.vue";
 import users from "../users.json";
 
-console.log(users);
-
 function logIn() {
   console.log("logged in");
+  console.log(users);
+}
+
+function logInput(i) {
+  console.log(i);
 }
 </script>
 
@@ -18,11 +21,15 @@ function logIn() {
     <InputField
       label-prop="Username"
       placeholder-prop="Username"
-      id-prop="username" />
+      id-prop="username"
+      type-prop="text"
+      @onInput="logInput" />
     <InputField
       label-prop="Password"
       placeholder-prop="Password"
-      id-prop="password" />
+      id-prop="password"
+      type-prop="password"
+      @onInput="logInput" />
     <button
       class="login-btn"
       type="submit"
@@ -51,5 +58,9 @@ function logIn() {
 
   color: var(--Light-color);
   font-size: 2.25rem;
+
+  &:focus {
+    outline: 3px solid var(--Accent-color);
+  }
 }
 </style>

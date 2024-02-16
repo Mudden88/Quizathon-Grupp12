@@ -1,9 +1,15 @@
 <script setup>
+import { ref } from "vue";
+
+const input = ref("");
+
 const props = defineProps({
   labelProp: { type: String, required: true },
   placeholderProp: { type: String, required: true },
   idProp: { type: String, required: true },
+  typeProp: { type: String, required: true },
 });
+// const emit = defineEmits(["sendInput"]);
 </script>
 
 <template>
@@ -15,9 +21,11 @@ const props = defineProps({
     >
     <input
       class="input-field"
-      type="text"
+      :type="typeProp"
       :id="idProp"
-      :placeholder="placeholderProp" />
+      :placeholder="placeholderProp"
+      v-model="input"
+      @input="$emit('onInput', input)" />
   </div>
 </template>
 
