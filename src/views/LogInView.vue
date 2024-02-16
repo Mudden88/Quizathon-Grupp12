@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import router from "../router.js";
 
 import InputField from "../components/InputField.vue";
 import users from "../users.json";
@@ -8,14 +9,14 @@ const error = ref(false),
   inputUserName = ref(""),
   inputPassword = ref("");
 
-function logIn() {
+function logIn(e) {
+  e.preventDefault;
   if (inputUserName.value in users) {
     error.value = false;
     let user = users[inputUserName.value];
     if (inputPassword.value === user.password) {
-      console.log("yes");
+      router.push("/");
     } else {
-      console.log("nope");
       error.value = true;
     }
   } else {
@@ -23,11 +24,11 @@ function logIn() {
   }
 }
 
-function testUsername(input) {
+function setUsername(input) {
   inputUserName.value = input;
 }
 
-function testPassword(input) {
+function setPassword(input) {
   inputPassword.value = input;
 }
 </script>
@@ -43,14 +44,18 @@ function testPassword(input) {
       placeholder-prop="Username"
       id-prop="username"
       type-prop="text"
-      @onInput="testUsername" />
+      @onInput="setUsername" />
     <InputField
       label-prop="Password"
       placeholder-prop="Password"
       id-prop="password"
       type-prop="password"
-      @onInput="testPassword" />
-    <p v-if="error">Wrong username or password</p>
+      @onInput="setPassword" />
+    <p
+      v-if="error"
+      class="error-msg">
+      Wrong username or password. Please try again!
+    </p>
     <button
       class="login-btn"
       type="submit"
@@ -68,6 +73,13 @@ function testPassword(input) {
   flex-direction: column;
   align-items: center;
   gap: 23px;
+}
+
+.error-msg {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.75rem;
+  text-decoration: underline;
+  color: #872e2e;
 }
 
 .login-btn {
