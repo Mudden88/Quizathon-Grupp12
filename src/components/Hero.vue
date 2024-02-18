@@ -1,11 +1,13 @@
 <script setup>
 import RandomQuiz from './RandomQuiz.vue';
+import
 </script>
 
 <template>
   <div class="container">
     <div class="hero">
-      <div class="blur"> <!--  RouterLink till component -->
+
+      <div class="blur">
         <h2>Welcome</h2>
         <p>Start random quiz</p>
       </div>
