@@ -1,18 +1,18 @@
 <script setup>
-import RandomQuiz from './RandomQuiz.vue';
-import
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
   <div class="container">
     <div class="hero">
 
-      <div class="blur">
-        <h2>Welcome</h2>
-        <p>Start random quiz</p>
-      </div>
+      <RouterLink to="/randomQuiz">
+        <div class="blur">
+          <h2>Welcome</h2>
+          <p>Start random quiz</p>
+        </div>
+      </RouterLink>
     </div>
-    <RandomQuiz />
   </div>
 </template>
 
