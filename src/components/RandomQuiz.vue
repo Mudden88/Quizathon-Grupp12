@@ -1,18 +1,23 @@
 <script setup>
 import axios from 'axios'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 
 const apiUrl = 'https://opentdb.com/api.php?amount=10'
 const questions = ref([])
+const currentIndex = ref(0)
+const selectedAnswerIndex = ref(null)
+const currentScore = ref(0)
 
-const shuffledAnswers = (question) => {
+const shuffledAnswers = computed(() => {
+  if (questions.value.length > 0 && currentIndex.value < questions.value.length) {
+    const question = questions.value[currentIndex.value]
+    const answers = [...question.incorrect_answers, question.correct_answer]
+    shuffleArray(answers)
 
-  const answers = [...question.incorrect_answers, question.correct_answer]
-
-  shuffleArray(answers)
-
-  return answers
-}
+    return answers
+  }
+  return []
+})
 
 async function fetchData() {
   let response = await axios.get(apiUrl)
@@ -29,62 +34,54 @@ function shuffleArray(array) {
   }
 }
 
-function selectedAnswer(question, answer, event) {
-
-  const element = event.target
-  element.style.backgroundColor = "var(--Pop-color)"
-
-  if (question.correct_answer === answer) {
-    console.log('CORRECT', answer)
-    return question.correct_answer
-  } else {
-    console.log('INCORRECT', answer)
-    return null
-  }
-
-}
-
-function handleAnswerClick(question, answer, event) {
-
-  const correctAnswer = selectedAnswer(question, answer, event)
-  return correctAnswer
-}
-
-const currentIndex = ref(0)
-
 function newIndex() {
-
   currentIndex.value += 1
+}
 
+function handleAnswerOnClick(index) {
+  selectedAnswerIndex.value = index
 }
 
 function handleConfirmClick() {
+
+  const question = questions.value[currentIndex.value]
+  const selectedAnswer = shuffledAnswers.value[selectedAnswerIndex.value]
+
+  if (selectedAnswer === question.correct_answer) {
+    currentScore.value += 1
+  }
+
+  selectedAnswerIndex.value = null
+  if (currentIndex.value === 10) {
+    router
+  }
   newIndex()
 }
 
 onMounted(() => {
-
   fetchData()
-
 })
 
 </script>
 
 <template>
   <div class="container">
-    <h1>RandomQuiz Component</h1>
     <ul v-if="questions.length > 0">
       <li v-for="(question, index) in questions" :key="question.question">
         <div class="checkIndex" v-if="index === currentIndex">
-          <h3>Question {{ index + 1 }} <span class="difficulty">{{ question.difficulty }}</span>
-          </h3>
+          <p>Question: {{ index + 1 }}/10
+            <span class="difficulty" v-html="question.difficulty"></span>
+          </p>
+          <p class="category">Category: {{ question.category }}</p>
+          <p class="currentScore">Score: {{ currentScore }} /10</p>
           <hr>
           <p class="mainQuestion" v-html="question.question"></p>
           <div class="answerContainer">
-            <p id="answer" v-for="answer in shuffledAnswers(question)" :key="answer"
-              @click="handleAnswerClick(question, answer, $event)" v-html="answer"></p>
+            <p id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer"
+              :class="{ selected: answerIndex === selectedAnswerIndex }" @click="() => handleAnswerOnClick(answerIndex)"
+              v-html="answer"></p>
 
-            <div class="button" @click="() => handleConfirmClick(question)">Confirm</div>
+            <div class="button" @click="handleConfirmClick">Confirm</div>
           </div>
         </div>
       </li>
@@ -96,7 +93,6 @@ onMounted(() => {
 <style scoped>
 .container {
   width: 390px;
-  height: fit-content;
   text-align: center;
 }
 
@@ -113,6 +109,7 @@ hr {
 
 p {
   font-size: 32px;
+  margin: 0;
 }
 
 h3 {
@@ -133,13 +130,33 @@ h3 {
 }
 
 #answer:hover {
-  transform: scale(1.1);
   background-color: var(--Pop-color);
 }
 
+#answer:active {
+  transform: scale(1.1);
+}
+
+#answer.selected {
+  background-color: var(--Pop-color);
+  box-shadow: 5px 5px 20px var(--Main-color);
+}
+
 .difficulty {
-  font-size: 15px;
+  font-size: 20px;
   color: var(--Accent-color);
+}
+
+.currentScore {
+  background-color: var(--Pop-color);
+  width: fit-content;
+  padding: 0 10px;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.category {
+  font-size: 25px;
 }
 
 .button {
@@ -153,7 +170,7 @@ h3 {
   justify-content: center;
   align-items: center;
   margin-left: 20px;
-  margin-top: 1.5em;
+  margin-top: .5em;
   cursor: pointer;
 }
 </style>
