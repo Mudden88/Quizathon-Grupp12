@@ -3,6 +3,13 @@ import { ref, onMounted } from "vue";
 import Categories from "./Categories.vue";
 import SectionHeader from "./SectionHeader.vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+function handleCategorySelect(categoryId) {
+  router.push({ path: `/StartQuiz/${categoryId}` });
+}
 
 const categories = ref([]);
 
@@ -34,7 +41,9 @@ onMounted(fetchCategories);
       <Categories
         v-for="category in categories"
         :key="category.id"
+        :id="category.id"
         :title="category.name"
+        @selectCategory="handleCategorySelect"
       />
     </div>
   </div>

@@ -1,11 +1,19 @@
 <script setup>
-defineProps({
+// Container kan ses som en låda med en etikett på. På lådan står ett namn (category name) och under etiketten sitter ett id-nr. Detta id-nr tas med in i StartQuiz med hjälp av router när vi klickar på en låda och där kan vi använda detta id-nr.
+const { title, id } = defineProps({
   title: String,
+  id: Number,
 });
+
+const emit = defineEmits(["selectCategory"]);
+
+function selectCategory() {
+  emit("selectCategory", id);
+}
 </script>
 
 <template>
-  <div class="container">
+  <div class="container" @click="selectCategory">
     <h2>{{ title }}</h2>
   </div>
 </template>
@@ -22,6 +30,7 @@ defineProps({
   text-align: center;
   padding: 7px;
   box-shadow: 6px 5px 5px rgba(45, 78, 72, 0.25);
+  cursor: pointer;
 }
 
 h2 {

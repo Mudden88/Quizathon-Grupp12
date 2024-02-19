@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import HomeView from "./views/HomeView.vue";
 import PageView from "./views/PageView.vue";
-import AllCategories from "./components/AllCategories.vue";
+import StartQuiz from "./components/StartQuiz.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -16,8 +16,8 @@ export default createRouter({
       path: "/page",
     },
     {
-      component: AllCategories,
-      path: "/categoryId",
+      path: "/StartQuiz/:categoryId",
+      component: StartQuiz,
       props: true,
     },
   ],

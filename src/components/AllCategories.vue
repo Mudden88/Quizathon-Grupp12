@@ -3,7 +3,16 @@ import { ref, onMounted, computed } from "vue";
 import Categories from "./Categories.vue";
 import SectionHeader from "./SectionHeader.vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
+
+//Navigera användaren till en ny path med router.push. Tar användaren till ny sida för att kunna välja svårighetsgrad och sen starta quiz.
+function handleCategorySelect(categoryId) {
+  router.push({ path: `/StartQuiz/${categoryId}` });
+}
+
+//Funktion för att hämta alla kategorier, visa fyra åt gången. Klicka på knapp 'show more' för att visa 8 kategorier till. Kör funktion när sidan laddats in.
 const categories = ref([]);
 const visibleCategories = ref(4);
 
@@ -35,7 +44,9 @@ onMounted(fetchCategories);
       <Categories
         v-for="category in displayedCategories"
         :key="category.id"
+        :id="category.id"
         :title="category.name"
+        @selectCategory="handleCategorySelect"
       />
     </div>
     <button
