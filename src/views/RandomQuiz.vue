@@ -92,10 +92,6 @@ function getScore() {
   console.log('Get score:', localStorage.getItem('userScore'))
 }
 
-
-
-
-
 //obvious
 fetchData()
 getScore()
