@@ -1,7 +1,7 @@
 <script setup>
 import axios from 'axios'
 import { ref, computed } from 'vue'
-import router from '../router';
+import ConfirmButton from '../components/ConfirmButton.vue'
 
 //Variabler och referens värden
 const apiUrl = 'https://opentdb.com/api.php?amount=10'
@@ -39,41 +39,67 @@ function shuffleArray(array) {
   }
 }
 
+// tar emot index från svaren och tilldelar index som värde för att kunna hantera vilket svar som är klickat på.
+function answerOnClick(index) {
+  selectedAnswerIndex.value = index
+}
+
 //Öka siffra efter varje fråga
 function newIndex() {
   currentIndex.value += 1
 }
-
-// tar emot index från svaren och tilldelar index som värde för att kunna hantera vilket svar som är klickat på.
-function handleAnswerOnClick(index) {
-  selectedAnswerIndex.value = index
-}
-
 
 //Logik för knappen, är svaret rätt. ökas currentScore,
 //selectedAnswerIndex.value som fått ett index från functionen innan får
 // Null för att släcka Pop-color
 //Om currentIndex är 10 skickas man tillbaka till home,
 //annars får den ett nytt index och ny fråga dyker upp.
-function handleConfirmClick() {
+function confirmClick() {
 
   const question = questions.value[currentIndex.value]
   const selectedAnswer = shuffledAnswers.value[selectedAnswerIndex.value]
 
   if (selectedAnswer === question.correct_answer) {
     currentScore.value += 1
+    setScore()
+    console.log('Correct! ', selectedAnswer)
+
+  } else {
+
+    console.log(selectedAnswer, 'is incorrect. Correct answer is ', question.correct_answer)
   }
 
   selectedAnswerIndex.value = null
 
   if (currentIndex.value === 10) {
+
     router.push("/")
+
   } else {
     newIndex()
   }
 }
+
+function setScore() {
+  localStorage.setItem('userScore', currentScore.value)
+}
+
+function clearScore() {
+  localStorage.removeItem('userScore')
+}
+
+function getScore() {
+  console.log('Get score:', localStorage.getItem('userScore'))
+}
+
+
+
+
 //obvious
 fetchData()
+getScore()
+clearScore()
+
 
 </script>
 
@@ -97,11 +123,11 @@ fetchData()
             ändrar färg med dynamiska klasser -->
           <div class="answerContainer">
             <p id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer"
-              :class="{ selected: answerIndex === selectedAnswerIndex }" @click="() => handleAnswerOnClick(answerIndex)"
+              :class="{ selected: answerIndex === selectedAnswerIndex }" @click="() => answerOnClick(answerIndex)"
               v-html="answer"></p>
 
-            <div class="button" @click="handleConfirmClick">Confirm</div>
           </div>
+          <ConfirmButton @Confirm="confirmClick" />
         </div>
       </li>
     </ul>
@@ -176,20 +202,5 @@ h3 {
 
 .category {
   font-size: 25px;
-}
-
-.button {
-  width: 291px;
-  height: 63px;
-  border-radius: 20px;
-  background-color: var(--Main-lighter-color);
-  color: var(--Light-color);
-  font-size: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 20px;
-  margin-top: .5em;
-  cursor: pointer;
 }
 </style>
