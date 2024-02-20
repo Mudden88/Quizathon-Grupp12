@@ -20,7 +20,7 @@ async function fetchCategories() {
   try {
     const response = await axios.get("https://opentdb.com/api_category.php");
     categories.value = response.data.trivia_categories;
-    console.log(categories.value);
+    // console.log(categories.value);
   } catch (error) {
     console.error("Error fetching categories:", error);
   }

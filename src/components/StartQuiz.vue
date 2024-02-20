@@ -2,7 +2,10 @@
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
-import Categories from "./Categories.vue";
+
+defineOptions({
+  inheritAttrs: false,
+});
 
 // Använd `useRoute` för att få tillgång till route-parametrar!
 const route = useRoute();
@@ -40,16 +43,24 @@ console.log("Kategori-ID:", categoryId);
 </script>
 
 <template>
-  <div>
-    <div class="cat-name-container">{{ categoryName }}</div>
+  <div class="cat-name-container">{{ categoryName }}</div>
+  <div class="container">
     <button @click="selectDifficulty('easy')">Easy</button>
     <button @click="selectDifficulty('medium')">Medium</button>
     <button @click="selectDifficulty('hard')">Hard</button>
-    <button @click="startQuiz">Start Quiz</button>
   </div>
+  <button class="start-quiz-btn" @click="startQuiz">Start Quiz</button>
 </template>
 
 <style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  text-align: center;
+  gap: 10px;
+}
 .cat-name-container {
   background-color: var(--Main-lighter-color);
   width: 156px;
@@ -67,9 +78,32 @@ console.log("Kategori-ID:", categoryId);
 }
 
 button {
-  width: 4rem;
-  height: 3rem;
-  margin: 10px;
+  margin: 20px 0 2px 0;
+  display: block;
+  padding: 0.7rem;
+  font-size: 22px;
+  color: var(--Main-color);
+  border-radius: 13px;
+  background-color: var(--Accent-color);
+  border: none;
+  cursor: pointer;
+}
+
+button:focus {
+  background-color: #daafba;
+}
+
+.start-quiz-btn {
+  background-color: var(--Main-lighter-color);
+  color: white;
+}
+
+.start-quiz-btn:hover {
+  background-color: var(--Main-color);
+}
+
+.start-quiz-btn:focus {
+  background-color: var(--Main-color);
 }
 
 @media (min-width: 1200px) {
