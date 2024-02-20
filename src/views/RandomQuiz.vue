@@ -10,7 +10,6 @@ const currentIndex = ref(0)
 const selectedAnswerIndex = ref(null)
 const currentScore = ref(0)
 const router = useRoute()
-const answer = document.getElementById('answer')
 
 
 const shuffledAnswers = computed(() => {
@@ -74,7 +73,6 @@ function confirmClick() {
 
 
   if (selectedAnswer === question.correct_answer) {
-    selectedAnswer.isCorrect = true
     currentScore.value += 1
     setScore()
 
@@ -116,8 +114,8 @@ clearScore()
           <p class="mainQuestion" v-html="question.question"></p>
           <div class="answerContainer">
             <p id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer"
-              :class="{ selected: answerIndex === selectedAnswerIndex, correct: selectedAnswerIndex === index && answerisCorrect }"
-              @click="() => answerOnClick(answerIndex)" v-html="answer"></p>
+              :class="{ selected: answerIndex === selectedAnswerIndex }" @click="() => answerOnClick(answerIndex)"
+              v-html="answer"></p>
 
           </div>
           <ConfirmButton @Confirm="confirmClick" @nextquestion="getNewIndex" />
@@ -167,10 +165,6 @@ h3 {
   cursor: pointer;
   margin: 10px;
   font-size: 36px;
-
-  &.correct {
-    background-color: var(--Main-lighter-color);
-  }
 }
 
 #answer:hover {
