@@ -43,5 +43,9 @@ export default createRouter({
       component: StartQuiz,
       props: true,
     },
+    {
+      component: LogInView,
+      path: "/login",
+    },
   ],
 });

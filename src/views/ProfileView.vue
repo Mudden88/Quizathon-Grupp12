@@ -1,2 +1,4 @@
 <script></script>
-<template><p>Profile</p></template>
+<template>
+  <p>Profile</p>
+</template>
