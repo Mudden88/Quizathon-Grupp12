@@ -28,7 +28,6 @@ import { RouterLink } from 'vue-router'
   background: var(--Main-lighter-color);
   background-image: url(../assets/pattern.png);
   background-size: contain;
-  color: var(--Light-color);
   width: 338px;
   height: 214px;
   border-radius: 40px;
@@ -49,7 +48,8 @@ h2 {
 
 h2,
 p {
-  color: var(--Main-color);
+
+  color: var(--Light-color);
   margin: 0;
 }
 
