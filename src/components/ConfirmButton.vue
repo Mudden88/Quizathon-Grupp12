@@ -1,6 +1,9 @@
 
 <template>
-  <div class="button" @click="$emit('confirm')">Confirm</div>
+  <div>
+    <div class="button" @click="$emit('confirm')">Confirm</div>
+    <div class="button" @click="$emit('nextquestion')">Next question</div>
+  </div>
 </template>
 
 <style scoped>

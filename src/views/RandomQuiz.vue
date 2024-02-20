@@ -2,16 +2,17 @@
 import axios from 'axios'
 import { ref, computed } from 'vue'
 import ConfirmButton from '../components/ConfirmButton.vue'
+import { useRoute } from 'vue-router';
 
-//Variabler och referens värden
 const apiUrl = 'https://opentdb.com/api.php?amount=10'
 const questions = ref([])
 const currentIndex = ref(0)
 const selectedAnswerIndex = ref(null)
 const currentScore = ref(0)
+const router = useRoute()
+const answer = document.getElementById('answer')
 
 
-//Computed på shuffledAnswers, blandar svaren endast en gång per frågeomgång
 const shuffledAnswers = computed(() => {
   if (questions.value.length > 0 && currentIndex.value < questions.value.length) {
     const question = questions.value[currentIndex.value]
@@ -49,6 +50,18 @@ function newIndex() {
   currentIndex.value += 1
 }
 
+
+function getNewIndex() {
+
+  if (currentIndex.value != 10) {
+
+    selectedAnswerIndex.value = null
+    newIndex()
+
+  } else {
+    router.push('/')
+  }
+}
 //Logik för knappen, är svaret rätt. ökas currentScore,
 //selectedAnswerIndex.value som fått ett index från functionen innan får
 // Null för att släcka Pop-color
@@ -59,24 +72,15 @@ function confirmClick() {
   const question = questions.value[currentIndex.value]
   const selectedAnswer = shuffledAnswers.value[selectedAnswerIndex.value]
 
+
   if (selectedAnswer === question.correct_answer) {
+    selectedAnswer.isCorrect = true
     currentScore.value += 1
     setScore()
-    console.log('Correct! ', selectedAnswer)
 
   } else {
 
     console.log(selectedAnswer, 'is incorrect. Correct answer is ', question.correct_answer)
-  }
-
-  selectedAnswerIndex.value = null
-
-  if (currentIndex.value === 10) {
-
-    router.push("/")
-
-  } else {
-    newIndex()
   }
 }
 
@@ -92,22 +96,16 @@ function getScore() {
   console.log('Get score:', localStorage.getItem('userScore'))
 }
 
-//obvious
 fetchData()
-getScore()
 clearScore()
-
 
 </script>
 
 <template>
   <div class="container">
-    <!-- v-if för att kolla så att questions arrayen inte är tom. Är den tom så
-     går v-else igenom som en "laddfunktion"
-    for loop hämtar frågor och index, index för att hålla koll på vilken
-    fråga av 10st som visas. Använder v-html för "encode" ska fungera-->
     <ul v-if="questions.length > 0">
       <li v-for="(question, index) in questions" :key="question.question">
+
         <div class="checkIndex" v-if="index === currentIndex">
           <p>Question: {{ index + 1 }}/10
             <span class="difficulty" v-html="question.difficulty"></span>
@@ -116,21 +114,21 @@ clearScore()
           <p class="currentScore">Score: {{ currentScore }} /10</p>
           <hr>
           <p class="mainQuestion" v-html="question.question"></p>
-          <!-- Hämtar blandade svar och svarsIndex,
-            ändrar färg med dynamiska klasser -->
           <div class="answerContainer">
             <p id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer"
-              :class="{ selected: answerIndex === selectedAnswerIndex }" @click="() => answerOnClick(answerIndex)"
-              v-html="answer"></p>
+              :class="{ selected: answerIndex === selectedAnswerIndex, correct: selectedAnswerIndex === index && answerisCorrect }"
+              @click="() => answerOnClick(answerIndex)" v-html="answer"></p>
 
           </div>
-          <ConfirmButton @Confirm="confirmClick" />
+          <ConfirmButton @Confirm="confirmClick" @nextquestion="getNewIndex" />
+
         </div>
       </li>
     </ul>
+
     <p v-else>Loading question...</p>
   </div>
-</template>
+</template >
 
 <style scoped>
 .container {
@@ -169,6 +167,10 @@ h3 {
   cursor: pointer;
   margin: 10px;
   font-size: 36px;
+
+  &.correct {
+    background-color: var(--Main-lighter-color);
+  }
 }
 
 #answer:hover {
