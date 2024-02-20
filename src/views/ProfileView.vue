@@ -1,2 +1,2 @@
 <script></script>
-<template> <p> Hej</p></template>
+<template><p>Profile</p></template>
