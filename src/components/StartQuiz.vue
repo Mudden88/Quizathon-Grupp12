@@ -43,7 +43,14 @@ console.log("Kategori-ID:", categoryId);
 </script>
 
 <template>
-  <div class="cat-name-container">{{ categoryName }}</div>
+  <div class="cat-name-container">
+    <div class="blur">{{ categoryName }}</div>
+  </div>
+  <p class="instructions">
+    Select a difficulty or click Start Quiz for a mix of easy, medium and hard
+    questions
+  </p>
+  <hr />
   <div class="container">
     <button @click="selectDifficulty('easy')">Easy</button>
     <button @click="selectDifficulty('medium')">Medium</button>
@@ -61,10 +68,25 @@ console.log("Kategori-ID:", categoryId);
   text-align: center;
   gap: 10px;
 }
+
+.blur {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 170px;
+  height: 96px;
+  backdrop-filter: blur(3px);
+  border-radius: 20px;
+  box-shadow: 2px 2px 9px #426c6470;
+  cursor: pointer;
+}
 .cat-name-container {
   background-color: var(--Main-lighter-color);
-  width: 156px;
-  height: 133px;
+  background-image: url(../assets/pattern.png);
+  background-size: contain;
+  width: 338px;
+  height: 214px;
   border-radius: 30px;
   display: flex;
   justify-content: center;
@@ -75,6 +97,21 @@ console.log("Kategori-ID:", categoryId);
   cursor: pointer;
   color: var(--Light-color);
   font-size: 28px;
+  margin-bottom: 25px;
+}
+
+.instructions {
+  font-size: 18px;
+  color: #272727;
+  width: 300px;
+  text-align: center;
+}
+
+hr {
+  border: 1px solid var(--Main-color);
+  margin-top: 12px;
+  border-radius: 6px;
+  width: 250px;
 }
 
 button {
@@ -106,9 +143,24 @@ button:focus {
   background-color: var(--Main-color);
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 800px) {
   .cat-name-container {
-    width: 259px;
+    width: 600px;
+    height: 300px;
+    font-size: 48px;
+  }
+  .blur {
+    width: 300px;
+    height: 200px;
+  }
+
+  .instructions {
+    font-size: 26px;
+    width: 450px;
+  }
+
+  hr {
+    width: 350px;
   }
 }
 </style>
