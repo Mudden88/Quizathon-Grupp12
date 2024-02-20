@@ -39,7 +39,7 @@ function guestUser() {
 
 <template>
   <section class="container">
-    <h1>Log in</h1>
+    <h1 class="heading">Log in</h1>
     <form
       class="login-form"
       id="login-form">
@@ -83,6 +83,11 @@ function guestUser() {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+}
+
+.heading {
+  color: var(--Main-color);
+  font-size: 2rem;
 }
 .login-form {
   display: flex;
