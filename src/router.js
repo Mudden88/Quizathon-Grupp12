@@ -1,8 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import HomeView from "./views/HomeView.vue";
-import PageView from "./views/PageView.vue";
-import RandomQuiz from "./views/RandomQuiz.vue"
+import RandomQuiz from "./views/RandomQuiz.vue";
 import LogInView from "./views/LogInView.vue";
 import ContactView from "./views/ContactView.vue";
 import InstructionsView from "./views/InstructionsView.vue";
@@ -34,7 +33,7 @@ export default createRouter({
     },
     {
       component: RandomQuiz,
-      path: "/randomQuiz"
+      path: "/randomQuiz",
     },
   ],
 });
