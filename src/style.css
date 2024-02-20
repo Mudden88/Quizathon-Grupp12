@@ -17,17 +17,9 @@
   box-sizing: border-box;
 }
 
-/* #app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 80%;
-  /* border: 1px solid red; */
-}
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+} 
