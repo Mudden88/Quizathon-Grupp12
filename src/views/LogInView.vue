@@ -1,9 +1,12 @@
 <script setup>
 import { ref } from "vue";
 import router from "../router.js";
+import { useStorage } from "../storage";
 
 import InputField from "../components/InputField.vue";
 import users from "../users.json";
+
+const fromStorage = useStorage();
 
 const error = ref(false),
   inputUserName = ref(""),
@@ -15,6 +18,7 @@ function logIn(e) {
     error.value = false;
     let user = users[inputUserName.value];
     if (inputPassword.value === user.password) {
+      fromStorage.user.username = user.username;
       router.push("/");
     } else {
       error.value = true;
