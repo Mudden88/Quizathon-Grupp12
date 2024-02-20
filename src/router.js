@@ -3,10 +3,10 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "./views/HomeView.vue";
 import PageView from "./views/PageView.vue";
 import LogInView from "./views/LogInView.vue";
-import ContactView from "./views/ContactView.vue"
-import InstructionsView from "./views/InstructionsView.vue"
-import LeaderboardView from "./views/LeaderboardView.vue"
-import ProfileView from "./views/ProfileView.vue"
+import ContactView from "./views/ContactView.vue";
+import InstructionsView from "./views/InstructionsView.vue";
+import LeaderboardView from "./views/LeaderboardView.vue";
+import ProfileView from "./views/ProfileView.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -19,17 +19,17 @@ export default createRouter({
       component: ContactView,
       path: "/contact",
     },
-    { 
+    {
       component: InstructionsView,
-      path: "/instructions"
+      path: "/instructions",
     },
     {
       component: LeaderboardView,
-      path: "/leaderboard"
+      path: "/leaderboard",
     },
     {
       component: ProfileView,
-      path: "/profile"
-    }
+      path: "/profile",
+    },
   ],
 });
