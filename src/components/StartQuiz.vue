@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
+import Categories from "./Categories.vue";
 
 // Använd `useRoute` för att få tillgång till route-parametrar!
 const route = useRoute();
@@ -17,12 +18,14 @@ function selectDifficulty(difficulty) {
 }
 
 // Kör denna funktion så fort sidan laddats för att hämta namnet på Kategorin. Detta för att kunna ha en container med namnet på kategorin på sidan så man ser vilken kategori som man valde.
+const categoryName = ref("");
+
 async function fetchCategoryName() {
   const response = await axios.get(
     `https://opentdb.com/api.php?amount=1&category=${categoryId}`
   );
-  const categoryName = response.data.results[0].category;
-  console.log("Kategorinamn:", categoryName);
+  categoryName.value = response.data.results[0].category;
+  console.log("Kategorinamn:", categoryName.value);
 }
 // Funktion för att hämta quiz med kategori-id:t och vilken svårighetsgrad som användaren valde
 async function startQuiz() {
@@ -38,6 +41,7 @@ console.log("Kategori-ID:", categoryId);
 
 <template>
   <div>
+    <div class="cat-name-container">{{ categoryName }}</div>
     <button @click="selectDifficulty('easy')">Easy</button>
     <button @click="selectDifficulty('medium')">Medium</button>
     <button @click="selectDifficulty('hard')">Hard</button>
@@ -46,9 +50,31 @@ console.log("Kategori-ID:", categoryId);
 </template>
 
 <style scoped>
+.cat-name-container {
+  background-color: var(--Main-lighter-color);
+  width: 156px;
+  height: 133px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 7px;
+  box-shadow: 6px 5px 5px rgba(45, 78, 72, 0.25);
+  cursor: pointer;
+  color: white;
+  font-size: 28px;
+}
+
 button {
   width: 4rem;
   height: 3rem;
   margin: 10px;
+}
+
+@media (min-width: 1200px) {
+  .cat-name-container {
+    width: 259px;
+  }
 }
 </style>
