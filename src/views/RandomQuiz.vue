@@ -1,35 +1,37 @@
 <script setup>
-import axios from 'axios'
-import { ref, computed } from 'vue'
-import ConfirmButton from '../components/ConfirmButton.vue'
-import { useRoute } from 'vue-router';
+import axios from "axios";
+import { ref, computed } from "vue";
+import ConfirmButton from "../components/ConfirmButton.vue";
+import { useRoute } from "vue-router";
 
-const apiUrl = 'https://opentdb.com/api.php?amount=10'
-const questions = ref([])
-const currentIndex = ref(0)
-const selectedAnswerIndex = ref(null)
-const currentScore = ref(0)
-const router = useRoute()
-
+const apiUrl = "https://opentdb.com/api.php?amount=10";
+const questions = ref([]);
+const currentIndex = ref(0);
+const selectedAnswerIndex = ref(null);
+const currentScore = ref(0);
+const router = useRoute();
 
 const shuffledAnswers = computed(() => {
-  if (questions.value.length > 0 && currentIndex.value < questions.value.length) {
-    const question = questions.value[currentIndex.value]
-    const answers = [...question.incorrect_answers, question.correct_answer]
-    shuffleArray(answers)
+  if (
+    questions.value.length > 0 &&
+    currentIndex.value < questions.value.length
+  ) {
+    const question = questions.value[currentIndex.value];
+    const answers = [...question.incorrect_answers, question.correct_answer];
+    shuffleArray(answers);
 
-    return answers
+    return answers;
   }
-  return []
-})
+  return [];
+});
 
 //function för att hämta quiz och lagra i questions arrayen
 async function fetchData() {
-  let response = await axios.get(apiUrl)
+  let response = await axios.get(apiUrl);
 
-  questions.value = response.data.results
+  questions.value = response.data.results;
 
-  return questions
+  return questions;
 }
 //function för att blanda array
 function shuffleArray(array) {
@@ -41,24 +43,20 @@ function shuffleArray(array) {
 
 // tar emot index från svaren och tilldelar index som värde för att kunna hantera vilket svar som är klickat på.
 function answerOnClick(index) {
-  selectedAnswerIndex.value = index
+  selectedAnswerIndex.value = index;
 }
 
 //Öka siffra efter varje fråga
 function newIndex() {
-  currentIndex.value += 1
+  currentIndex.value += 1;
 }
 
-
 function getNewIndex() {
-
   if (currentIndex.value != 10) {
-
-    selectedAnswerIndex.value = null
-    newIndex()
-
+    selectedAnswerIndex.value = null;
+    newIndex();
   } else {
-    router.push('/')
+    router.push("/");
   }
 }
 //Logik för knappen, är svaret rätt. ökas currentScore,
@@ -67,66 +65,70 @@ function getNewIndex() {
 //Om currentIndex är 10 skickas man tillbaka till home,
 //annars får den ett nytt index och ny fråga dyker upp.
 function confirmClick() {
-
-  const question = questions.value[currentIndex.value]
-  const selectedAnswer = shuffledAnswers.value[selectedAnswerIndex.value]
-
+  const question = questions.value[currentIndex.value];
+  const selectedAnswer = shuffledAnswers.value[selectedAnswerIndex.value];
 
   if (selectedAnswer === question.correct_answer) {
-    currentScore.value += 1
-    setScore()
-
+    currentScore.value += 1;
+    setScore();
   } else {
-
-    console.log(selectedAnswer, 'is incorrect. Correct answer is ', question.correct_answer)
+    console.log(
+      selectedAnswer,
+      "is incorrect. Correct answer is ",
+      question.correct_answer
+    );
   }
 }
 
 function setScore() {
-  localStorage.setItem('userScore', currentScore.value)
+  localStorage.setItem("userScore", currentScore.value);
 }
 
 function clearScore() {
-  localStorage.removeItem('userScore')
+  localStorage.removeItem("userScore");
 }
 
 function getScore() {
-  console.log('Get score:', localStorage.getItem('userScore'))
+  console.log("Get score:", localStorage.getItem("userScore"));
 }
 
-fetchData()
-clearScore()
-
+fetchData();
+clearScore();
 </script>
 
 <template>
   <div class="container">
     <ul v-if="questions.length > 0">
       <li v-for="(question, index) in questions" :key="question.question">
-
         <div class="checkIndex" v-if="index === currentIndex">
-          <p>Question: {{ index + 1 }}/10
+          <p>
+            Question: {{ index + 1 }}/10
             <span class="difficulty" v-html="question.difficulty"></span>
           </p>
-          <p class="category">Category: <span v-html="question.category"></span></p>
+          <p class="category">
+            Category: <span v-html="question.category"></span>
+          </p>
           <p class="currentScore">Score: {{ currentScore }} /10</p>
-          <hr>
+          <hr />
           <p class="mainQuestion" v-html="question.question"></p>
           <div class="answerContainer">
-            <p id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer"
-              :class="{ selected: answerIndex === selectedAnswerIndex }" @click="() => answerOnClick(answerIndex)"
-              v-html="answer"></p>
-
+            <p
+              id="answer"
+              v-for="(answer, answerIndex) in shuffledAnswers"
+              :key="answer"
+              :class="{ selected: answerIndex === selectedAnswerIndex }"
+              @click="() => answerOnClick(answerIndex)"
+              v-html="answer"
+            ></p>
           </div>
           <ConfirmButton @Confirm="confirmClick" @nextquestion="getNewIndex" />
-
         </div>
       </li>
     </ul>
 
     <p v-else>Loading question...</p>
   </div>
-</template >
+</template>
 
 <style scoped>
 .container {
@@ -136,7 +138,6 @@ clearScore()
 
 ul {
   list-style-type: none;
-
 }
 
 hr {
