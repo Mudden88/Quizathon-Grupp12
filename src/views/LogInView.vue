@@ -31,43 +31,59 @@ function setUsername(input) {
 function setPassword(input) {
   inputPassword.value = input;
 }
+
+function guestUser() {
+  router.push("/");
+}
 </script>
 
 <template>
-  <h1>Log in</h1>
-
-  <form
-    class="login-form"
-    id="login-form">
-    <InputField
-      label-prop="Username"
-      placeholder-prop="Username"
-      id-prop="username"
-      type-prop="text"
-      @onInput="setUsername" />
-    <InputField
-      label-prop="Password"
-      placeholder-prop="Password"
-      id-prop="password"
-      type-prop="password"
-      @onInput="setPassword" />
-    <p
-      v-if="error"
-      class="error-msg">
-      Wrong username or password. Please try again!
-    </p>
+  <section class="container">
+    <h1>Log in</h1>
+    <form
+      class="login-form"
+      id="login-form">
+      <InputField
+        label-prop="Username"
+        placeholder-prop="Username"
+        id-prop="username"
+        type-prop="text"
+        @onInput="setUsername" />
+      <InputField
+        label-prop="Password"
+        placeholder-prop="Password"
+        id-prop="password"
+        type-prop="password"
+        @onInput="setPassword" />
+      <p
+        v-if="error"
+        class="error-msg">
+        Wrong username or password. Please try again!
+      </p>
+      <button
+        class="login-btn"
+        type="submit"
+        form="login-form"
+        value="LogIn"
+        @click="logIn">
+        Log in
+      </button>
+    </form>
     <button
-      class="login-btn"
-      type="submit"
-      form="login-form"
-      value="LogIn"
-      @click="logIn">
-      Log in
+      class="guest-btn"
+      @click="guestUser">
+      Continue as guest
     </button>
-  </form>
+  </section>
 </template>
 
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 .login-form {
   display: flex;
   flex-direction: column;
@@ -79,7 +95,7 @@ function setPassword(input) {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 0.75rem;
   text-decoration: underline;
-  color: #872e2e;
+  color: var(--Error-color);
 }
 
 .login-btn {
@@ -91,6 +107,19 @@ function setPassword(input) {
 
   color: var(--Light-color);
   font-size: 2.25rem;
+
+  &:focus {
+    outline: 3px solid var(--Accent-color);
+  }
+}
+
+.guest-btn {
+  font-size: 1.4rem;
+  color: var(--Main-color);
+  padding: 8px 50px;
+  border: none;
+  border-radius: 13px;
+  background-color: var(--Accent-color);
 
   &:focus {
     outline: 3px solid var(--Accent-color);
