@@ -19,6 +19,7 @@ function logIn(e) {
     let user = users[inputUserName.value];
     if (inputPassword.value === user.password) {
       fromStorage.user.username = user.username;
+      fromStorage.user.isLoggedIn = true;
       router.push("/");
     } else {
       error.value = true;
@@ -37,6 +38,8 @@ function setPassword(input) {
 }
 
 function guestUser() {
+  fromStorage.user.username = "Guest";
+  fromStorage.user.isLoggedIn = true;
   router.push("/");
 }
 </script>
