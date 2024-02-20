@@ -73,7 +73,7 @@ console.log("Kategori-ID:", categoryId);
   padding: 7px;
   box-shadow: 6px 5px 5px rgba(45, 78, 72, 0.25);
   cursor: pointer;
-  color: white;
+  color: var(--Light-color);
   font-size: 28px;
 }
 
