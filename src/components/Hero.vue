@@ -1,11 +1,10 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink } from "vue-router";
 </script>
 
 <template>
   <div class="container">
     <div class="hero">
-
       <RouterLink to="/randomQuiz">
         <a>
           <div class="blur">
@@ -48,7 +47,6 @@ h2 {
 
 h2,
 p {
-
   color: var(--Light-color);
   margin: 0;
 }
@@ -66,7 +64,7 @@ p {
   height: 96px;
   backdrop-filter: blur(3px);
   border-radius: 20px;
-  filter: drop-shadow(-2px 2px 0.2rem rgba(0, 0, 0, 0.2));
+  box-shadow: 2px 2px 9px #426c6470;
   cursor: pointer;
 }
 </style>

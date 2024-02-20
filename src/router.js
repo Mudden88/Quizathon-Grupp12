@@ -11,7 +11,6 @@ import InstructionsView from "./views/InstructionsView.vue";
 import LeaderboardView from "./views/LeaderboardView.vue";
 import ProfileView from "./views/ProfileView.vue";
 
-
 export default createRouter({
   history: createWebHashHistory(),
   routes: [
