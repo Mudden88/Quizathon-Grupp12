@@ -1,8 +1,16 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import HomeView from "./views/HomeView.vue";
-import PageView from "./views/PageView.vue";
+
 import StartQuiz from "./components/StartQuiz.vue";
+
+import RandomQuiz from "./views/RandomQuiz.vue";
+import LogInView from "./views/LogInView.vue";
+import ContactView from "./views/ContactView.vue";
+import InstructionsView from "./views/InstructionsView.vue";
+import LeaderboardView from "./views/LeaderboardView.vue";
+import ProfileView from "./views/ProfileView.vue";
+
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -12,8 +20,24 @@ export default createRouter({
       path: "/",
     },
     {
-      component: PageView,
-      path: "/page",
+      component: ContactView,
+      path: "/contact",
+    },
+    {
+      component: InstructionsView,
+      path: "/instructions",
+    },
+    {
+      component: LeaderboardView,
+      path: "/leaderboard",
+    },
+    {
+      component: ProfileView,
+      path: "/profile",
+    },
+    {
+      component: RandomQuiz,
+      path: "/randomQuiz",
     },
     {
       path: "/StartQuiz/:categoryId",
