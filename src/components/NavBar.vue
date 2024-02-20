@@ -93,8 +93,6 @@ a {
     padding-right: 15px;
 }
 
-
-
 :root {
   --background: #eef1ef;
   --primary: #3a5e57;
@@ -116,6 +114,7 @@ a {
   display: flex;
   justify-content: space-between;
 }
+
 .burger-menu {
 display: flex;
 flex-direction: column;
