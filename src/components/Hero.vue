@@ -7,10 +7,12 @@ import { RouterLink } from 'vue-router'
     <div class="hero">
 
       <RouterLink to="/randomQuiz">
-        <div class="blur">
-          <h2>Welcome</h2>
-          <p>Start random quiz</p>
-        </div>
+        <a>
+          <div class="blur">
+            <h2>Welcome</h2>
+            <p>Start random quiz</p>
+          </div>
+        </a>
       </RouterLink>
     </div>
   </div>
@@ -33,6 +35,12 @@ import { RouterLink } from 'vue-router'
   display: flex;
   align-items: center;
   justify-content: center;
+
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 h2 {
