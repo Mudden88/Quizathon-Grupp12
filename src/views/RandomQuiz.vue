@@ -255,4 +255,15 @@ h3 {
 .correct-unselected {
   border: 6px solid var(--Main-lighter-color);
 }
+
+@media (min-width: 900px) {
+  .answer-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .container {
+    width: 100%;
+  }
+}
 </style>

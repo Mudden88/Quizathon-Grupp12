@@ -67,4 +67,35 @@ p {
   box-shadow: 2px 2px 9px #426c6470;
   cursor: pointer;
 }
+
+@media (min-width: 800px) {
+  .hero {
+    width: 600px;
+    height: 300px;
+    font-size: 48px;
+  }
+
+  h2 {
+    font-size: 68px;
+  }
+  .blur {
+    width: 300px;
+    height: 150px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero {
+    width: 1000px;
+    height: 300px;
+  }
+
+  h2 {
+    font-size: 68px;
+  }
+  .blur {
+    width: 300px;
+    height: 150px;
+  }
+}
 </style>
