@@ -18,18 +18,37 @@ icon.value = ifMenuClicked.value ? menuX : burger
     <header>
     <nav>
 <div class="navbar">
-  <div class="burger" @click="closeMenu">
+  <!-- <div class="burger" @click="closeMenu">
   <img id="burger" :src="icon" alt="" @click="menuClicked">
-</div>
-    <img id="logo" src="../assets/quizathon-logo.png" alt="logo">
-    <img id="profile" src="../assets/icons/profile-outline-icon.png" alt="">
+</div> -->
+<div class="desktop-header">
+      <div class="nav">
+       <RouterLink to="/"> <img id="logo" src="../assets/quizathon-logo.png" alt="logo"></RouterLink>
+        <RouterLink to="/instructions">Instructions 
+          <img src="../assets/icons/instructions-icon.png" alt="">
+        </RouterLink>
+        <RouterLink to="/profile">Profile
+          <img src="../assets/icons/profile-icon.png" alt="">
+        </RouterLink>
+        <RouterLink to="/leaderboard">Leaderboard 
+          <img src="../assets/icons/crown-icon.png" alt="">
+        </RouterLink>
+        <RouterLink to="/contact">Contact
+          <img src="../assets/icons/letter-icon.png" alt="">
+        </RouterLink>
+      </div>
+    </div>
   </div>
+    <!-- <img id="logo" src="../assets/quizathon-logo.png" alt="logo">
+    <img id="profile" src="../assets/icons/profile-outline-icon.png" alt="">
+  
   <div class="burger-menu" v-show="ifMenuClicked">
     <div @click="menuClicked" class="icons"><RouterLink to="/instructions">Instructions </RouterLink><img src="../assets/icons/instructions-icon.png" alt=""></div>
     <div @click="menuClicked" class="icons"><RouterLink to="/profile">Profile</RouterLink><img src="../assets/icons/profile-icon.png" alt=""></div>
     <div @click="menuClicked" class="icons"><RouterLink to="/leaderboard">Leaderboard</RouterLink><img src="../assets/icons/crown-icon.png" alt=""></div>
     <div @click="menuClicked" class="icons"><RouterLink to="/contact">Contact<img src="../assets/icons/letter-icon.png" alt=""></RouterLink></div>
-    </div>
+    </div> -->
+
     </nav>
 </header>
 </template>
@@ -91,6 +110,7 @@ a {
     margin-top: 50px;
     padding-top: 30px;
     padding-right: 15px;
+    width: 350px;
 }
 
 :root {
@@ -102,22 +122,42 @@ a {
   --bgText: #272727;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 880px) {
  header {
 #logo {
-  height: 150px;
+  height: 130px;
 }
 .navbar {
   height: 160px;
   width: 100vw;
   background-color: #eef1ef;
-  display: flex;
-  justify-content: space-between;
+
 }
 
-.burger-menu {
-display: flex;
-flex-direction: column;
+img {
+height: 30px;
+}
+
+a {
+  font-size: 30px;
+  font-weight: lighter;
+}
+
+.desktop-header {
+  height: 120px;
+  width: 100vw;
+  background-color: #eef1ef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 10px;
 }
 
 }
