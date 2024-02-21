@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
-const userScore = ref(null)
-console.log(userScore.value)
+let userScore = ref(null)
+
 if (userScore.value === null) {
   userScore.value = localStorage.getItem('userScore')
-  console.log(userScore.value)
 }
 
 </script>
@@ -15,15 +15,20 @@ if (userScore.value === null) {
     <h1>Congratulations!</h1>
     <hr>
     <h2>Your score is {{ userScore }}/10</h2>
-
-    <div class="button">Try Again</div>
-
-    <span>
-      <hr>
-      Or explore out other quizes
-      <hr>
+    <a>
+      <RouterLink to="/RandomQuiz">
+        <div class="button">Try Again</div>
+      </RouterLink>
+    </a>
+    <span class="textBox">
+      <hr class="hr1">Or explore out other quizes
+      <hr class="hr2">
     </span>
-    <div class="guest-btn">Home</div>
+    <a>
+      <RouterLink to="/">
+        <div class="guest-btn">Home</div>
+      </RouterLink>
+    </a>
   </div>
 </template>
 
@@ -50,6 +55,10 @@ if (userScore.value === null) {
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+}
+
 .guest-btn {
   font-size: 1.4rem;
   color: var(--Main-color);
@@ -65,5 +74,27 @@ if (userScore.value === null) {
   &:focus {
     outline: 3px solid var(--Accent-color);
   }
+}
+
+.textBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
+
+.hr1 {
+  margin: 0 10px;
+  height: 1px;
+  width: 60px;
+  justify-self: end;
+}
+
+.hr2 {
+
+  margin: 0 10px;
+  height: 1px;
+  width: 60px;
+  justify-self: start;
 }
 </style>
