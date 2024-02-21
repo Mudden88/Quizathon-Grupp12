@@ -10,6 +10,7 @@ import ContactView from "./views/ContactView.vue";
 import InstructionsView from "./views/InstructionsView.vue";
 import LeaderboardView from "./views/LeaderboardView.vue";
 import ProfileView from "./views/ProfileView.vue";
+import AfterQuiz from './views/AfterQuiz.vue'
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -42,6 +43,10 @@ export default createRouter({
       path: "/StartQuiz/:categoryId",
       component: StartQuiz,
       props: true,
+    },
+    {
+      component: AfterQuiz,
+      path: '/AfterQuiz'
     },
   ],
 });
