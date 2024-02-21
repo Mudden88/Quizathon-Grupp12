@@ -1,10 +1,4 @@
 <script setup>
-import { RouterLink } from "vue-router";
-import Hero from "./components/Hero.vue";
-
-import PopularCategories from "./components/PopularCategories.vue";
-import AllCategories from "./components/AllCategories.vue";
-
 import NavBar from "./components/NavBar.vue";
 import AfterQuiz from "./views/AfterQuiz.vue";
 
@@ -15,10 +9,13 @@ const fromStorage = useStorage();
 
 <template>
   <NavBar />
+<<<<<<< HEAD
   <Hero />
   <!--
   <PopularCategories /> -->
   <!-- <AllCategories /> -->
+=======
+>>>>>>> origin/main
 
   <h1 v-if="fromStorage.user.isLoggedIn">
     Welcome {{ fromStorage.user.username }}!

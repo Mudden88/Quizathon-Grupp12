@@ -1,3 +1,16 @@
+<script setup>
+
+import PopularCategories from "../components/PopularCategories.vue";
+import AllCategories from "../components/AllCategories.vue";
+import Hero from "../components/Hero.vue"
+
+</script>
+
+
 <template>
-  <h1>Home</h1>
+  <Hero />
+
+<PopularCategories />
+<AllCategories />
+
 </template>

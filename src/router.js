@@ -48,5 +48,9 @@ export default createRouter({
       component: AfterQuiz,
       path: '/AfterQuiz'
     },
+    {
+      component: LogInView,
+      path: "/login",
+    },
   ],
 });

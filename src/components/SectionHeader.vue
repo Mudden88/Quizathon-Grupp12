@@ -18,7 +18,7 @@ h2 {
 }
 
 hr {
-  border: 2px solid var(--Main-color);
+  border: 1px solid var(--Main-color);
   margin-bottom: 12px;
   border-radius: 6px;
 }
