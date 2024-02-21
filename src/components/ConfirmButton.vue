@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <div class="button" @click="$emit('confirm')">Confirm</div>
@@ -18,7 +17,7 @@
   justify-content: center;
   align-items: center;
   margin-left: 20px;
-  margin-top: .5em;
+  margin-top: 0.5em;
   cursor: pointer;
 }
 </style>
