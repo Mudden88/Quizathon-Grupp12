@@ -16,7 +16,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 20px;
   margin-top: 0.5em;
   cursor: pointer;
 }
