@@ -1,7 +1,29 @@
+<script setup>
+import { ref } from 'vue'
+
+const displayConfirm = ref(true)
+const displayNext = ref(false)
+
+const emit = defineEmits(['confirm', 'nextquestion'])
+
+function switchButton() {
+  displayConfirm.value = false
+  displayNext.value = true
+  emit('confirm')
+}
+
+function emitNext() {
+  emit('nextquestion')
+}
+
+
+
+</script>
+
 <template>
   <div>
-    <div class="button" @click="$emit('confirm')">Confirm</div>
-    <div class="button" @click="$emit('nextquestion')">Next question</div>
+    <div class="button" @click="switchButton" v-if="displayConfirm">Confirm</div>
+    <div class="button" @click="emitNext" v-if="displayNext">Next</div>
   </div>
 </template>
 
@@ -17,6 +39,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 0.5em;
+  margin-bottom: 1em;
   cursor: pointer;
 }
 </style>
