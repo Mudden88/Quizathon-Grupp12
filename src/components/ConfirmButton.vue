@@ -42,4 +42,8 @@ function emitNext() {
   margin-bottom: 1em;
   cursor: pointer;
 }
+
+.button:active {
+  transform: scale(1.1);
+}
 </style>

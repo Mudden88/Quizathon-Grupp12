@@ -148,7 +148,7 @@ clearScore();
 <style scoped>
 .container {
   width: 390px;
-  text-align: center;
+  margin-top: 10px;
 }
 
 ul {
