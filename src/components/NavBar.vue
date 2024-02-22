@@ -37,35 +37,32 @@ window.addEventListener("resize", checkScreen)
 <template> 
     <header>
     <nav>
+    
 <div class="logos">
-
     <img id="burger" @click="toggleBurgerNav" :src="icon" alt="" v-show="mobile">
-
   <RouterLink to="/"> <img id="logo" src="../assets/quizathon-logo.png" alt="logo">
   </RouterLink>
+
+
+  <ul class="navigation" v-show="!mobile">
+    <div class="desktop-links"><li><RouterLink to="/instructions">Instructions
+      <img src="../assets/icons/instructions-icon.png" alt="">
+      </RouterLink></li></div>
+      <div class="desktop-links"><li><RouterLink to="/profile">Profile
+      <img src="../assets/icons/profile-icon.png" alt="">
+      </RouterLink></li></div>
+      <div class="desktop-links"><li><RouterLink to="/leaderboard">Leaderboard 
+      <img src="../assets/icons/crown-icon.png" alt="">
+      </RouterLink></li></div>
+      <div class="desktop-links"><li><RouterLink to="/contact">Contact
+      <img src="../assets/icons/letter-icon.png" alt="">
+      </RouterLink></li></div>
+    </ul>
   <RouterLink to="/profile">
     <img id="profile" src="../assets/icons/profile-outline-icon.png" alt="">
   </RouterLink>
-  
-    </div>
-  <div class="nagivation" v-show="!mobile">
-  <ul>
-    <li><RouterLink to="/instructions">Instructions
-      <img src="../assets/icons/instructions-icon.png" alt="">
-      </RouterLink></li>
-    <li><RouterLink to="/profile">Profile
-      <img src="../assets/icons/profile-icon.png" alt="">
-      </RouterLink></li>
-    <li><RouterLink to="/leaderboard">Leaderboard 
-      <img src="../assets/icons/crown-icon.png" alt="">
-      </RouterLink></li>
-    <li><RouterLink to="/contact">Contact
-      <img src="../assets/icons/letter-icon.png" alt="">
-      </RouterLink></li>
-    </ul>
-  </div>
-  
- 
+</div>
+
 <ul class="dropdown-nav" v-show="mobileNav">
    <li @click="toggleBurgerNav" class="icons">
     <RouterLink to="/instructions">Instructions mobil<img src="../assets/icons/instructions-icon.png" alt="">
@@ -85,7 +82,6 @@ window.addEventListener("resize", checkScreen)
 </template>
 
 <style scoped>
-
 .dropdown-nav {
   display: flex;
   flex-direction: column;
@@ -99,7 +95,23 @@ window.addEventListener("resize", checkScreen)
   border-bottom: solid #3a5e57 1px;
 }
 
+.desktop-links {
+  margin: 10px;
+  font-size: 20px;
+  text-decoration: none;
+  color: #3a5e57;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.navigation {
+  display: flex;
+}
+
 li {
+  display: flex;
+  flex-direction: column;
   list-style: none;
   text-decoration: none;
   cursor: pointer;
@@ -117,7 +129,7 @@ li {
 }
 
 img {
-  height: 50px;
+  height: 30px;
   margin-left: 10px;
 }
 
@@ -126,19 +138,16 @@ img {
     margin: 10px 20px
 }
 
-a {
+ a {
   margin: 10px;
   font-size: 20px;
   text-decoration: none;
   color: #3a5e57;
-  font-size: 40px;
-  display: flex;
-  justify-content: center;
+  font-size: 30px;
+  /* display: flex;
+  justify-content: center; */
 }
 
-.dropdown-nav > li {
-
-}
 
 :root {
   --background: #eef1ef;
@@ -149,36 +158,4 @@ a {
   --bgText: #272727;
 }
 
-/* @media screen and (min-width: 880px) {
- header {
-#logo {
-  height: 130px;
-}
-.desktop-navbar {
-  height: 160px;
-  width: 100vw;
-  background-color: #eef1ef;
-} */
-
-img {
-height: 30px;
-}
-
-a {
-  font-size: 30px;
-  font-weight: lighter;
-}
-
-/* .burger {
-  height: 120px;
-  width: 100vw;
-  background-color: #eef1ef;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-}
-} */
 </style>
