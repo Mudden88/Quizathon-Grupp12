@@ -127,40 +127,34 @@ clearScore();
           <hr />
           <p class="main-question" v-html="question.question"></p>
           <div class="answer-container">
-            <p
-              id="answer"
-              v-for="(answer, answerIndex) in shuffledAnswers"
-              :key="answer"
-              :class="{
-                selected: answerIndex === selectedAnswerIndex,
-                'correct-answer':
-                  correctAnswerIndex === answerIndex &&
-                  userAnswerCorrect !== null,
-                'wrong-answer':
-                  selectedAnswerIndex === answerIndex &&
-                  userAnswerCorrect === false,
-                'correct-unselected':
-                  correctAnswerIndex === answerIndex &&
-                  userAnswerCorrect === false,
-              }"
-              @click="() => answerOnClick(answerIndex)"
-              v-html="answer"
-            ></p>
+            <p id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer" :class="{
+              selected: answerIndex === selectedAnswerIndex,
+              'correct-answer':
+                correctAnswerIndex === answerIndex &&
+                userAnswerCorrect !== null,
+              'wrong-answer':
+                selectedAnswerIndex === answerIndex &&
+                userAnswerCorrect === false,
+              'correct-unselected':
+                correctAnswerIndex === answerIndex &&
+                userAnswerCorrect === false,
+            }" @click="() => answerOnClick(answerIndex)" v-html="answer"></p>
           </div>
-          <ConfirmButton
-            :disabledButton="disabledButton"
-            @Confirm="confirmClick"
-            @nextquestion="getNewIndex"
-          />
+          <ConfirmButton :disabledButton="disabledButton" @Confirm="confirmClick" @nextquestion="getNewIndex" />
         </div>
       </li>
     </ul>
 
-    <p v-else>Loading question...</p>
+    <p class="loading" v-else>Loading question...</p>
   </div>
 </template>
 
 <style scoped>
+.loading {
+  text-align: center;
+  margin-top: 3em;
+}
+
 .container {
   width: 390px;
   margin-top: 10px;
@@ -269,6 +263,7 @@ h3 {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
+
   .container {
     width: 100%;
   }

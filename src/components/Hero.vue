@@ -68,7 +68,7 @@ p {
   cursor: pointer;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 750px) {
   .hero {
     width: 600px;
     height: 300px;
@@ -78,6 +78,7 @@ p {
   h2 {
     font-size: 68px;
   }
+
   .blur {
     width: 300px;
     height: 150px;
@@ -93,6 +94,7 @@ p {
   h2 {
     font-size: 68px;
   }
+
   .blur {
     width: 300px;
     height: 150px;
