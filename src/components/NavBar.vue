@@ -17,7 +17,7 @@ const icon = ref(burger);
 const ifMenuClicked = ref(false);
 
 const fromStorage = useStorage();
-const isLoggedIn = ref(fromStorage.user.isLoggedIn);
+// const isLoggedIn = ref(fromStorage.user.isLoggedIn);
 
 function menuClicked() {
   ifMenuClicked.value = !ifMenuClicked.value;
@@ -29,60 +29,25 @@ function menuClicked() {
   <header>
     <nav>
       <div class="navbar">
-        <div
-          class="burger"
-          @click="closeMenu">
-          <img
-            id="burger"
-            :src="icon"
-            alt=""
-            @click="menuClicked" />
+        <div class="burger" @click="closeMenu">
+          <img id="burger" :src="icon" alt="" @click="menuClicked" />
         </div>
-        <img
-          id="logo"
-          :src="imgUrl"
-          alt="logo" />
-        <img
-          id="profile"
-          :src="profileOutline"
-          alt="" />
+        <img id="logo" :src="imgUrl" alt="logo" />
+        <img id="profile" :src="profileOutline" alt="" />
       </div>
-      <div
-        class="burger-menu"
-        v-show="ifMenuClicked">
-        <div
-          @click="menuClicked"
-          class="icons">
-          <RouterLink to="/instructions">Instructions </RouterLink
-          ><img
-            :src="instructionIcon"
-            alt="" />
+      <div class="burger-menu" v-show="ifMenuClicked">
+        <div @click="menuClicked" class="icons">
+          <RouterLink to="/instructions">Instructions </RouterLink><img :src="instructionIcon" alt="" />
         </div>
-        <div
-          @click="menuClicked"
-          class="icons">
-          <RouterLink :to="isLoggedIn ? '/profile' : '/login'"
-            >Profile</RouterLink
-          >
-          <img
-            :src="profileIcon"
-            alt="" />
+        <div @click="menuClicked" class="icons">
+          <RouterLink :to="isLoggedIn ? '/profile' : '/login'">Profile</RouterLink>
+          <img :src="profileIcon" alt="" />
         </div>
-        <div
-          @click="menuClicked"
-          class="icons">
-          <RouterLink to="/leaderboard">Leaderboard</RouterLink
-          ><img
-            :src="leaderboardIcon"
-            alt="" />
+        <div @click="menuClicked" class="icons">
+          <RouterLink to="/leaderboard">Leaderboard</RouterLink><img :src="leaderboardIcon" alt="" />
         </div>
-        <div
-          @click="menuClicked"
-          class="icons">
-          <RouterLink to="/contact">Contact</RouterLink
-          ><img
-            :src="contactIcon"
-            alt="" />
+        <div @click="menuClicked" class="icons">
+          <RouterLink to="/contact">Contact</RouterLink><img :src="contactIcon" alt="" />
         </div>
       </div>
     </nav>
