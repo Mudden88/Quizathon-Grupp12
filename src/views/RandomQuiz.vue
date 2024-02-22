@@ -10,6 +10,8 @@ const currentIndex = ref(0);
 const selectedAnswerIndex = ref(null);
 const currentScore = ref(0);
 const router = useRouter();
+const emit = defineEmits(['changedisabled'])
+const disabledButton = ref(true)
 
 const shuffledAnswers = computed(() => {
   if (
@@ -42,8 +44,10 @@ function shuffleArray(array) {
 }
 
 // tar emot index från svaren och tilldelar index som värde för att kunna hantera vilket svar som är klickat på.
+//Git-Ellen fixade disable button
 function answerOnClick(index) {
   selectedAnswerIndex.value = index;
+  disabledButton.value = false
 }
 
 //Öka siffra efter varje fråga
@@ -57,6 +61,7 @@ function newIndex() {
 function getNewIndex() {
   if (currentIndex.value != 10) {
     selectedAnswerIndex.value = null;
+    disabledButton.value = true
     newIndex();
   }
   if (currentIndex.value === 10) {
@@ -136,7 +141,7 @@ clearScore();
                 userAnswerCorrect === false,
             }" @click="() => answerOnClick(answerIndex)" v-html="answer"></p>
           </div>
-          <ConfirmButton @Confirm="confirmClick" @nextquestion="getNewIndex" />
+          <ConfirmButton :disabledButton="disabledButton" @Confirm="confirmClick" @nextquestion="getNewIndex" />
         </div>
       </li>
     </ul>

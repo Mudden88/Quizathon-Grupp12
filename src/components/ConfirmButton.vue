@@ -3,8 +3,17 @@ import { ref } from 'vue'
 
 const displayConfirm = ref(true)
 const displayNext = ref(false)
+// const disabledButton = ref(true)
+
 
 const emit = defineEmits(['confirm', 'nextquestion'])
+const props = defineProps({
+  disabledButton: {
+    type: Boolean
+  }
+})
+
+
 
 function switchButton() {
   displayConfirm.value = false
@@ -16,19 +25,18 @@ function emitNext() {
   emit('nextquestion')
 }
 
-
-
 </script>
 
 <template>
   <div>
-    <div class="button" @click="switchButton" v-if="displayConfirm">Confirm</div>
-    <div class="button" @click="emitNext" v-if="displayNext">Next</div>
+    <button id="button" :disabled="disabledButton" @click="switchButton" v-if="displayConfirm">Confirm
+    </button>
+    <div id="button" @click="emitNext" v-if="displayNext">Next</div>
   </div>
 </template>
 
 <style scoped>
-.button {
+#button {
   width: 291px;
   height: 63px;
   border-radius: 20px;
@@ -41,9 +49,12 @@ function emitNext() {
   margin-top: 0.5em;
   margin-bottom: 1em;
   cursor: pointer;
+
 }
 
-.button:active {
+
+
+#button:active {
   transform: scale(1.1);
 }
 </style>
