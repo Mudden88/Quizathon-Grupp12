@@ -2,14 +2,14 @@
 import axios from "axios";
 import { ref, computed } from "vue";
 import ConfirmButton from "../components/ConfirmButton.vue";
-import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 
 const apiUrl = "https://opentdb.com/api.php?amount=10";
 const questions = ref([]);
 const currentIndex = ref(0);
 const selectedAnswerIndex = ref(null);
 const currentScore = ref(0);
-const router = useRoute();
+const router = useRouter();
 
 const shuffledAnswers = computed(() => {
   if (
@@ -58,8 +58,9 @@ function getNewIndex() {
   if (currentIndex.value != 10) {
     selectedAnswerIndex.value = null;
     newIndex();
-  } else {
-    router.push("/");
+  }
+  if (currentIndex.value === 10) {
+    router.push('/AfterQuiz');
   }
 }
 //Logik för knappen, är svaret rätt. ökas currentScore,
@@ -83,7 +84,8 @@ function confirmClick() {
     currentScore.value += 1;
     setScore();
     userAnswerCorrect.value = true;
-  } else {
+  }
+  else {
     console.log(
       selectedAnswer,
       "is incorrect. Correct answer is ",
@@ -99,10 +101,6 @@ function setScore() {
 
 function clearScore() {
   localStorage.removeItem("userScore");
-}
-
-function getScore() {
-  console.log("Get score:", localStorage.getItem("userScore"));
 }
 
 fetchData();
@@ -125,25 +123,18 @@ clearScore();
           <hr />
           <p class="main-question" v-html="question.question"></p>
           <div class="answer-container">
-            <p
-              id="answer"
-              v-for="(answer, answerIndex) in shuffledAnswers"
-              :key="answer"
-              :class="{
-                selected: answerIndex === selectedAnswerIndex,
-                'correct-answer':
-                  correctAnswerIndex === answerIndex &&
-                  userAnswerCorrect !== null,
-                'wrong-answer':
-                  selectedAnswerIndex === answerIndex &&
-                  userAnswerCorrect === false,
-                'correct-unselected':
-                  correctAnswerIndex === answerIndex &&
-                  userAnswerCorrect === false,
-              }"
-              @click="() => answerOnClick(answerIndex)"
-              v-html="answer"
-            ></p>
+            <p id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer" :class="{
+              selected: answerIndex === selectedAnswerIndex,
+              'correct-answer':
+                correctAnswerIndex === answerIndex &&
+                userAnswerCorrect !== null,
+              'wrong-answer':
+                selectedAnswerIndex === answerIndex &&
+                userAnswerCorrect === false,
+              'correct-unselected':
+                correctAnswerIndex === answerIndex &&
+                userAnswerCorrect === false,
+            }" @click="() => answerOnClick(answerIndex)" v-html="answer"></p>
           </div>
           <ConfirmButton @Confirm="confirmClick" @nextquestion="getNewIndex" />
         </div>
