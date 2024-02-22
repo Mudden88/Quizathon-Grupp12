@@ -17,7 +17,7 @@ const icon = ref(burger);
 const ifMenuClicked = ref(false);
 
 const fromStorage = useStorage();
-// const isLoggedIn = ref(fromStorage.user.isLoggedIn);
+const isLoggedIn = ref(fromStorage.user.isLoggedIn);
 
 function menuClicked() {
   ifMenuClicked.value = !ifMenuClicked.value;
