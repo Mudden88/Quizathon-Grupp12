@@ -3,8 +3,14 @@ import axios from "axios";
 import { ref, computed } from "vue";
 import ConfirmButton from "../components/ConfirmButton.vue";
 import { useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
-const apiUrl = "https://opentdb.com/api.php?amount=10";
+const url = ref("");
+const route = useRoute();
+
+const difficulty = route.params.difficulty;
+const id = route.params.id;
+
 const questions = ref([]);
 const currentIndex = ref(0);
 const selectedAnswerIndex = ref(null);
@@ -29,7 +35,12 @@ const shuffledAnswers = computed(() => {
 
 //function för att hämta quiz och lagra i questions arrayen
 async function fetchData() {
-  let response = await axios.get(apiUrl);
+  if (route.params.type === "random") {
+    url.value = "https://opentdb.com/api.php?amount=10";
+  } else {
+    url.value = `https://opentdb.com/api.php?amount=10&category=${id}&difficulty=${difficulty}`;
+  }
+  let response = await axios.get(url.value);
 
   questions.value = response.data.results;
 
@@ -90,11 +101,6 @@ function confirmClick() {
     setScore();
     userAnswerCorrect.value = true;
   } else {
-    console.log(
-      selectedAnswer,
-      "is incorrect. Correct answer is ",
-      question.correct_answer
-    );
     userAnswerCorrect.value = false;
   }
 }
@@ -112,40 +118,62 @@ clearScore();
 </script>
 
 <template>
+  {{ $route.params.type }}
   <div class="container">
     <ul v-if="questions.length > 0">
-      <li v-for="(question, index) in questions" :key="question.question">
-        <div class="check-index" v-if="index === currentIndex">
+      <li
+        v-for="(question, index) in questions"
+        :key="question.question">
+        <div
+          class="check-index"
+          v-if="index === currentIndex">
           <p>
             Question: {{ index + 1 }}/10
-            <span class="difficulty" v-html="question.difficulty"></span>
+            <span
+              class="difficulty"
+              v-html="question.difficulty"></span>
           </p>
           <p class="category">
             Category: <span v-html="question.category"></span>
           </p>
           <p class="currentScore">Score: {{ currentScore }} /10</p>
           <hr />
-          <p class="main-question" v-html="question.question"></p>
+          <p
+            class="main-question"
+            v-html="question.question"></p>
           <div class="answer-container">
-            <p id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer" :class="{
-              selected: answerIndex === selectedAnswerIndex,
-              'correct-answer':
-                correctAnswerIndex === answerIndex &&
-                userAnswerCorrect !== null,
-              'wrong-answer':
-                selectedAnswerIndex === answerIndex &&
-                userAnswerCorrect === false,
-              'correct-unselected':
-                correctAnswerIndex === answerIndex &&
-                userAnswerCorrect === false,
-            }" @click="() => answerOnClick(answerIndex)" v-html="answer"></p>
+            <p
+              id="answer"
+              v-for="(answer, answerIndex) in shuffledAnswers"
+              :key="answer"
+              :class="{
+                selected: answerIndex === selectedAnswerIndex,
+                'correct-answer':
+                  correctAnswerIndex === answerIndex &&
+                  userAnswerCorrect !== null,
+                'wrong-answer':
+                  selectedAnswerIndex === answerIndex &&
+                  userAnswerCorrect === false,
+                'correct-unselected':
+                  correctAnswerIndex === answerIndex &&
+                  userAnswerCorrect === false,
+              }"
+              @click="() => answerOnClick(answerIndex)"
+              v-html="answer"></p>
           </div>
-          <ConfirmButton :disabledButton="disabledButton" @Confirm="confirmClick" @nextquestion="getNewIndex" />
+          <ConfirmButton
+            :disabledButton="disabledButton"
+            @Confirm="confirmClick"
+            @nextquestion="getNewIndex" />
         </div>
       </li>
     </ul>
 
-    <p class="loading" v-else>Loading question...</p>
+    <p
+      class="loading"
+      v-else>
+      Loading question...
+    </p>
   </div>
 </template>
 
