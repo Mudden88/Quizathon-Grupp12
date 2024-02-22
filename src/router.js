@@ -8,7 +8,7 @@ import ContactView from "./views/ContactView.vue";
 import InstructionsView from "./views/InstructionsView.vue";
 import LeaderboardView from "./views/LeaderboardView.vue";
 import ProfileView from "./views/ProfileView.vue";
-import AfterQuiz from './views/AfterQuiz.vue'
+import AfterQuiz from "./views/AfterQuiz.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -35,7 +35,7 @@ export default createRouter({
     },
     {
       component: RandomQuiz,
-      path: "/randomQuiz",
+      path: "/randomQuiz/:type",
     },
     {
       path: "/StartQuiz/:categoryId",
@@ -44,7 +44,7 @@ export default createRouter({
     },
     {
       component: AfterQuiz,
-      path: '/AfterQuiz'
+      path: "/AfterQuiz",
     },
     {
       component: LogInView,

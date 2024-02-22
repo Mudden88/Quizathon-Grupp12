@@ -56,7 +56,13 @@ console.log("Kategori-ID:", categoryId);
     <button @click="selectDifficulty('medium')">Medium</button>
     <button @click="selectDifficulty('hard')">Hard</button>
   </div>
-  <button class="start-quiz-btn" @click="startQuiz">Start Quiz</button>
+  <RouterLink to="/randomQuiz/category">
+    <button
+      class="start-quiz-btn"
+      @click="startQuiz">
+      Start Quiz
+    </button>
+  </RouterLink>
 </template>
 
 <style scoped>
