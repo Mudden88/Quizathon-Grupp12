@@ -60,7 +60,7 @@ function getNewIndex() {
     newIndex();
   }
   if (currentIndex.value === 10) {
-    router.push('/AfterQuiz');
+    router.push("/AfterQuiz");
   }
 }
 //Logik för knappen, är svaret rätt. ökas currentScore,
@@ -84,8 +84,7 @@ function confirmClick() {
     currentScore.value += 1;
     setScore();
     userAnswerCorrect.value = true;
-  }
-  else {
+  } else {
     console.log(
       selectedAnswer,
       "is incorrect. Correct answer is ",
@@ -123,18 +122,25 @@ clearScore();
           <hr />
           <p class="main-question" v-html="question.question"></p>
           <div class="answer-container">
-            <p id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer" :class="{
-              selected: answerIndex === selectedAnswerIndex,
-              'correct-answer':
-                correctAnswerIndex === answerIndex &&
-                userAnswerCorrect !== null,
-              'wrong-answer':
-                selectedAnswerIndex === answerIndex &&
-                userAnswerCorrect === false,
-              'correct-unselected':
-                correctAnswerIndex === answerIndex &&
-                userAnswerCorrect === false,
-            }" @click="() => answerOnClick(answerIndex)" v-html="answer"></p>
+            <p
+              id="answer"
+              v-for="(answer, answerIndex) in shuffledAnswers"
+              :key="answer"
+              :class="{
+                selected: answerIndex === selectedAnswerIndex,
+                'correct-answer':
+                  correctAnswerIndex === answerIndex &&
+                  userAnswerCorrect !== null,
+                'wrong-answer':
+                  selectedAnswerIndex === answerIndex &&
+                  userAnswerCorrect === false,
+                'correct-unselected':
+                  correctAnswerIndex === answerIndex &&
+                  userAnswerCorrect === false,
+              }"
+              @click="() => answerOnClick(answerIndex)"
+              v-html="answer"
+            ></p>
           </div>
           <ConfirmButton @Confirm="confirmClick" @nextquestion="getNewIndex" />
         </div>
