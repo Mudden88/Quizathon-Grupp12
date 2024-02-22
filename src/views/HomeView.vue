@@ -10,7 +10,6 @@ import Hero from "../components/Hero.vue"
 <template>
   <Hero />
 
-<PopularCategories />
-<AllCategories />
-
+  <PopularCategories />
+  <AllCategories />
 </template>
