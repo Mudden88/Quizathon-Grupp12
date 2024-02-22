@@ -21,7 +21,7 @@ if (userScore.value === null) {
       </RouterLink>
     </a>
     <span class="textBox">
-      <hr class="hr1">Or explore out other quizes
+      <hr class="hr1">Or explore our other quizes
       <hr class="hr2">
     </span>
     <a>
