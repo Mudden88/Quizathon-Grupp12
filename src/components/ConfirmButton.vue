@@ -31,7 +31,7 @@ function emitNext() {
   <div>
     <button id="button" :disabled="disabledButton" @click="switchButton" v-if="displayConfirm">Confirm
     </button>
-    <div id="button" @click="emitNext" v-if="displayNext">Next</div>
+    <button id="button" @click="emitNext" v-if="displayNext">Next</button>
   </div>
 </template>
 
@@ -50,6 +50,9 @@ function emitNext() {
   margin-bottom: 1em;
   cursor: pointer;
 
+  &:disabled {
+    opacity: 30%;
+  }
 }
 
 
