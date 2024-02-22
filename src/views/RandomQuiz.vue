@@ -10,8 +10,8 @@ const currentIndex = ref(0);
 const selectedAnswerIndex = ref(null);
 const currentScore = ref(0);
 const router = useRouter();
-const emit = defineEmits(['changedisabled'])
-const disabledButton = ref(true)
+const emit = defineEmits(["changedisabled"]);
+const disabledButton = ref(true);
 
 const shuffledAnswers = computed(() => {
   if (
@@ -47,7 +47,7 @@ function shuffleArray(array) {
 //Git-Ellen fixade disable button
 function answerOnClick(index) {
   selectedAnswerIndex.value = index;
-  disabledButton.value = false
+  disabledButton.value = false;
 }
 
 //Öka siffra efter varje fråga
@@ -61,7 +61,7 @@ function newIndex() {
 function getNewIndex() {
   if (currentIndex.value != 10) {
     selectedAnswerIndex.value = null;
-    disabledButton.value = true
+    disabledButton.value = true;
     newIndex();
   }
   if (currentIndex.value === 10) {
@@ -147,7 +147,11 @@ clearScore();
               v-html="answer"
             ></p>
           </div>
-          <ConfirmButton :disabledButton="disabledButton" @Confirm="confirmClick" @nextquestion="getNewIndex" />
+          <ConfirmButton
+            :disabledButton="disabledButton"
+            @Confirm="confirmClick"
+            @nextquestion="getNewIndex"
+          />
         </div>
       </li>
     </ul>
@@ -212,6 +216,7 @@ h3 {
   cursor: pointer;
   margin: 10px;
   font-size: 36px;
+  padding: 10px;
 }
 
 #answer:hover {
