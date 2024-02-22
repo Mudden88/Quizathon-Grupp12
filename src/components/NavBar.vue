@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 import { useStorage } from "../storage";
 
 import imgUrl from "/src/assets/quizathon-logo.png";
@@ -14,18 +14,18 @@ import contactIcon from "/src/assets/icons/letter-icon.png";
 import profileOutline from "/src/assets/icons/profile-outline-icon.png";
 
 const icon = ref(burger);
-const router = useRouter()
+const router = useRouter();
 const ifMenuClicked = ref(false);
 
 const fromStorage = useStorage();
 
 function userLogin() {
-  console.log(fromStorage.user.isLoggedIn)
+  console.log(fromStorage.user.isLoggedIn);
   if (fromStorage.user.isLoggedIn === true) {
-    router.push('/profile')
+    router.push("/profile");
   }
   if (fromStorage.user.isLoggedIn === false) {
-    router.push('/login')
+    router.push("/login");
   }
 }
 
@@ -33,31 +33,71 @@ function menuClicked() {
   ifMenuClicked.value = !ifMenuClicked.value;
   icon.value = ifMenuClicked.value ? menuX : burger;
 }
+
+function goHome() {
+  router.push("/");
+}
 </script>
 
 <template>
   <header>
     <nav>
       <div class="navbar">
-        <div class="burger" @click="closeMenu">
-          <img id="burger" :src="icon" alt="" @click="menuClicked" />
+        <div
+          class="burger"
+          @click="closeMenu">
+          <img
+            id="burger"
+            :src="icon"
+            alt=""
+            @click="menuClicked" />
         </div>
-        <img id="logo" :src="imgUrl" alt="logo" />
-        <img id="profile" :src="profileOutline" alt="" />
+        <img
+          id="logo"
+          :src="imgUrl"
+          alt="logo"
+          @click="goHome" />
+        <img
+          id="profile"
+          :src="profileOutline"
+          alt="" />
       </div>
-      <div class="burger-menu" v-show="ifMenuClicked">
-        <div @click="menuClicked" class="icons">
-          <RouterLink to="/instructions">Instructions </RouterLink><img :src="instructionIcon" alt="" />
+      <div
+        class="burger-menu"
+        v-show="ifMenuClicked">
+        <div
+          @click="menuClicked"
+          class="icons">
+          <RouterLink to="/instructions">Instructions </RouterLink
+          ><img
+            :src="instructionIcon"
+            alt="" />
         </div>
-        <div @click="menuClicked" class="icons">
-          <a @click="userLogin">Profile
-            <img :src="profileIcon" alt="" /></a>
+        <div
+          @click="menuClicked"
+          class="icons">
+          <a @click="userLogin"
+            >Profile
+            <img
+              :src="profileIcon"
+              alt=""
+          /></a>
         </div>
-        <div @click="menuClicked" class="icons">
-          <RouterLink to="/leaderboard">Leaderboard</RouterLink><img :src="leaderboardIcon" alt="" />
+        <div
+          @click="menuClicked"
+          class="icons">
+          <RouterLink to="/leaderboard">Leaderboard</RouterLink
+          ><img
+            :src="leaderboardIcon"
+            alt="" />
         </div>
-        <div @click="menuClicked" class="icons">
-          <RouterLink to="/contact">Contact</RouterLink><img :src="contactIcon" alt="" />
+        <div
+          @click="menuClicked"
+          class="icons">
+          <RouterLink to="/contact">Contact</RouterLink
+          ><img
+            :src="contactIcon"
+            alt="" />
         </div>
       </div>
     </nav>
