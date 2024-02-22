@@ -112,13 +112,12 @@ function setScore() {
 function clearScore() {
   localStorage.removeItem("userScore");
 }
-
-fetchData();
+setTimeout(fetchData, 3000);
+// fetchData();
 clearScore();
 </script>
 
 <template>
-  {{ $route.params.type }}
   <div class="container">
     <ul v-if="questions.length > 0">
       <li
