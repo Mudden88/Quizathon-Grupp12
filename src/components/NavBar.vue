@@ -5,71 +5,97 @@ import burger from "/src/assets/burger.png"
 import menuX from "/src/assets/menuX.png"
 
 const icon = ref(burger),
-ifMenuClicked = ref(false)
+ifMenuClicked = ref(null)
 
-function menuClicked() {
-ifMenuClicked.value = !ifMenuClicked.value
-icon.value = ifMenuClicked.value ? menuX : burger
+const mobile = ref(null),
+mobileNav = ref(null),
+windowWidth = ref(null)
+
+function checkScreen() {
+  windowWidth.value = window.innerWidth
+  if (windowWidth.value <= 800) {
+    mobile.value = true
+  } else {
+    mobile.value = false
+    mobileNav.value = false
+  }
 }
+
+function toggleBurgerNav() {
+  mobile.value = !mobile.value
+  ifMenuClicked.value = !ifMenuClicked.value
+}
+
+function iconToggle() {
+    icon.value = ifMenuClicked ? burger : menuX
+}
+
+window.addEventListener("resize", checkScreen)
 
 </script>
 
 <template> 
     <header>
     <nav>
-<div class="navbar">
-  <!-- <div class="burger" @click="closeMenu">
-  <img id="burger" :src="icon" alt="" @click="menuClicked">
-</div> -->
-<div class="desktop-header">
-      <div class="nav">
-       <RouterLink to="/"> <img id="logo" src="../assets/quizathon-logo.png" alt="logo"></RouterLink>
-        <RouterLink to="/instructions">Instructions 
-          <img src="../assets/icons/instructions-icon.png" alt="">
-        </RouterLink>
-        <RouterLink to="/profile">Profile
-          <img src="../assets/icons/profile-icon.png" alt="">
-        </RouterLink>
-        <RouterLink to="/leaderboard">Leaderboard 
-          <img src="../assets/icons/crown-icon.png" alt="">
-        </RouterLink>
-        <RouterLink to="/contact">Contact
-          <img src="../assets/icons/letter-icon.png" alt="">
-        </RouterLink>
-      </div>
+<div class="logos">
+  <RouterLink to="/"> <img id="logo" src="../assets/quizathon-logo.png" alt="logo"></RouterLink>
+  <RouterLink to="/profile"><img id="profile" src="../assets/icons/profile-outline-icon.png" alt=""></RouterLink>
     </div>
-  </div>
-    <!-- <img id="logo" src="../assets/quizathon-logo.png" alt="logo">
-    <img id="profile" src="../assets/icons/profile-outline-icon.png" alt="">
+  <div class="nagivation" v-show="!mobile">
+  <ul>
+       <li><RouterLink to="/instructions">Instructions 
+          <img src="../assets/icons/instructions-icon.png" alt="">
+        </RouterLink></li>
+       <li><RouterLink to="/profile">Profile
+          <img src="../assets/icons/profile-icon.png" alt="">
+        </RouterLink></li>
+        <li><RouterLink to="/leaderboard">Leaderboard 
+          <img src="../assets/icons/crown-icon.png" alt="">
+        </RouterLink></li>
+        <li><RouterLink to="/contact">Contact
+          <img src="../assets/icons/letter-icon.png" alt="">
+        </RouterLink></li>
+      </ul>
+    </div>
   
-  <div class="burger-menu" v-show="ifMenuClicked">
-    <div @click="menuClicked" class="icons"><RouterLink to="/instructions">Instructions </RouterLink><img src="../assets/icons/instructions-icon.png" alt=""></div>
-    <div @click="menuClicked" class="icons"><RouterLink to="/profile">Profile</RouterLink><img src="../assets/icons/profile-icon.png" alt=""></div>
-    <div @click="menuClicked" class="icons"><RouterLink to="/leaderboard">Leaderboard</RouterLink><img src="../assets/icons/crown-icon.png" alt=""></div>
-    <div @click="menuClicked" class="icons"><RouterLink to="/contact">Contact<img src="../assets/icons/letter-icon.png" alt=""></RouterLink></div>
-    </div> -->
+  <div class="burger">
+    <img id="burger" @click="toggleBurgerNav" :src="icon" alt="" v-show="mobile" :class="{'icon-active' : mobileNav}">
 
+<ul class="dropdown-nav" v-show="mobileNav">
+   <li @click="toggleBurgerNav" class="icons">
+    <RouterLink to="/instructions">Instructions<img src="../assets/icons/instructions-icon.png" alt="">
+    </RouterLink></li>
+    <li @click="toggleBurgerNav" class="icons">
+      <RouterLink to="/profile">Profile<img src="../assets/icons/profile-icon.png" alt="">
+      </RouterLink></li>
+    <li @click="toggleBurgerNav" class="icons">
+      <RouterLink to="/leaderboard">Leaderboard<img src="../assets/icons/crown-icon.png" alt="">
+      </RouterLink></li>
+    <li @click="toggleBurgerNav" class="icons">
+      <RouterLink to="/contact">Contact<img src="../assets/icons/letter-icon.png" alt=""></RouterLink></li>
+  </ul> 
+  </div>
     </nav>
 </header>
 </template>
 
 <style scoped>
-
-.navbar {
+/* 
+.desktop-navbar {
   height: 120px;
   width: 100vw;
   background-color: #eef1ef;
   display: flex;
   justify-content: space-between;
-}
-
+} */
+/* 
 button {
   margin-top: 35px;
   margin-right: 40px;
   height: 50px;
   border-style: none;
   cursor: pointer;
-}
+} */
 
 #logo {
   height: 100px;
@@ -90,7 +116,7 @@ a {
   color: #3a5e57;
   font-size: 40px;
 }
-
+/* 
 .burger-menu {
     margin-top: 100px;
     height:500px;
@@ -102,8 +128,8 @@ a {
     top: 0;
     z-index: 1;
     background-color: #eef1ef; 
-}
-
+} */
+/* 
 .icons {
     display: flex;
     border-top: solid #3a5e57 1px;
@@ -111,7 +137,7 @@ a {
     padding-top: 30px;
     padding-right: 15px;
     width: 350px;
-}
+} */
 
 :root {
   --background: #eef1ef;
@@ -122,17 +148,16 @@ a {
   --bgText: #272727;
 }
 
-@media screen and (min-width: 880px) {
+/* @media screen and (min-width: 880px) {
  header {
 #logo {
   height: 130px;
 }
-.navbar {
+.desktop-navbar {
   height: 160px;
   width: 100vw;
   background-color: #eef1ef;
-
-}
+} */
 
 img {
 height: 30px;
@@ -143,23 +168,16 @@ a {
   font-weight: lighter;
 }
 
-.desktop-header {
+/* .burger {
   height: 120px;
   width: 100vw;
   background-color: #eef1ef;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
 
-.nav {
-  width: 100vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 10px;
 }
-
-}
-}
+} */
 </style>
