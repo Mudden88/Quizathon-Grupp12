@@ -30,12 +30,6 @@ async function fetchCategoryName() {
   categoryName.value = response.data.results[0].category;
   console.log("Kategorinamn:", categoryName.value);
 }
-// Funktion för att hämta quiz med kategori-id:t och vilken svårighetsgrad som användaren valde
-async function startQuiz() {
-  const url = `https://opentdb.com/api.php?amount=10&category=${categoryId}&difficulty=${selectedDifficulty.value}`;
-  const response = await axios.get(url);
-  console.log(response.data);
-}
 
 onMounted(fetchCategoryName);
 
@@ -56,12 +50,8 @@ console.log("Kategori-ID:", categoryId);
     <button @click="selectDifficulty('medium')">Medium</button>
     <button @click="selectDifficulty('hard')">Hard</button>
   </div>
-  <RouterLink to="/randomQuiz/category">
-    <button
-      class="start-quiz-btn"
-      @click="startQuiz">
-      Start Quiz
-    </button>
+  <RouterLink :to="`/randomQuiz/category/${categoryId}/${selectedDifficulty}`">
+    <button class="start-quiz-btn">Start Quiz</button>
   </RouterLink>
 </template>
 

@@ -8,7 +8,8 @@ import { useRoute } from "vue-router";
 const url = ref("");
 const route = useRoute();
 
-console.log(route.params.type);
+const difficulty = route.params.difficulty;
+const id = route.params.id;
 
 const questions = ref([]);
 const currentIndex = ref(0);
@@ -36,10 +37,8 @@ const shuffledAnswers = computed(() => {
 async function fetchData() {
   if (route.params.type === "random") {
     url.value = "https://opentdb.com/api.php?amount=10";
-    console.log(url.value);
   } else {
-    url.value =
-      "https://opentdb.com/api.php?amount=10&category=11&difficulty=easy";
+    url.value = `https://opentdb.com/api.php?amount=10&category=${id}&difficulty=${difficulty}`;
   }
   let response = await axios.get(url.value);
 
@@ -102,11 +101,6 @@ function confirmClick() {
     setScore();
     userAnswerCorrect.value = true;
   } else {
-    console.log(
-      selectedAnswer,
-      "is incorrect. Correct answer is ",
-      question.correct_answer
-    );
     userAnswerCorrect.value = false;
   }
 }
