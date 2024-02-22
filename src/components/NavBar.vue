@@ -5,9 +5,7 @@ import burger from "/src/assets/burger.png"
 import menuX from "/src/assets/menuX.png"
 
 const icon = ref(burger),
-ifMenuClicked = ref(null)
-
-const mobile = ref(null),
+mobile = ref(null),
 mobileNav = ref(null),
 windowWidth = ref(null)
 
@@ -15,20 +13,22 @@ function checkScreen() {
   windowWidth.value = window.innerWidth
   if (windowWidth.value <= 800) {
     mobile.value = true
+    mobileNav.value = false
   } else {
+    icon.value = burger
     mobile.value = false
     mobileNav.value = false
   }
 }
 
 function toggleBurgerNav() {
-  mobile.value = !mobile.value
-  ifMenuClicked.value = !ifMenuClicked.value
+  mobileNav.value = !mobileNav.value
+  if (mobile.value === true) {
+  icon.value = !mobileNav.value ? burger : menuX
+  }
 }
 
-function iconToggle() {
-    icon.value = ifMenuClicked ? burger : menuX
-}
+checkScreen ()
 
 window.addEventListener("resize", checkScreen)
 
@@ -38,32 +38,37 @@ window.addEventListener("resize", checkScreen)
     <header>
     <nav>
 <div class="logos">
-  <RouterLink to="/"> <img id="logo" src="../assets/quizathon-logo.png" alt="logo"></RouterLink>
-  <RouterLink to="/profile"><img id="profile" src="../assets/icons/profile-outline-icon.png" alt=""></RouterLink>
+
+    <img id="burger" @click="toggleBurgerNav" :src="icon" alt="" v-show="mobile">
+
+  <RouterLink to="/"> <img id="logo" src="../assets/quizathon-logo.png" alt="logo">
+  </RouterLink>
+  <RouterLink to="/profile">
+    <img id="profile" src="../assets/icons/profile-outline-icon.png" alt="">
+  </RouterLink>
+  
     </div>
   <div class="nagivation" v-show="!mobile">
   <ul>
-       <li><RouterLink to="/instructions">Instructions 
-          <img src="../assets/icons/instructions-icon.png" alt="">
-        </RouterLink></li>
-       <li><RouterLink to="/profile">Profile
-          <img src="../assets/icons/profile-icon.png" alt="">
-        </RouterLink></li>
-        <li><RouterLink to="/leaderboard">Leaderboard 
-          <img src="../assets/icons/crown-icon.png" alt="">
-        </RouterLink></li>
-        <li><RouterLink to="/contact">Contact
-          <img src="../assets/icons/letter-icon.png" alt="">
-        </RouterLink></li>
-      </ul>
-    </div>
+    <li><RouterLink to="/instructions">Instructions
+      <img src="../assets/icons/instructions-icon.png" alt="">
+      </RouterLink></li>
+    <li><RouterLink to="/profile">Profile
+      <img src="../assets/icons/profile-icon.png" alt="">
+      </RouterLink></li>
+    <li><RouterLink to="/leaderboard">Leaderboard 
+      <img src="../assets/icons/crown-icon.png" alt="">
+      </RouterLink></li>
+    <li><RouterLink to="/contact">Contact
+      <img src="../assets/icons/letter-icon.png" alt="">
+      </RouterLink></li>
+    </ul>
+  </div>
   
-  <div class="burger">
-    <img id="burger" @click="toggleBurgerNav" :src="icon" alt="" v-show="mobile" :class="{'icon-active' : mobileNav}">
-
+ 
 <ul class="dropdown-nav" v-show="mobileNav">
    <li @click="toggleBurgerNav" class="icons">
-    <RouterLink to="/instructions">Instructions<img src="../assets/icons/instructions-icon.png" alt="">
+    <RouterLink to="/instructions">Instructions mobil<img src="../assets/icons/instructions-icon.png" alt="">
     </RouterLink></li>
     <li @click="toggleBurgerNav" class="icons">
       <RouterLink to="/profile">Profile<img src="../assets/icons/profile-icon.png" alt="">
@@ -74,28 +79,38 @@ window.addEventListener("resize", checkScreen)
     <li @click="toggleBurgerNav" class="icons">
       <RouterLink to="/contact">Contact<img src="../assets/icons/letter-icon.png" alt=""></RouterLink></li>
   </ul> 
-  </div>
+  
     </nav>
 </header>
 </template>
 
 <style scoped>
-/* 
-.desktop-navbar {
-  height: 120px;
-  width: 100vw;
-  background-color: #eef1ef;
+
+.dropdown-nav {
   display: flex;
-  justify-content: space-between;
-} */
-/* 
-button {
-  margin-top: 35px;
-  margin-right: 40px;
-  height: 50px;
-  border-style: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropdown-nav > li {
+  margin: 20px 20px 10px 20px;
+  padding: 10px;
+  width: 300px;
+  border-bottom: solid #3a5e57 1px;
+}
+
+li {
+  list-style: none;
+  text-decoration: none;
   cursor: pointer;
-} */
+}
+
+.logos {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 #logo {
   height: 100px;
@@ -103,10 +118,12 @@ button {
 
 img {
   height: 50px;
+  margin-left: 10px;
 }
 
 #profile, #burger {
-    margin: 30px 10px 0 10px
+  height: 45px;
+    margin: 10px 20px
 }
 
 a {
@@ -115,29 +132,13 @@ a {
   text-decoration: none;
   color: #3a5e57;
   font-size: 40px;
+  display: flex;
+  justify-content: center;
 }
-/* 
-.burger-menu {
-    margin-top: 100px;
-    height:500px;
-    width: 100vw;
-    display: flex;
-    align-items: center;   
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    background-color: #eef1ef; 
-} */
-/* 
-.icons {
-    display: flex;
-    border-top: solid #3a5e57 1px;
-    margin-top: 50px;
-    padding-top: 30px;
-    padding-right: 15px;
-    width: 350px;
-} */
+
+.dropdown-nav > li {
+
+}
 
 :root {
   --background: #eef1ef;
