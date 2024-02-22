@@ -49,6 +49,7 @@ function emitNext() {
   margin-top: 0.5em;
   margin-bottom: 1em;
   cursor: pointer;
+  border-style: none;
 
   &:disabled {
     opacity: 30%;
