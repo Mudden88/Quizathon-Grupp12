@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
+import { useRouter } from 'vue-router';
 import { useStorage } from "../storage";
 
 import imgUrl from "/src/assets/quizathon-logo.png";
@@ -13,11 +14,20 @@ import contactIcon from "/src/assets/icons/letter-icon.png";
 import profileOutline from "/src/assets/icons/profile-outline-icon.png";
 
 const icon = ref(burger);
-
+const router = useRouter()
 const ifMenuClicked = ref(false);
 
 const fromStorage = useStorage();
-const isLoggedIn = ref(fromStorage.user.isLoggedIn);
+
+function userLogin() {
+  console.log(fromStorage.user.isLoggedIn)
+  if (fromStorage.user.isLoggedIn === true) {
+    router.push('/profile')
+  }
+  if (fromStorage.user.isLoggedIn === false) {
+    router.push('/login')
+  }
+}
 
 function menuClicked() {
   ifMenuClicked.value = !ifMenuClicked.value;
@@ -40,8 +50,8 @@ function menuClicked() {
           <RouterLink to="/instructions">Instructions </RouterLink><img :src="instructionIcon" alt="" />
         </div>
         <div @click="menuClicked" class="icons">
-          <RouterLink :to="isLoggedIn ? '/profile' : '/login'">Profile</RouterLink>
-          <img :src="profileIcon" alt="" />
+          <a @click="userLogin">Profile
+            <img :src="profileIcon" alt="" /></a>
         </div>
         <div @click="menuClicked" class="icons">
           <RouterLink to="/leaderboard">Leaderboard</RouterLink><img :src="leaderboardIcon" alt="" />
@@ -90,6 +100,7 @@ a {
   text-decoration: none;
   color: #3a5e57;
   font-size: 40px;
+  cursor: pointer;
 }
 
 .burger-menu {
