@@ -63,7 +63,8 @@ function menuClicked() {
           class="icons">
           <RouterLink :to="isLoggedIn ? '/profile' : '/login'"
             >Profile</RouterLink
-          ><img
+          >
+          <img
             :src="profileIcon"
             alt="" />
         </div>
