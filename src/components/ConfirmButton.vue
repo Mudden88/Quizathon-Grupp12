@@ -60,4 +60,12 @@ function emitNext() {
 #button:active {
   transform: scale(1.1);
 }
+
+@media (min-width: 900px) {
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 3.7rem;
+  }
+}
 </style>
