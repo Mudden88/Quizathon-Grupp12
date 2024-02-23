@@ -50,17 +50,18 @@ checkScreen ()
 
 window.addEventListener("resize", checkScreen)
 
+function goHome() {
+  router.push("/");
+}
 </script>
 
-<template> 
-    <header>
+<template>
+  <header>
     <nav>
     
 <div class="logos">
     <img id="burger" @click="toggleBurgerNav" :src="icon" alt="" v-show="mobile">
-  <RouterLink to="/"> <img @click="goHome" id="logo" src="../assets/quizathon-logo.png" alt="logo">
-  </RouterLink>
-
+ <img @click="goHome" id="logo" src="../assets/quizathon-logo.png" alt="logo">
 
   <ul class="navigation" v-show="!mobile">
     <div class="desktop-links"><li><RouterLink to="/instructions">Instructions
@@ -96,7 +97,7 @@ window.addEventListener("resize", checkScreen)
   </ul> 
   
     </nav>
-</header>
+  </header>
 </template>
 
 <style scoped>
@@ -175,5 +176,4 @@ img {
   --yellow: #e6c16b;
   --bgText: #272727;
 }
-
 </style>
