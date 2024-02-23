@@ -6,6 +6,8 @@ import { useStorage } from "../storage";
 import burger from "/src/assets/burger.png"
 import menuX from "/src/assets/menuX.png"
 
+const router = useRouter()
+
 const icon = ref(burger),
 mobile = ref(null),
 mobileNav = ref(null),
