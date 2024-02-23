@@ -50,9 +50,6 @@ checkScreen ()
 
 window.addEventListener("resize", checkScreen)
 
-function goHome() {
-  router.push("/");
-}
 </script>
 
 <template>
