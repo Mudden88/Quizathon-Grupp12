@@ -1,15 +1,17 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
-import { useRouter } from "vue-router"; 
-import { useStorage } from "../storage"; 
+import { useRouter } from "vue-router";
+import { useStorage } from "../storage";
 import burger from "/src/assets/burger.png"
 import menuX from "/src/assets/menuX.png"
 
+const router = useRouter()
+
 const icon = ref(burger),
-mobile = ref(null),
-mobileNav = ref(null),
-windowWidth = ref(null)
+  mobile = ref(null),
+  mobileNav = ref(null),
+  windowWidth = ref(null)
 
 function checkScreen() {
   windowWidth.value = window.innerWidth
@@ -23,79 +25,96 @@ function checkScreen() {
   }
 }
 
-function userLogin() { 
-console.log(fromStorage.user.isLoggedIn); 
-if (fromStorage.user.isLoggedIn === true) { 
-router.push("/profile"); 
-} 
-if (fromStorage.user.isLoggedIn === false) { 
-router.push("/login"); 
-} 
-} 
-
-function goHome() { 
-router.push("/"); 
-} 
-
-const fromStorage = useStorage(); 
-
-function toggleBurgerNav() {
-  mobileNav.value = !mobileNav.value
-  if (mobile.value === true) {
-  icon.value = !mobileNav.value ? burger : menuX
+function userLogin() {
+  console.log(fromStorage.user.isLoggedIn);
+  if (fromStorage.user.isLoggedIn === true) {
+    router.push("/profile");
+  }
+  if (fromStorage.user.isLoggedIn === false) {
+    router.push("/login");
   }
 }
-
-checkScreen ()
-
-window.addEventListener("resize", checkScreen)
 
 function goHome() {
   router.push("/");
 }
+
+const fromStorage = useStorage();
+
+function toggleBurgerNav() {
+  mobileNav.value = !mobileNav.value
+  if (mobile.value === true) {
+    icon.value = !mobileNav.value ? burger : menuX
+  }
+}
+
+checkScreen()
+
+window.addEventListener("resize", checkScreen)
+
 </script>
 
 <template>
   <header>
     <nav>
-    
-<div class="logos">
-    <img id="burger" @click="toggleBurgerNav" :src="icon" alt="" v-show="mobile">
- <img @click="goHome" id="logo" src="../assets/quizathon-logo.png" alt="logo">
 
-  <ul class="navigation" v-show="!mobile">
-    <div class="desktop-links"><li><RouterLink to="/instructions">Instructions
-      <img src="../assets/icons/instructions-icon.png" alt="">
-      </RouterLink></li></div>
-      <div class="desktop-links"><li><RouterLink to="/profile">Profile
-      <img @click="userLogin" src="../assets/icons/profile-icon.png" alt="">
-      </RouterLink></li></div>
-      <div class="desktop-links"><li><RouterLink to="/leaderboard">Leaderboard 
-      <img src="../assets/icons/crown-icon.png" alt="">
-      </RouterLink></li></div>
-      <div class="desktop-links"><li><RouterLink to="/contact">Contact
-      <img src="../assets/icons/letter-icon.png" alt="">
-      </RouterLink></li></div>
-    </ul>
-  <RouterLink to="/profile">
-    <img id="profile" src="../assets/icons/profile-outline-icon.png" alt="">
-  </RouterLink>
-</div>
+      <div class="logos">
+        <img id="burger" @click="toggleBurgerNav" :src="icon" alt="" v-show="mobile">
+        <img @click="goHome" id="logo" src="../assets/quizathon-logo.png" alt="logo">
 
-<ul class="dropdown-nav" v-show="mobileNav">
-   <li @click="toggleBurgerNav" class="icons">
-    <RouterLink to="/instructions">Instructions mobil<img src="../assets/icons/instructions-icon.png" alt="">
-    </RouterLink></li>
-    <li @click="toggleBurgerNav" class="icons">
-      <RouterLink to="/profile">Profile<img src="../assets/icons/profile-icon.png" alt="">
-      </RouterLink></li>
-    <li @click="toggleBurgerNav" class="icons">
-      <RouterLink to="/leaderboard">Leaderboard<img src="../assets/icons/crown-icon.png" alt="">
-      </RouterLink></li>
-    <li @click="toggleBurgerNav" class="icons">
-      <RouterLink to="/contact">Contact<img src="../assets/icons/letter-icon.png" alt=""></RouterLink></li>
-  </ul> 
-  
+        <ul class="navigation" v-show="!mobile">
+          <div class="desktop-links">
+            <li>
+              <RouterLink to="/instructions">Instructions
+                <img src="../assets/icons/instructions-icon.png" alt="">
+              </RouterLink>
+            </li>
+          </div>
+          <div class="desktop-links">
+            <li>
+              <RouterLink to="/profile">Profile
+                <img @click="userLogin" src="../assets/icons/profile-icon.png" alt="">
+              </RouterLink>
+            </li>
+          </div>
+          <div class="desktop-links">
+            <li>
+              <RouterLink to="/leaderboard">Leaderboard
+                <img src="../assets/icons/crown-icon.png" alt="">
+              </RouterLink>
+            </li>
+          </div>
+          <div class="desktop-links">
+            <li>
+              <RouterLink to="/contact">Contact
+                <img src="../assets/icons/letter-icon.png" alt="">
+              </RouterLink>
+            </li>
+          </div>
+        </ul>
+        <RouterLink to="/profile">
+          <img id="profile" src="../assets/icons/profile-outline-icon.png" alt="">
+        </RouterLink>
+      </div>
+
+      <ul class="dropdown-nav" v-show="mobileNav">
+        <li @click="toggleBurgerNav" class="icons">
+          <RouterLink to="/instructions">Instructions mobil<img src="../assets/icons/instructions-icon.png" alt="">
+          </RouterLink>
+        </li>
+        <li @click="toggleBurgerNav" class="icons">
+          <RouterLink to="/profile">Profile<img src="../assets/icons/profile-icon.png" alt="">
+          </RouterLink>
+        </li>
+        <li @click="toggleBurgerNav" class="icons">
+          <RouterLink to="/leaderboard">Leaderboard<img src="../assets/icons/crown-icon.png" alt="">
+          </RouterLink>
+        </li>
+        <li @click="toggleBurgerNav" class="icons">
+          <RouterLink to="/contact">Contact<img src="../assets/icons/letter-icon.png" alt=""></RouterLink>
+        </li>
+      </ul>
+
     </nav>
   </header>
 </template>
@@ -107,7 +126,7 @@ function goHome() {
   align-items: center;
 }
 
-.dropdown-nav > li {
+.dropdown-nav>li {
   margin: 20px 20px 10px 20px;
   padding: 10px;
   width: 300px;
@@ -152,12 +171,13 @@ img {
   margin-left: 10px;
 }
 
-#profile, #burger {
+#profile,
+#burger {
   height: 45px;
-    margin: 10px 20px
+  margin: 10px 20px
 }
 
- a {
+a {
   margin: 10px;
   font-size: 20px;
   text-decoration: none;
