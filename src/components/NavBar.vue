@@ -72,9 +72,9 @@ window.addEventListener("resize", checkScreen)
           </div>
           <div class="desktop-links">
             <li>
-              <RouterLink to="/profile">Profile
-                <img @click="userLogin" src="../assets/icons/profile-icon.png" alt="">
-              </RouterLink>
+              <a @click="userLogin">Profile
+                <img src="../assets/icons/profile-icon.png" alt=""></a>
+
             </li>
           </div>
           <div class="desktop-links">
@@ -92,9 +92,9 @@ window.addEventListener("resize", checkScreen)
             </li>
           </div>
         </ul>
-        <RouterLink to="/profile">
+        <a @click="userLogin">
           <img id="profile" src="../assets/icons/profile-outline-icon.png" alt="">
-        </RouterLink>
+        </a>
       </div>
 
       <ul class="dropdown-nav" v-show="mobileNav">
@@ -164,6 +164,7 @@ li {
 
 #logo {
   height: 100px;
+  cursor: pointer;
 }
 
 img {
@@ -183,8 +184,6 @@ a {
   text-decoration: none;
   color: #3a5e57;
   font-size: 30px;
-  /* display: flex;
-  justify-content: center; */
 }
 
 
