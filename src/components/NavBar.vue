@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
+import { useRouter } from "vue-router"; 
+import { useStorage } from "../storage"; 
 import burger from "/src/assets/burger.png"
 import menuX from "/src/assets/menuX.png"
 
@@ -21,6 +23,22 @@ function checkScreen() {
   }
 }
 
+function userLogin() { 
+console.log(fromStorage.user.isLoggedIn); 
+if (fromStorage.user.isLoggedIn === true) { 
+router.push("/profile"); 
+} 
+if (fromStorage.user.isLoggedIn === false) { 
+router.push("/login"); 
+} 
+} 
+
+function goHome() { 
+router.push("/"); 
+} 
+
+const fromStorage = useStorage(); 
+
 function toggleBurgerNav() {
   mobileNav.value = !mobileNav.value
   if (mobile.value === true) {
@@ -40,7 +58,7 @@ window.addEventListener("resize", checkScreen)
     
 <div class="logos">
     <img id="burger" @click="toggleBurgerNav" :src="icon" alt="" v-show="mobile">
-  <RouterLink to="/"> <img id="logo" src="../assets/quizathon-logo.png" alt="logo">
+  <RouterLink to="/"> <img @click="goHome" id="logo" src="../assets/quizathon-logo.png" alt="logo">
   </RouterLink>
 
 
@@ -49,7 +67,7 @@ window.addEventListener("resize", checkScreen)
       <img src="../assets/icons/instructions-icon.png" alt="">
       </RouterLink></li></div>
       <div class="desktop-links"><li><RouterLink to="/profile">Profile
-      <img src="../assets/icons/profile-icon.png" alt="">
+      <img @click="userLogin" src="../assets/icons/profile-icon.png" alt="">
       </RouterLink></li></div>
       <div class="desktop-links"><li><RouterLink to="/leaderboard">Leaderboard 
       <img src="../assets/icons/crown-icon.png" alt="">
