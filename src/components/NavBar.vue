@@ -103,8 +103,8 @@ window.addEventListener("resize", checkScreen)
           </RouterLink>
         </li>
         <li @click="toggleBurgerNav" class="icons">
-          <RouterLink to="/profile">Profile<img src="../assets/icons/profile-icon.png" alt="">
-          </RouterLink>
+          <a @click="userLogin">Profile<img src="../assets/icons/profile-icon.png" alt="">
+          </a>
         </li>
         <li @click="toggleBurgerNav" class="icons">
           <RouterLink to="/leaderboard">Leaderboard<img src="../assets/icons/crown-icon.png" alt="">
