@@ -15,7 +15,7 @@ const icon = ref(burger),
 
 function checkScreen() {
   windowWidth.value = window.innerWidth
-  if (windowWidth.value <= 800) {
+  if (windowWidth.value <= 1140) {
     mobile.value = true
     mobileNav.value = false
   } else {
@@ -65,6 +65,13 @@ window.addEventListener("resize", checkScreen)
         <ul class="navigation" v-show="!mobile">
           <div class="desktop-links">
             <li>
+              <RouterLink to="/">Home
+                <img src="../assets/icons/instructions-icon.png" alt=""> <!--Byt bild-->
+              </RouterLink>
+            </li>
+          </div>
+          <div class="desktop-links">
+            <li>
               <RouterLink to="/instructions">Instructions
                 <img src="../assets/icons/instructions-icon.png" alt="">
               </RouterLink>
@@ -99,7 +106,11 @@ window.addEventListener("resize", checkScreen)
 
       <ul class="dropdown-nav" v-show="mobileNav">
         <li @click="toggleBurgerNav" class="icons">
-          <RouterLink to="/instructions">Instructions mobil<img src="../assets/icons/instructions-icon.png" alt="">
+          <RouterLink to="/">Home<img src="../assets/icons/instructions-icon.png" alt=""> <!--Byt bild-->
+          </RouterLink>
+        </li>
+        <li @click="toggleBurgerNav" class="icons">
+          <RouterLink to="/instructions">Instructions<img src="../assets/icons/instructions-icon.png" alt="">
           </RouterLink>
         </li>
         <li @click="toggleBurgerNav" class="icons">
@@ -156,10 +167,13 @@ li {
 }
 
 .logos {
+  position: sticky;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+
 }
 
 #logo {
@@ -172,10 +186,19 @@ img {
   margin-left: 10px;
 }
 
+
+
+
 #profile,
 #burger {
+  height: 32px;
+  margin: 10px 20px;
+  cursor: pointer;
+}
+
+#burger {
   height: 45px;
-  margin: 10px 20px
+
 }
 
 a {
@@ -186,13 +209,9 @@ a {
   font-size: 30px;
 }
 
+nav {
+  box-shadow: 0px 10px 9px #00000070;
+  margin-bottom: 3em;
 
-:root {
-  --background: #eef1ef;
-  --primary: #3a5e57;
-  --secondary: #6d8c86;
-  --boxText: #eef1ef;
-  --yellow: #e6c16b;
-  --bgText: #272727;
 }
 </style>
