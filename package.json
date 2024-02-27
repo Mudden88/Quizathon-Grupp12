@@ -17,5 +17,9 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
     "vite": "^5.0.8"
+  },
+  "optionalDependencies": {
+    "@esbuild/darwin-arm64": "^0.20.1",
+    "@rollup/rollup-darwin-arm64": "^4.12.0"
   }
 }
