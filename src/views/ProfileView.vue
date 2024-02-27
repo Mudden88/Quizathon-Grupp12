@@ -13,8 +13,8 @@ function logOut() {
     score: null,
   };
   setTimeout(() => {
-    router.push('/')
-  }, 2500)
+    router.push('/login')
+  }, 1500)
 }
 </script>
 
@@ -22,7 +22,7 @@ function logOut() {
   <div class="container">
     <h1>Profile</h1>
     <hr>
-    <div v-if="fromStorage.user.isLoggedIn">
+    <div class="profile" v-if="fromStorage.user.isLoggedIn">
       <h2>Username: {{ fromStorage.user.username }}</h2>
       <h2>Latest Score: {{ userScore }}</h2>
       <button @click="logOut">Log out</button>
