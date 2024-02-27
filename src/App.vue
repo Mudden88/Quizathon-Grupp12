@@ -1,15 +1,10 @@
 <script setup>
-import NavBar from "./components/NavBar.vue";
-import { useStorage } from "./storage";
-const fromStorage = useStorage();
+import NavBar from "/src/components/NavBar.vue"
+
 
 </script>
 
 <template>
   <NavBar />
-  <h1 v-if="fromStorage.user.isLoggedIn">
-    Welcome {{ fromStorage.user.username }}!
-  </h1>
-
   <RouterView></RouterView>
 </template>

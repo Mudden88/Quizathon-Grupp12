@@ -1,5 +1,6 @@
 <script setup>
-import { useStorage } from "../storage";
+import { ref } from 'vue'
+import { useStorage } from "storage";
 import { useRouter } from "vue-router";
 
 const fromStorage = useStorage();
@@ -19,6 +20,7 @@ function logOut() {
 </script>
 
 <template>
+
   <div class="container">
     <h1>Profile</h1>
     <hr>
@@ -33,19 +35,23 @@ function logOut() {
 
 <style scoped>
 .container {
+  background-color: var(--Main-lighter-color);
+  color: var(--Light-color);
+  width: 500px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: fit-content;
+  border-radius: 40px;
 }
 
 button {
   width: 291px;
   height: 63px;
   border-radius: 20px;
-  background-color: var(--Main-lighter-color);
-  color: var(--Light-color);
+  background-color: var(--Accent-color);
+  color: var(--Main-color);
   font-size: 36px;
   display: flex;
   justify-content: center;
@@ -54,6 +60,10 @@ button {
   margin-bottom: 1em;
   cursor: pointer;
   border-style: none;
+
+  &hover {
+    background-color: var(--Main-lighter-color);
+  }
 }
 
 button:active {
@@ -62,6 +72,6 @@ button:active {
 
 hr {
   margin: 2em;
-  width: 100%;
+  width: auto;
 }
 </style>

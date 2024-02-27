@@ -1,16 +1,22 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import router from "../router.js";
 import { useStorage } from "../storage";
 
 import InputField from "../components/InputField.vue";
 import users from "../users.json";
 
-const fromStorage = useStorage();
-
 const error = ref(false),
   inputUserName = ref(""),
   inputPassword = ref("");
+
+const isLoggedIn = ref(localStorage.getItem("user"))
+isLoggedIn.value = JSON.parse(isLoggedIn.value)
+
+const loggedIn = ref(isLoggedIn.value.user.isLoggedIn)
+
+const fromStorage = useStorage(),
+showMessage = ref(false)
 
 function logIn(e) {
   e.preventDefault;
@@ -27,6 +33,15 @@ function logIn(e) {
   } else {
     error.value = true;
   }
+  watch(loggedIn.value, () => {
+    if (loggedIn.value === true) {
+      console.log("welcome", isLoggedIn.value)
+    showMessage.value = true
+    setTimeout(() => {
+      showMessage.value = false;
+    }, 3000);
+}
+})
 }
 
 function setUsername(input) {
@@ -41,6 +56,16 @@ function guestUser() {
   fromStorage.user.username = "Guest";
   fromStorage.user.isLoggedIn = true;
   router.push("/");
+  
+  watch(loggedIn.value, () => {
+    if (loggedIn.value === true) {
+      console.log("welcome", isLoggedIn.value)
+    showMessage.value = true
+    setTimeout(() => {
+      showMessage.value = false;
+    }, 3000);
+}
+})
 }
 </script>
 
