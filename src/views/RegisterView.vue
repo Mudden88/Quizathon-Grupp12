@@ -59,7 +59,7 @@ function addUser(id, username, password, email) {
 
 <template>
   <h1>Register</h1>
-  <form>
+  <form class="signup-form">
     <InputField
       label-prop="Username"
       placeholder-prop="Username"
@@ -94,6 +94,12 @@ function addUser(id, username, password, email) {
 </template>
 
 <style scoped>
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 23px;
+}
 .signup-btn {
   width: 260px;
   height: 63px;
