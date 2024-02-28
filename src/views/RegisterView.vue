@@ -1,10 +1,11 @@
-<!-- clear inputfields, check if not "", hide errormsg sometimes -->
+<!-- userId not the same -->
 
 <script setup>
 import { usersRef, db } from "../firebase";
 import InputField from "../components/InputField.vue";
 import { onValue, set, ref as dbref } from "firebase/database";
 import { ref, watch } from "vue";
+import router from "../router";
 
 const data = ref(null);
 onValue(usersRef, (snapshot) => {
@@ -12,14 +13,14 @@ onValue(usersRef, (snapshot) => {
 });
 
 const usernameInput = ref(null),
-  usernameError = ref(true),
+  usernameError = ref(null),
   emailInput = ref(null),
-  emailError = ref(true),
+  emailError = ref(null),
   userId = ref(1),
   passwordInput = ref(null),
-  passwordError = ref(true),
+  passwordError = ref(null),
   confirmPasswordInput = ref(null),
-  confirmPasswordError = ref(true),
+  confirmPasswordError = ref(null),
   btnDisabled = ref(true),
   formValidation = ref(false);
 
@@ -32,7 +33,9 @@ function setUsername(input) {
 
 function setEmail(input) {
   emailInput.value = input;
-  if (!emailInput.value.includes("@")) {
+  if (
+    !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(emailInput.value)
+  ) {
     emailError.value = true;
   } else {
     emailError.value = false;
@@ -59,10 +62,10 @@ function checkPassword(input) {
 
 watch([usernameError, emailError, passwordError, confirmPasswordError], () => {
   if (
-    !usernameError.value &&
-    !emailError.value &&
-    !passwordError.value &&
-    !confirmPasswordError.value
+    usernameError.value === false &&
+    emailError.value === false &&
+    passwordError.value === false &&
+    confirmPasswordError.value === false
   ) {
     formValidation.value = true;
     btnDisabled.value = false;
@@ -76,6 +79,7 @@ function submitUserInfo() {
     passwordInput.value,
     emailInput.value
   );
+  router.push("/login");
 }
 
 function addUser(id, username, password, email) {
@@ -147,6 +151,9 @@ function addUser(id, username, password, email) {
 </template>
 
 <style scoped>
+h1 {
+  color: var(--Dark-color);
+}
 .signup-form {
   display: flex;
   flex-direction: column;
