@@ -6,12 +6,13 @@ import { useStorage } from "../storage";
 import burger from "/src/assets/burger.png"
 import menuX from "/src/assets/menuX.png"
 
-const router = useRouter()
 
+const router = useRouter()
 const icon = ref(burger),
   mobile = ref(null),
-  mobileNav = ref(null),
+  mobileNav = ref(false),
   windowWidth = ref(null)
+const fromStorage = useStorage();
 
 function checkScreen() {
   windowWidth.value = window.innerWidth
@@ -26,7 +27,6 @@ function checkScreen() {
 }
 
 function userLogin() {
-  console.log(fromStorage.user.isLoggedIn);
   if (fromStorage.user.isLoggedIn === true) {
     router.push("/profile");
   }
@@ -39,8 +39,6 @@ function goHome() {
   router.push("/");
 }
 
-const fromStorage = useStorage();
-
 function toggleBurgerNav() {
   mobileNav.value = !mobileNav.value
   if (mobile.value === true) {
@@ -48,9 +46,16 @@ function toggleBurgerNav() {
   }
 }
 
+const clickOutside = (e) => {
+  const isIcon = e.target.id === 'burger'
+  if (!isIcon && mobileNav.value && !e.target.closest('.dropdown-nav')) {
+    mobileNav.value = false
+    icon.value = burger
+  }
+}
 checkScreen()
-
 window.addEventListener("resize", checkScreen)
+window.addEventListener('click', clickOutside)
 
 </script>
 
@@ -182,11 +187,9 @@ li {
 }
 
 img {
-  height: 30px;
+  height: 32px;
   margin-left: 10px;
 }
-
-
 
 
 #profile,
