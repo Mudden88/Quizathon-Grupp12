@@ -36,13 +36,19 @@ function checkPassword(input) {
 }
 
 function submitUserInfo() {
-  addUser(userId.value, usernameInput.value, passwordInput.value);
+  addUser(
+    userId.value,
+    usernameInput.value,
+    passwordInput.value,
+    emailInput.value
+  );
 }
-function addUser(id, username, password) {
+function addUser(id, username, password, email) {
   set(dbref(db, `users/${username}`), {
     username: username,
     password: password,
     id: id,
+    email: email,
   });
 }
 </script>
@@ -74,6 +80,31 @@ function addUser(id, username, password) {
       id-prop="confirmPassword"
       type-prop="password"
       @onInput="checkPassword" />
-    <button @click="submitUserInfo">Register</button>
+    <button
+      class="signup-btn"
+      @click="submitUserInfo">
+      Register
+    </button>
   </form>
 </template>
+
+<style scoped>
+.signup-btn {
+  width: 260px;
+  height: 63px;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--Main-lighter-color);
+
+  color: var(--Light-color);
+  font-size: 2.25rem;
+
+  &:focus {
+    outline: 3px solid var(--Accent-color);
+  }
+
+  &:disabled {
+    opacity: 30%;
+  }
+}
+</style>
