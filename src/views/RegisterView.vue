@@ -29,9 +29,11 @@ function setPassword(input) {
 
 function checkPassword(input) {
   let confirmPassword = input;
-  if (passwordInput.value !== confirmPassword) {
-    btnDisabled.value = true;
-  } else {
+  if (
+    passwordInput.value === confirmPassword &&
+    usernameInput.value &&
+    emailInput.value
+  ) {
     btnDisabled.value = false;
   }
 }
