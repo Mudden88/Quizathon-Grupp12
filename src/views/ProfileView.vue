@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue'
-import { useStorage } from "storage";
-import { useRouter } from "vue-router";
+
+import { useStorage } from '../storage'
+import { useRouter } from 'vue-router'
 
 const fromStorage = useStorage();
 const router = useRouter()

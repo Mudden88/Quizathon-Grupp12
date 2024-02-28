@@ -1,12 +1,19 @@
 <script setup>
-import { ref } from 'vue'
-import { useStorage } from "/src/storage";
+
+import { useStorage } from '../storage'
+import { ref, watch } from 'vue'
+
 const fromStorage = useStorage()
+const loggedIn = fromStorage.user.isLoggedIn
 
-const isLoggedIn = ref(localStorage.getItem("user"))
-isLoggedIn.value = JSON.parse(isLoggedIn.value)
-
-const loggedIn = ref(isLoggedIn.value.user.isLoggedIn)
+watch(loggedIn, (newValue, oldValue) => {
+  if (newValue = true) {
+  console.log("Hej")
+    setTimeout(() => {
+      loggedIn.value = false;
+    }, 1000);
+  }
+}) 
 
 </script>
 
