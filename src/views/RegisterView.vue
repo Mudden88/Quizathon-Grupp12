@@ -11,15 +11,28 @@ onValue(usersRef, (snapshot) => {
 });
 
 const usernameInput = ref(null),
+  emailInput = ref(null),
   userId = ref(1),
   passwordInput = ref(null);
 
 function setUsername(input) {
   usernameInput.value = input;
 }
+function setEmail(input) {
+  emailInput.value = input;
+}
 
 function setPassword(input) {
   passwordInput.value = input;
+}
+
+function checkPassword(input) {
+  let confirmPassword = input;
+  if (passwordInput.value !== confirmPassword) {
+    btnDisabled.value = true;
+  } else {
+    btnDisabled.value = false;
+  }
 }
 
 function submitUserInfo() {
@@ -44,11 +57,23 @@ function addUser(id, username, password) {
       type-prop="text"
       @onInput="setUsername" />
     <InputField
+      label-prop="Email"
+      placeholder-prop="Email"
+      id-prop="email"
+      type-prop="email"
+      @onInput="setEmail" />
+    <InputField
       label-prop="Password"
       placeholder-prop="Password"
       id-prop="password"
       type-prop="password"
       @onInput="setPassword" />
+    <InputField
+      label-prop="Confirm password"
+      placeholder-prop="Confirm password"
+      id-prop="confirmPassword"
+      type-prop="password"
+      @onInput="checkPassword" />
     <button @click="submitUserInfo">Register</button>
   </form>
 </template>
