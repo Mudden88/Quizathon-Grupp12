@@ -9,7 +9,7 @@ export const firebaseApp = initializeApp({
   projectId: "quiz-d3d59",
   storageBucket: "quiz-d3d59.appspot.com",
   messagingSenderId: "27371671203",
-  appId: "1:27371671203:web:fa2f95ed7c1a938130b916",
+  appId: "1:27371671203:web:d2b12c66b993532630b916",
 });
 
 export const db = getDatabase(firebaseApp);
