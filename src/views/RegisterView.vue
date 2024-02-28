@@ -7,7 +7,6 @@ import { ref } from "vue";
 const data = ref(null);
 onValue(usersRef, (snapshot) => {
   data.value = snapshot.val();
-  console.log(data.value);
 });
 
 const usernameInput = ref(null),
