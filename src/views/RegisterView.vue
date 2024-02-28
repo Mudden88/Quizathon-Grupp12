@@ -13,7 +13,8 @@ onValue(usersRef, (snapshot) => {
 const usernameInput = ref(null),
   emailInput = ref(null),
   userId = ref(1),
-  passwordInput = ref(null);
+  passwordInput = ref(null),
+  btnDisabled = ref(true);
 
 function setUsername(input) {
   usernameInput.value = input;
@@ -43,6 +44,7 @@ function submitUserInfo() {
     emailInput.value
   );
 }
+
 function addUser(id, username, password, email) {
   set(dbref(db, `users/${username}`), {
     username: username,
@@ -82,6 +84,7 @@ function addUser(id, username, password, email) {
       @onInput="checkPassword" />
     <button
       class="signup-btn"
+      :disabled="btnDisabled"
       @click="submitUserInfo">
       Register
     </button>
