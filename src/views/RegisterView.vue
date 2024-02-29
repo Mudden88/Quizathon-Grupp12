@@ -86,6 +86,10 @@ function addUser(username, password, email) {
     email: email,
   });
 }
+
+function goToLogin() {
+  router.push("/login");
+}
 </script>
 
 <template>
@@ -151,6 +155,12 @@ function addUser(username, password, email) {
       Register
     </button>
   </form>
+  <p class="small-text">Already have an account?</p>
+  <button
+    class="login-btn"
+    @click="goToLogin">
+    Log in
+  </button>
 </template>
 
 <style scoped>
@@ -186,6 +196,26 @@ h1 {
 
   &:disabled {
     opacity: 30%;
+  }
+}
+
+.small-text {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.7rem;
+  color: var(--Dark-color);
+  margin-block: 14px;
+}
+
+.login-btn {
+  font-size: 1.4rem;
+  background-color: var(--Light-color);
+  border: 3px solid var(--Main-color);
+  border-radius: 13px;
+  color: var(--Main-color);
+  padding: 8px 50px;
+
+  &:hover {
+    box-shadow: 4px 4px 6px #27272730 inset;
   }
 }
 </style>
