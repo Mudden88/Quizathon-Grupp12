@@ -1,4 +1,4 @@
-<!-- userId not the same -->
+<!-- spaces not allowed, connect everything to firebase instead of users.json, page when registered -->
 
 <script setup>
 import { usersRef, db } from "../firebase";
@@ -16,7 +16,6 @@ const usernameInput = ref(null),
   usernameError = ref(null),
   emailInput = ref(null),
   emailError = ref(null),
-  userId = ref(1),
   passwordInput = ref(null),
   passwordError = ref(null),
   confirmPasswordInput = ref(null),
@@ -28,6 +27,10 @@ function setUsername(input) {
   usernameInput.value = input;
   if (usernameInput.value !== null || usernameInput.value !== "") {
     usernameError.value = false;
+    if (usernameInput.value in data.value) {
+      usernameError.value = true;
+      console.log("username is taken");
+    }
   }
 }
 
@@ -73,20 +76,14 @@ watch([usernameError, emailError, passwordError, confirmPasswordError], () => {
 });
 
 function submitUserInfo() {
-  addUser(
-    userId.value,
-    usernameInput.value,
-    passwordInput.value,
-    emailInput.value
-  );
+  addUser(usernameInput.value, passwordInput.value, emailInput.value);
   router.push("/login");
 }
 
-function addUser(id, username, password, email) {
+function addUser(username, password, email) {
   set(dbref(db, `users/${username}`), {
     username: username,
     password: password,
-    id: id,
     email: email,
   });
 }
@@ -95,15 +92,22 @@ function addUser(id, username, password, email) {
 <template>
   <h1>Register</h1>
   <form class="signup-form">
-    <InputField
-      label-prop="Username"
-      placeholder-prop="Username"
-      id-prop="username"
-      type-prop="text"
-      @onInput="setUsername" />
     <div>
       <InputField
-        label-prop="Email"
+        label-prop="Username*"
+        placeholder-prop="Username"
+        id-prop="username"
+        type-prop="text"
+        @onInput="setUsername" />
+      <p
+        v-if="usernameError"
+        class="error-msg">
+        Username is taken
+      </p>
+    </div>
+    <div>
+      <InputField
+        label-prop="Email*"
         placeholder-prop="Email"
         id-prop="email"
         type-prop="email"
@@ -116,7 +120,7 @@ function addUser(id, username, password, email) {
     </div>
     <div>
       <InputField
-        label-prop="Password"
+        label-prop="Password*"
         placeholder-prop="Password"
         id-prop="password"
         type-prop="password"
@@ -129,7 +133,7 @@ function addUser(id, username, password, email) {
     </div>
     <div>
       <InputField
-        label-prop="Confirm password"
+        label-prop="Confirm password*"
         placeholder-prop="Confirm password"
         id-prop="confirmPassword"
         type-prop="password"
@@ -153,6 +157,7 @@ function addUser(id, username, password, email) {
 <style scoped>
 h1 {
   color: var(--Dark-color);
+  margin-block: 20px;
 }
 .signup-form {
   display: flex;
