@@ -3,9 +3,8 @@ import { ref } from "vue";
 import { RouterLink } from "vue-router";
 import { useRouter } from "vue-router";
 import { useStorage } from "../storage";
-import burger from "/src/assets/burger.png"
-import menuX from "/src/assets/menuX.png"
-
+import burger from "/src/assets/burger.png";
+import menuX from "/src/assets/menuX.png";
 
 const router = useRouter(),
   icon = ref(burger),
@@ -13,17 +12,17 @@ const router = useRouter(),
   mobileNav = ref(false),
   windowWidth = ref(null),
   fromStorage = useStorage(),
-  emit = defineEmits(['overlay']);
+  emit = defineEmits(["overlay"]);
 
 function checkScreen() {
-  windowWidth.value = window.innerWidth
+  windowWidth.value = window.innerWidth;
   if (windowWidth.value <= 1152) {
-    mobile.value = true
-    mobileNav.value = false
+    mobile.value = true;
+    mobileNav.value = false;
   } else {
-    icon.value = burger
-    mobile.value = false
-    mobileNav.value = false
+    icon.value = burger;
+    mobile.value = false;
+    mobileNav.value = false;
   }
 }
 
@@ -41,103 +40,160 @@ function goHome() {
 }
 
 function toggleBurgerNav() {
-  mobileNav.value = !mobileNav.value
+  mobileNav.value = !mobileNav.value;
   if (mobile.value === true) {
-    icon.value = !mobileNav.value ? burger : menuX
-    emit('overlay')
+    icon.value = !mobileNav.value ? burger : menuX;
+    emit("overlay");
   }
 }
 
 const clickOutside = (e) => {
-  const isIcon = e.target.id === 'burger'
-  if (!isIcon && mobileNav.value && !e.target.closest('.dropdown-nav')) {
-    mobileNav.value = false
-    icon.value = burger
+  const isIcon = e.target.id === "burger";
+  if (!isIcon && mobileNav.value && !e.target.closest(".dropdown-nav")) {
+    mobileNav.value = false;
+    icon.value = burger;
   }
-}
-checkScreen()
-window.addEventListener("resize", checkScreen)
-window.addEventListener('click', clickOutside)
-
+};
+checkScreen();
+window.addEventListener("resize", checkScreen);
+window.addEventListener("click", clickOutside);
 </script>
 
 <template>
   <header>
     <nav>
-
       <div class="logos">
-        <img id="burger" @click="toggleBurgerNav" :src="icon" alt="" v-show="mobile">
-        <img @click="goHome" id="logo" src="../assets/quizathon-logo.png" alt="logo">
+        <img
+          id="burger"
+          @click="toggleBurgerNav"
+          :src="icon"
+          alt=""
+          v-show="mobile" />
+        <img
+          @click="goHome"
+          id="logo"
+          src="../assets/quizathon-logo.png"
+          alt="logo" />
 
-        <ul class="navigation" v-show="!mobile">
+        <ul
+          class="navigation"
+          v-show="!mobile">
           <div class="desktop-links">
             <li>
-              <RouterLink to="/">Home
-                <img src="../assets/icons/house-icon.png" alt="">
+              <RouterLink to="/"
+                >Home
+                <img
+                  src="../assets/icons/house-icon.png"
+                  alt="" />
               </RouterLink>
             </li>
           </div>
           <div class="desktop-links">
             <li>
-              <RouterLink to="/instructions">Instructions
-                <img src="../assets/icons/instructions-icon.png" alt="">
+              <RouterLink to="/instructions"
+                >Instructions
+                <img
+                  src="../assets/icons/instructions-icon.png"
+                  alt="" />
               </RouterLink>
             </li>
           </div>
           <div class="desktop-links">
             <li>
-              <a @click="userLogin">Profile
-                <img src="../assets/icons/profile-icon.png" alt=""></a>
-
+              <a @click="userLogin"
+                >Profile
+                <img
+                  src="../assets/icons/profile-icon.png"
+                  alt=""
+              /></a>
             </li>
           </div>
           <div class="desktop-links">
             <li>
-              <RouterLink to="/leaderboard">Leaderboard
-                <img src="../assets/icons/crown-icon.png" alt="">
+              <RouterLink to="/leaderboard"
+                >Leaderboard
+                <img
+                  src="../assets/icons/crown-icon.png"
+                  alt="" />
               </RouterLink>
             </li>
           </div>
           <div class="desktop-links">
             <li>
-              <RouterLink to="/contact">Contact
-                <img src="../assets/icons/letter-icon.png" alt="">
+              <RouterLink to="/contact"
+                >Contact
+                <img
+                  src="../assets/icons/letter-icon.png"
+                  alt="" />
               </RouterLink>
             </li>
           </div>
         </ul>
         <a @click="userLogin">
-          <img id="profile" src="../assets/icons/profile-outline-icon.png" alt="">
+          <img
+            id="profile"
+            src="../assets/icons/profile-outline-icon.png"
+            alt="" />
         </a>
       </div>
 
-      <ul class="dropdown-nav" v-show="mobileNav">
-        <li @click="toggleBurgerNav" class="icons">
-          <RouterLink to="/">Home<img src="../assets/icons/house-icon.png" alt="">
+      <ul
+        class="dropdown-nav"
+        v-show="mobileNav">
+        <li
+          @click="toggleBurgerNav"
+          class="icons">
+          <RouterLink to="/"
+            >Home<img
+              src="../assets/icons/house-icon.png"
+              alt="" />
           </RouterLink>
         </li>
-        <li @click="toggleBurgerNav" class="icons">
-          <RouterLink to="/instructions">Instructions<img src="../assets/icons/instructions-icon.png" alt="">
+        <li
+          @click="toggleBurgerNav"
+          class="icons">
+          <RouterLink to="/instructions"
+            >Instructions<img
+              src="../assets/icons/instructions-icon.png"
+              alt="" />
           </RouterLink>
         </li>
-        <li @click="toggleBurgerNav" class="icons">
-          <a @click="userLogin">Profile<img src="../assets/icons/profile-icon.png" alt="">
+        <li
+          @click="toggleBurgerNav"
+          class="icons">
+          <a @click="userLogin"
+            >Profile<img
+              src="../assets/icons/profile-icon.png"
+              alt="" />
           </a>
         </li>
-        <li @click="toggleBurgerNav" class="icons">
-          <RouterLink to="/leaderboard">Leaderboard<img src="../assets/icons/crown-icon.png" alt="">
+        <li
+          @click="toggleBurgerNav"
+          class="icons">
+          <RouterLink to="/leaderboard"
+            >Leaderboard<img
+              src="../assets/icons/crown-icon.png"
+              alt="" />
           </RouterLink>
         </li>
-        <li @click="toggleBurgerNav" class="icons">
-          <RouterLink to="/contact">Contact<img src="../assets/icons/letter-icon.png" alt=""></RouterLink>
+        <li
+          @click="toggleBurgerNav"
+          class="icons">
+          <RouterLink to="/contact"
+            >Contact<img
+              src="../assets/icons/letter-icon.png"
+              alt=""
+          /></RouterLink>
         </li>
       </ul>
-
     </nav>
   </header>
 </template>
 
 <style scoped>
+header {
+  align-self: stretch;
+}
 .dropdown-nav {
   display: flex;
   flex-direction: column;
@@ -145,7 +201,7 @@ window.addEventListener('click', clickOutside)
   align-items: center;
 }
 
-.dropdown-nav>li {
+.dropdown-nav > li {
   margin: 20px 20px 10px 20px;
   width: 300px;
   border-bottom: solid #3a5e572d 2px;
@@ -175,12 +231,10 @@ li {
 
 .logos {
   position: sticky;
-  width: 100vw;
+  /* width: 100vw; */
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-
 }
 
 #logo {
@@ -193,7 +247,6 @@ img {
   margin-left: 10px;
 }
 
-
 #profile,
 #burger {
   height: 32px;
@@ -203,7 +256,6 @@ img {
 
 #burger {
   height: 45px;
-
 }
 
 a {
@@ -217,6 +269,5 @@ nav {
   box-shadow: 0px 3px 10px #00000070;
   margin-bottom: 3em;
   padding-bottom: 2em;
-
 }
 </style>
