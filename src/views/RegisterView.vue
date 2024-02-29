@@ -94,6 +94,9 @@ function goToLogin() {
 
 <template>
   <h1>Register</h1>
+  <p class="error-msg">
+    The database is not yet secure and the information may be leaked
+  </p>
   <form class="signup-form">
     <div>
       <InputField
