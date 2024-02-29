@@ -3,9 +3,16 @@ import { ref } from "vue";
 import router from "../router.js";
 import { useStorage } from "../storage";
 import InputField from "../components/InputField.vue";
-import users from "../users.json";
+// import users from "../users.json";
+import { usersRef } from "../firebase";
+import { onValue } from "firebase/database";
 
 const fromStorage = useStorage();
+
+const data = ref(null);
+onValue(usersRef, (snapshot) => {
+  data.value = snapshot.val();
+});
 
 const error = ref(false),
   inputUserName = ref(""),
@@ -13,9 +20,9 @@ const error = ref(false),
 
 function logIn(e) {
   e.preventDefault;
-  if (inputUserName.value in users) {
+  if (inputUserName.value in data.value) {
     error.value = false;
-    let user = users[inputUserName.value];
+    let user = data.value[inputUserName.value];
     if (inputPassword.value === user.password) {
       fromStorage.user.username = user.username;
       fromStorage.user.isLoggedIn = true;
@@ -50,19 +57,38 @@ function goToSignup() {
 <template>
   <section class="container">
     <h1 class="heading">Log in</h1>
-    <form class="login-form" id="login-form">
-      <InputField label-prop="Username" placeholder-prop="Username" id-prop="username" type-prop="text"
+    <form
+      class="login-form"
+      id="login-form">
+      <InputField
+        label-prop="Username"
+        placeholder-prop="Username"
+        id-prop="username"
+        type-prop="text"
         @onInput="setUsername" />
-      <InputField label-prop="Password" placeholder-prop="Password" id-prop="password" type-prop="password"
+      <InputField
+        label-prop="Password"
+        placeholder-prop="Password"
+        id-prop="password"
+        type-prop="password"
         @onInput="setPassword" />
-      <p v-if="error" class="error-msg">
+      <p
+        v-if="error"
+        class="error-msg">
         Wrong username or password. Please try again!
       </p>
-      <button class="login-btn" type="submit" form="login-form" value="LogIn" @click="logIn">
+      <button
+        class="login-btn"
+        type="submit"
+        form="login-form"
+        value="LogIn"
+        @click="logIn">
         Log in
       </button>
     </form>
-    <button class="guest-btn" @click="guestUser">
+    <button
+      class="guest-btn"
+      @click="guestUser">
       Continue as guest
     </button>
     <p class="small-text">Don't have an account?</p>
