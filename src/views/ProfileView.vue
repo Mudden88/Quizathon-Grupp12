@@ -1,6 +1,7 @@
 <script setup>
 import { useStorage } from "../storage";
 import { useRouter } from "vue-router";
+import { ref } from "vue";
 
 const fromStorage = useStorage();
 const router = useRouter()
@@ -16,6 +17,8 @@ function logOut() {
     router.push('/')
   }, 2500)
 }
+
+
 </script>
 
 <template>

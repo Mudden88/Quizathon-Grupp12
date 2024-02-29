@@ -7,16 +7,17 @@ import burger from "/src/assets/burger.png"
 import menuX from "/src/assets/menuX.png"
 
 
-const router = useRouter()
-const icon = ref(burger),
+const router = useRouter(),
+  icon = ref(burger),
   mobile = ref(null),
   mobileNav = ref(false),
-  windowWidth = ref(null)
-const fromStorage = useStorage();
+  windowWidth = ref(null),
+  fromStorage = useStorage(),
+  emit = defineEmits(['overlay']);
 
 function checkScreen() {
   windowWidth.value = window.innerWidth
-  if (windowWidth.value <= 1140) {
+  if (windowWidth.value <= 1152) {
     mobile.value = true
     mobileNav.value = false
   } else {
@@ -43,6 +44,7 @@ function toggleBurgerNav() {
   mobileNav.value = !mobileNav.value
   if (mobile.value === true) {
     icon.value = !mobileNav.value ? burger : menuX
+    emit('overlay')
   }
 }
 
@@ -139,14 +141,14 @@ window.addEventListener('click', clickOutside)
 .dropdown-nav {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 .dropdown-nav>li {
   margin: 20px 20px 10px 20px;
-  padding: 10px;
   width: 300px;
-  border-bottom: solid #3a5e57 1px;
+  border-bottom: solid #3a5e572d 2px;
 }
 
 .desktop-links {
@@ -205,7 +207,6 @@ img {
 }
 
 a {
-  margin: 10px;
   font-size: 20px;
   text-decoration: none;
   color: #3a5e57;
@@ -213,8 +214,9 @@ a {
 }
 
 nav {
-  box-shadow: 0px 10px 9px #00000070;
+  box-shadow: 0px 3px 10px #00000070;
   margin-bottom: 3em;
+  padding-bottom: 2em;
 
 }
 </style>
