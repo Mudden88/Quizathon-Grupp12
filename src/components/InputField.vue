@@ -9,7 +9,6 @@ const props = defineProps({
   idProp: { type: String, required: true },
   typeProp: { type: String, required: true },
 });
-// const emit = defineEmits(["sendInput"]);
 </script>
 
 <template>
