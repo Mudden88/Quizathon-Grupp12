@@ -68,23 +68,21 @@ window.addEventListener("click", clickOutside);
           @click="toggleBurgerNav"
           :src="icon"
           alt=""
-          v-show="mobile" />
+          v-show="mobile"
+        />
         <img
           @click="goHome"
           id="logo"
           src="../assets/quizathon-logo.png"
-          alt="logo" />
+          alt="logo"
+        />
 
-        <ul
-          class="navigation"
-          v-show="!mobile">
+        <ul class="navigation" v-show="!mobile">
           <div class="desktop-links">
             <li>
               <RouterLink to="/"
                 >Home
-                <img
-                  src="../assets/icons/house-icon.png"
-                  alt="" />
+                <img src="../assets/icons/house-icon.png" alt="" />
               </RouterLink>
             </li>
           </div>
@@ -92,19 +90,14 @@ window.addEventListener("click", clickOutside);
             <li>
               <RouterLink to="/instructions"
                 >Instructions
-                <img
-                  src="../assets/icons/instructions-icon.png"
-                  alt="" />
+                <img src="../assets/icons/instructions-icon.png" alt="" />
               </RouterLink>
             </li>
           </div>
           <div class="desktop-links">
             <li>
               <a @click="userLogin"
-                >Profile
-                <img
-                  src="../assets/icons/profile-icon.png"
-                  alt=""
+                >Profile <img src="../assets/icons/profile-icon.png" alt=""
               /></a>
             </li>
           </div>
@@ -112,9 +105,7 @@ window.addEventListener("click", clickOutside);
             <li>
               <RouterLink to="/leaderboard"
                 >Leaderboard
-                <img
-                  src="../assets/icons/crown-icon.png"
-                  alt="" />
+                <img src="../assets/icons/crown-icon.png" alt="" />
               </RouterLink>
             </li>
           </div>
@@ -122,9 +113,7 @@ window.addEventListener("click", clickOutside);
             <li>
               <RouterLink to="/contact"
                 >Contact
-                <img
-                  src="../assets/icons/letter-icon.png"
-                  alt="" />
+                <img src="../assets/icons/letter-icon.png" alt="" />
               </RouterLink>
             </li>
           </div>
@@ -133,56 +122,38 @@ window.addEventListener("click", clickOutside);
           <img
             id="profile"
             src="../assets/icons/profile-outline-icon.png"
-            alt="" />
+            alt=""
+          />
         </a>
       </div>
 
-      <ul
-        class="dropdown-nav"
-        v-show="mobileNav">
-        <li
-          @click="toggleBurgerNav"
-          class="icons">
+      <ul class="dropdown-nav" v-show="mobileNav">
+        <li @click="toggleBurgerNav" class="icons">
           <RouterLink to="/"
-            >Home<img
-              src="../assets/icons/house-icon.png"
-              alt="" />
+            >Home<img src="../assets/icons/house-icon.png" alt="" />
           </RouterLink>
         </li>
-        <li
-          @click="toggleBurgerNav"
-          class="icons">
+        <li @click="toggleBurgerNav" class="icons">
           <RouterLink to="/instructions"
             >Instructions<img
               src="../assets/icons/instructions-icon.png"
-              alt="" />
+              alt=""
+            />
           </RouterLink>
         </li>
-        <li
-          @click="toggleBurgerNav"
-          class="icons">
+        <li @click="toggleBurgerNav" class="icons">
           <a @click="userLogin"
-            >Profile<img
-              src="../assets/icons/profile-icon.png"
-              alt="" />
+            >Profile<img src="../assets/icons/profile-icon.png" alt="" />
           </a>
         </li>
-        <li
-          @click="toggleBurgerNav"
-          class="icons">
+        <li @click="toggleBurgerNav" class="icons">
           <RouterLink to="/leaderboard"
-            >Leaderboard<img
-              src="../assets/icons/crown-icon.png"
-              alt="" />
+            >Leaderboard<img src="../assets/icons/crown-icon.png" alt="" />
           </RouterLink>
         </li>
-        <li
-          @click="toggleBurgerNav"
-          class="icons">
+        <li @click="toggleBurgerNav" class="icons">
           <RouterLink to="/contact"
-            >Contact<img
-              src="../assets/icons/letter-icon.png"
-              alt=""
+            >Contact<img src="../assets/icons/letter-icon.png" alt=""
           /></RouterLink>
         </li>
       </ul>
@@ -229,6 +200,10 @@ li {
   cursor: pointer;
 }
 
+li:active {
+  transform: scale(1.1);
+}
+
 .logos {
   position: sticky;
   /* width: 100vw; */
@@ -245,6 +220,10 @@ li {
 img {
   height: 32px;
   margin-left: 10px;
+}
+
+img:active {
+  transform: scale(1.1);
 }
 
 #profile,
