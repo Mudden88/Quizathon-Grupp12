@@ -1,28 +1,54 @@
 <script setup>
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { ref } from "vue";
+import { RouterLink } from "vue-router";
+import { useRouter } from "vue-router";
 
-let userScore = ref(null)
+let userScore = ref(null);
+const scoreMessage = ref("");
 
 if (userScore.value === null) {
-  userScore.value = localStorage.getItem('userScore')
+  userScore.value = Number(localStorage.getItem("userScore"));
 }
 
+// Meddelanden beroende på hur det går på Quizzet -->
+if (userScore.value === 0) {
+  scoreMessage.value = "That didn't go too well, try again!";
+} else if (userScore.value >= 1 && userScore.value <= 3) {
+  scoreMessage.value = "Good effort! But you can do better.";
+} else if (userScore.value >= 4 && userScore.value <= 6) {
+  scoreMessage.value = "Not bad at all, you're getting there!";
+} else if (userScore.value >= 7 && userScore.value <= 9) {
+  scoreMessage.value = "Great job! You're almost at the top!";
+} else if (userScore.value === 10) {
+  scoreMessage.value = "Perfect score! Congratulations!";
+}
+// <--
+
+// Hämta quizSettings från localStorage och kör funktion playAgain när användaren klickar på "Play Again".
+const savedSettings = JSON.parse(localStorage.getItem("quizSettings"));
+const router = useRouter();
+
+function playAgain() {
+  let playAgainUrl;
+  if (savedSettings.type === "random") {
+    playAgainUrl = "/randomQuiz/random";
+  } else {
+    playAgainUrl = `/randomQuiz/category/${savedSettings.categoryId}/${savedSettings.difficulty}`;
+  }
+  router.push(playAgainUrl);
+}
 </script>
 
 <template>
   <div class="container">
-    <h1>Congratulations!</h1>
-    <hr>
+    <h1>{{ scoreMessage }}</h1>
+    <hr />
     <h2>Your score is {{ userScore }}/10</h2>
-    <a>
-      <RouterLink to="/RandomQuiz">
-        <div class="button">Try Again</div>
-      </RouterLink>
-    </a>
+    <button @click="playAgain">Play Again</button>
     <span class="textBox">
-      <hr class="hr1">Or explore our other quizes
-      <hr class="hr2">
+      <hr class="hr1" />
+      Or explore our other quizes
+      <hr class="hr2" />
     </span>
     <a>
       <RouterLink to="/">
@@ -40,7 +66,7 @@ if (userScore.value === null) {
   align-items: center;
 }
 
-.button {
+button {
   width: 291px;
   height: 63px;
   border-radius: 20px;
@@ -51,8 +77,17 @@ if (userScore.value === null) {
   justify-content: center;
   align-items: center;
   margin-left: 20px;
-  margin: .5em 0;
+  margin: 0.5em 0;
   cursor: pointer;
+  border-style: none;
+}
+
+h1 {
+  margin-top: 7rem;
+}
+
+h2 {
+  margin-top: 0.5rem;
 }
 
 a {
@@ -67,7 +102,7 @@ a {
   padding: 10px;
   border: none;
   border-radius: 13px;
-  margin: .5em 0;
+  margin: 0.5em 0;
   background-color: var(--Accent-color);
   cursor: pointer;
 
@@ -91,7 +126,6 @@ a {
 }
 
 .hr2 {
-
   margin: 0 10px;
   height: 1px;
   width: 60px;

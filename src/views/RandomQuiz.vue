@@ -40,8 +40,16 @@ async function fetchData() {
   } else {
     url.value = `https://opentdb.com/api.php?amount=10&category=${id}&difficulty=${difficulty}`;
   }
-  let response = await axios.get(url.value);
 
+  //Kod för att lagra Quiz-inställningarna i localstorage -->
+  const quizSettings = {
+    type: route.params.type,
+    categoryId: id,
+    difficulty: difficulty,
+  };
+  localStorage.setItem("quizSettings", JSON.stringify(quizSettings));
+  // <--
+  let response = await axios.get(url.value);
   questions.value = response.data.results;
 
   return questions;
@@ -120,26 +128,18 @@ clearScore();
 <template>
   <div class="container">
     <ul v-if="questions.length > 0">
-      <li
-        v-for="(question, index) in questions"
-        :key="question.question">
-        <div
-          class="check-index"
-          v-if="index === currentIndex">
+      <li v-for="(question, index) in questions" :key="question.question">
+        <div class="check-index" v-if="index === currentIndex">
           <p>
             Question: {{ index + 1 }}/10
-            <span
-              class="difficulty"
-              v-html="question.difficulty"></span>
+            <span class="difficulty" v-html="question.difficulty"></span>
           </p>
           <p class="category">
             Category: <span v-html="question.category"></span>
           </p>
           <p class="currentScore">Score: {{ currentScore }} /10</p>
           <hr />
-          <p
-            class="main-question"
-            v-html="question.question"></p>
+          <p class="main-question" v-html="question.question"></p>
           <div class="answer-container">
             <p
               id="answer"
@@ -158,21 +158,19 @@ clearScore();
                   userAnswerCorrect === false,
               }"
               @click="() => answerOnClick(answerIndex)"
-              v-html="answer"></p>
+              v-html="answer"
+            ></p>
           </div>
           <ConfirmButton
             :disabledButton="disabledButton"
             @Confirm="confirmClick"
-            @nextquestion="getNewIndex" />
+            @nextquestion="getNewIndex"
+          />
         </div>
       </li>
     </ul>
 
-    <p
-      class="loading"
-      v-else>
-      Loading question...
-    </p>
+    <p class="loading" v-else>Loading question...</p>
   </div>
 </template>
 
@@ -203,6 +201,7 @@ hr {
 p {
   font-size: 32px;
   margin: 0;
+  color: var(--Dark-color);
 }
 
 .main-question {
@@ -273,15 +272,18 @@ h3 {
 }
 
 .correct-answer {
-  border: 6px solid var(--Main-color);
+  background-color: var(--Main-color) !important;
+  color: white;
 }
 
 .wrong-answer {
-  border: 6px solid #872e2e;
+  background-color: var(--Error-color) !important;
+  color: white;
 }
 
 .correct-unselected {
-  border: 6px solid var(--Main-lighter-color);
+  background-color: var(--Main-color) !important;
+  color: white;
 }
 
 @media (min-width: 900px) {
