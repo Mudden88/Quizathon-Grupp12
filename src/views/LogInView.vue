@@ -51,26 +51,36 @@ function goToSignup() {
   <section class="container">
     <h1 class="heading">Log in</h1>
     <form class="login-form" id="login-form">
-      <InputField label-prop="Username" placeholder-prop="Username" id-prop="username" type-prop="text"
-        @onInput="setUsername" />
-      <InputField label-prop="Password" placeholder-prop="Password" id-prop="password" type-prop="password"
-        @onInput="setPassword" />
+      <InputField
+        label-prop="Username"
+        placeholder-prop="Username"
+        id-prop="username"
+        type-prop="text"
+        @onInput="setUsername"
+      />
+      <InputField
+        label-prop="Password"
+        placeholder-prop="Password"
+        id-prop="password"
+        type-prop="password"
+        @onInput="setPassword"
+      />
       <p v-if="error" class="error-msg">
         Wrong username or password. Please try again!
       </p>
-      <button class="login-btn" type="submit" form="login-form" value="LogIn" @click="logIn">
+      <button
+        class="login-btn"
+        type="submit"
+        form="login-form"
+        value="LogIn"
+        @click="logIn"
+      >
         Log in
       </button>
     </form>
-    <button class="guest-btn" @click="guestUser">
-      Continue as guest
-    </button>
+    <button class="guest-btn" @click="guestUser">Continue as guest</button>
     <p class="small-text">Don't have an account?</p>
-    <button
-      class="signup-btn"
-      @click="goToSignup">
-      Sign up
-    </button>
+    <button class="signup-btn" @click="goToSignup">Sign up</button>
   </section>
 </template>
 
@@ -107,13 +117,17 @@ function goToSignup() {
   border: none;
   border-radius: 20px;
   background-color: var(--Main-lighter-color);
-
+  cursor: pointer;
   color: var(--Light-color);
   font-size: 2.25rem;
 
   &:focus {
     outline: 3px solid var(--Accent-color);
   }
+}
+
+.login-btn:active {
+  transform: scale(1.1);
 }
 
 .guest-btn {
@@ -123,10 +137,14 @@ function goToSignup() {
   border: none;
   border-radius: 13px;
   background-color: var(--Accent-color);
-
+  cursor: pointer;
   &:focus {
     outline: 3px solid var(--Accent-color);
   }
+}
+
+.guest-btn:active {
+  transform: scale(1.1);
 }
 
 .small-text {
@@ -143,9 +161,13 @@ function goToSignup() {
   border-radius: 13px;
   color: var(--Main-color);
   padding: 8px 50px;
-
+  cursor: pointer;
   &:hover {
     box-shadow: 4px 4px 6px #27272730 inset;
   }
+}
+
+.signup-btn:active {
+  transform: scale(1.1);
 }
 </style>
