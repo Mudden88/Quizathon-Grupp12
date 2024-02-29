@@ -73,7 +73,7 @@ window.addEventListener('click', clickOutside)
           <div class="desktop-links">
             <li>
               <RouterLink to="/">Home
-                <img src="../assets/icons/instructions-icon.png" alt=""> <!--Byt bild-->
+                <img src="../assets/icons/house-icon.png" alt="">
               </RouterLink>
             </li>
           </div>
@@ -113,7 +113,7 @@ window.addEventListener('click', clickOutside)
 
       <ul class="dropdown-nav" v-show="mobileNav">
         <li @click="toggleBurgerNav" class="icons">
-          <RouterLink to="/">Home<img src="../assets/icons/instructions-icon.png" alt=""> <!--Byt bild-->
+          <RouterLink to="/">Home<img src="../assets/icons/house-icon.png" alt="">
           </RouterLink>
         </li>
         <li @click="toggleBurgerNav" class="icons">
