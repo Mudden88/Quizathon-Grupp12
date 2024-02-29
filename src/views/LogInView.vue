@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import router from "../router.js";
 import { useStorage } from "../storage";
+import ConfettiExplosion from "vue-confetti-explosion";
 
 import InputField from "../components/InputField.vue";
 import users from "../users.json";
@@ -63,6 +64,7 @@ function guestUser() {
   <div class="message" v-show="loggedIn">
       <h1>Welcome {{ fromStorage.user.username }} !</h1>
       <h2>Get redy to Quiz!</h2>
+      <ConfettiExplosion v-if="loggedIn" :particleCount="200" :force="0.6" :stageHeight="1000" :stageWidth="800" />
   </div>
   <section class="container">
     <h1 class="heading">Log in</h1>
@@ -110,11 +112,13 @@ function guestUser() {
   color: var(--Main-color);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding-top: 30px;
-  height: 150px;
-  width: 300px;
+  height: 300px;
+  width: 370px;
+  box-shadow: 10px 10px 10px var(--Main-color);
   border-radius: 40px;
+  margin-bottom: 30px;
 }
 .container {
   display: flex;
