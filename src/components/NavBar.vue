@@ -162,6 +162,9 @@ window.addEventListener("click", clickOutside);
 </template>
 
 <style scoped>
+header {
+  align-self: stretch;
+}
 .dropdown-nav {
   display: flex;
   flex-direction: column;
@@ -203,7 +206,7 @@ li:active {
 
 .logos {
   position: sticky;
-  width: 100vw;
+  /* width: 100vw; */
   display: flex;
   align-items: center;
   justify-content: space-between;

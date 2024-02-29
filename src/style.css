@@ -19,14 +19,11 @@
 
 #app {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-
   width: 100%;
-  width: 80%;
 }
-
 
 body {
   background-color: var(--Light-color);
