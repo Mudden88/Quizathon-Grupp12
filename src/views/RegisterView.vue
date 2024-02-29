@@ -29,7 +29,6 @@ function setUsername(input) {
     usernameError.value = false;
     if (usernameInput.value in data.value) {
       usernameError.value = true;
-      console.log("username is taken");
     }
   }
 }
@@ -102,7 +101,7 @@ function addUser(username, password, email) {
       <p
         v-if="usernameError"
         class="error-msg">
-        Username is taken
+        Username is not available
       </p>
     </div>
     <div>
