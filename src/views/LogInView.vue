@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import router from "../router.js";
 import { useStorage } from "../storage";
-
 import InputField from "../components/InputField.vue";
 import users from "../users.json";
 
@@ -47,38 +46,19 @@ function guestUser() {
 <template>
   <section class="container">
     <h1 class="heading">Log in</h1>
-    <form
-      class="login-form"
-      id="login-form">
-      <InputField
-        label-prop="Username"
-        placeholder-prop="Username"
-        id-prop="username"
-        type-prop="text"
+    <form class="login-form" id="login-form">
+      <InputField label-prop="Username" placeholder-prop="Username" id-prop="username" type-prop="text"
         @onInput="setUsername" />
-      <InputField
-        label-prop="Password"
-        placeholder-prop="Password"
-        id-prop="password"
-        type-prop="password"
+      <InputField label-prop="Password" placeholder-prop="Password" id-prop="password" type-prop="password"
         @onInput="setPassword" />
-      <p
-        v-if="error"
-        class="error-msg">
+      <p v-if="error" class="error-msg">
         Wrong username or password. Please try again!
       </p>
-      <button
-        class="login-btn"
-        type="submit"
-        form="login-form"
-        value="LogIn"
-        @click="logIn">
+      <button class="login-btn" type="submit" form="login-form" value="LogIn" @click="logIn">
         Log in
       </button>
     </form>
-    <button
-      class="guest-btn"
-      @click="guestUser">
+    <button class="guest-btn" @click="guestUser">
       Continue as guest
     </button>
   </section>
@@ -96,6 +76,7 @@ function guestUser() {
   color: var(--Main-color);
   font-size: 2rem;
 }
+
 .login-form {
   display: flex;
   flex-direction: column;

@@ -6,16 +6,18 @@ import { useStorage } from "../storage";
 import burger from "/src/assets/burger.png"
 import menuX from "/src/assets/menuX.png"
 
-const router = useRouter()
 
-const icon = ref(burger),
+const router = useRouter(),
+  icon = ref(burger),
   mobile = ref(null),
-  mobileNav = ref(null),
-  windowWidth = ref(null)
+  mobileNav = ref(false),
+  windowWidth = ref(null),
+  fromStorage = useStorage(),
+  emit = defineEmits(['overlay']);
 
 function checkScreen() {
   windowWidth.value = window.innerWidth
-  if (windowWidth.value <= 800) {
+  if (windowWidth.value <= 1152) {
     mobile.value = true
     mobileNav.value = false
   } else {
@@ -26,7 +28,6 @@ function checkScreen() {
 }
 
 function userLogin() {
-  console.log(fromStorage.user.isLoggedIn);
   if (fromStorage.user.isLoggedIn === true) {
     router.push("/profile");
   }
@@ -39,18 +40,24 @@ function goHome() {
   router.push("/");
 }
 
-const fromStorage = useStorage();
-
 function toggleBurgerNav() {
   mobileNav.value = !mobileNav.value
   if (mobile.value === true) {
     icon.value = !mobileNav.value ? burger : menuX
+    emit('overlay')
   }
 }
 
+const clickOutside = (e) => {
+  const isIcon = e.target.id === 'burger'
+  if (!isIcon && mobileNav.value && !e.target.closest('.dropdown-nav')) {
+    mobileNav.value = false
+    icon.value = burger
+  }
+}
 checkScreen()
-
 window.addEventListener("resize", checkScreen)
+window.addEventListener('click', clickOutside)
 
 </script>
 
@@ -63,6 +70,13 @@ window.addEventListener("resize", checkScreen)
         <img @click="goHome" id="logo" src="../assets/quizathon-logo.png" alt="logo">
 
         <ul class="navigation" v-show="!mobile">
+          <div class="desktop-links">
+            <li>
+              <RouterLink to="/">Home
+                <img src="../assets/icons/house-icon.png" alt="">
+              </RouterLink>
+            </li>
+          </div>
           <div class="desktop-links">
             <li>
               <RouterLink to="/instructions">Instructions
@@ -99,7 +113,11 @@ window.addEventListener("resize", checkScreen)
 
       <ul class="dropdown-nav" v-show="mobileNav">
         <li @click="toggleBurgerNav" class="icons">
-          <RouterLink to="/instructions">Instructions mobil<img src="../assets/icons/instructions-icon.png" alt="">
+          <RouterLink to="/">Home<img src="../assets/icons/house-icon.png" alt="">
+          </RouterLink>
+        </li>
+        <li @click="toggleBurgerNav" class="icons">
+          <RouterLink to="/instructions">Instructions<img src="../assets/icons/instructions-icon.png" alt="">
           </RouterLink>
         </li>
         <li @click="toggleBurgerNav" class="icons">
@@ -123,14 +141,14 @@ window.addEventListener("resize", checkScreen)
 .dropdown-nav {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 .dropdown-nav>li {
   margin: 20px 20px 10px 20px;
-  padding: 10px;
   width: 300px;
-  border-bottom: solid #3a5e57 1px;
+  border-bottom: solid #3a5e572d 2px;
 }
 
 .desktop-links {
@@ -156,10 +174,13 @@ li {
 }
 
 .logos {
+  position: sticky;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+
 }
 
 #logo {
@@ -168,31 +189,34 @@ li {
 }
 
 img {
-  height: 30px;
+  height: 32px;
   margin-left: 10px;
 }
 
+
 #profile,
 #burger {
+  height: 32px;
+  margin: 10px 20px;
+  cursor: pointer;
+}
+
+#burger {
   height: 45px;
-  margin: 10px 20px
+
 }
 
 a {
-  margin: 10px;
   font-size: 20px;
   text-decoration: none;
   color: #3a5e57;
   font-size: 30px;
 }
 
+nav {
+  box-shadow: 0px 3px 10px #00000070;
+  margin-bottom: 3em;
+  padding-bottom: 2em;
 
-:root {
-  --background: #eef1ef;
-  --primary: #3a5e57;
-  --secondary: #6d8c86;
-  --boxText: #eef1ef;
-  --yellow: #e6c16b;
-  --bgText: #272727;
 }
 </style>
