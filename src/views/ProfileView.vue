@@ -2,6 +2,7 @@
 
 import { useStorage } from '../storage'
 import { useRouter } from 'vue-router'
+import crown from '../assets/icons/crown-icon.png'
 
 const fromStorage = useStorage();
 const router = useRouter()
@@ -22,11 +23,12 @@ function logOut() {
 <template>
 
   <div class="container">
-    <h1>Profile</h1>
+    <h1> {{ fromStorage.user.username }} Profile</h1>
     <hr>
     <div class="profile" v-if="fromStorage.user.isLoggedIn">
-      <h2>Username: {{ fromStorage.user.username }}</h2>
-      <h2>Latest Score: {{ userScore }}</h2>
+      <img :src="crown" alt="">
+      <h1>Username: {{ fromStorage.user.username }}</h1>
+      <h1>Latest Score: {{ userScore }}</h1>
       <button @click="logOut">Log out</button>
     </div>
     <h2 v-else>Please wait. You are being redirected...</h2>
@@ -35,15 +37,33 @@ function logOut() {
 
 <style scoped>
 .container {
+  color: #272727;
+  width: 370px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+}
+
+img {
+  height: 36px;
+}
+.profile {
   background-color: var(--Main-lighter-color);
   color: var(--Light-color);
-  width: 500px;
+  width: 370px;
   height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 40px;
+}
+
+h1, h2 {
+  padding: 20px;
 }
 
 button {
@@ -60,10 +80,6 @@ button {
   margin-bottom: 1em;
   cursor: pointer;
   border-style: none;
-
-  &hover {
-    background-color: var(--Main-lighter-color);
-  }
 }
 
 button:active {
@@ -72,6 +88,6 @@ button:active {
 
 hr {
   margin: 2em;
-  width: auto;
+  width: 100%;
 }
 </style>

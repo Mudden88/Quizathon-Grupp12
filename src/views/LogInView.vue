@@ -12,6 +12,8 @@ const error = ref(false),
 
 const fromStorage = useStorage()
 
+const loggedIn = ref(false)
+
 function logIn(e) {
   e.preventDefault;
   if (inputUserName.value in users) {
@@ -20,14 +22,19 @@ function logIn(e) {
     if (inputPassword.value === user.password) {
       fromStorage.user.username = user.username;
       fromStorage.user.isLoggedIn = true;
-      router.push("/");
+      loggedIn.value = true
+      if (loggedIn.value) {
+        setTimeout(() => {
+        loggedIn.value = false
+        router.push("/");
+        }, 2500)
+      }
     } else {
       error.value = true;
     }
   } else {
     error.value = true;
   }
-  
 }
 
 function setUsername(input) {
@@ -41,11 +48,22 @@ function setPassword(input) {
 function guestUser() {
   fromStorage.user.username = "Guest";
   fromStorage.user.isLoggedIn = true;
-  router.push("/");
+  loggedIn.value = true
+  if (loggedIn.value) {
+    setTimeout(() => {
+    loggedIn.value = false
+    router.push("/");
+    }, 2500)
+  }
 }
+
 </script>
 
 <template>
+  <div class="message" v-show="loggedIn">
+      <h1>Welcome {{ fromStorage.user.username }} !</h1>
+      <h2>Get redy to Quiz!</h2>
+  </div>
   <section class="container">
     <h1 class="heading">Log in</h1>
     <form
@@ -86,6 +104,18 @@ function guestUser() {
 </template>
 
 <style scoped>
+
+.message {
+  background-color: var(--Accent-color);
+  color: var(--Main-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  height: 150px;
+  width: 300px;
+  border-radius: 40px;
+}
 .container {
   display: flex;
   flex-direction: column;
