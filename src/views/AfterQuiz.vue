@@ -44,7 +44,7 @@ function playAgain() {
   <div class="container">
     <h1>{{ scoreMessage }}</h1>
     <ConfettiExplosion
-      :particleCount="2000"
+      :particleCount="1400"
       :force="0.8"
       :stageHeight="1000"
       :stageWidth="1200" />
