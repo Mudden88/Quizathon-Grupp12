@@ -20,8 +20,6 @@ const error = ref(false),
   inputUserName = ref(""),
   inputPassword = ref("");
 
-const fromStorage = useStorage()
-
 const loggedIn = ref(false)
 
 function logIn(e) {

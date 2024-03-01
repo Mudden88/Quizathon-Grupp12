@@ -5,7 +5,7 @@ import { RouterLink } from "vue-router";
 <template>
   <div class="container">
     <div class="hero">
-      <RouterLink to="/randomQuiz/random">
+      <RouterLink to="/Quiz/random">
         <a>
           <div class="blur">
             <h2>Welcome</h2>

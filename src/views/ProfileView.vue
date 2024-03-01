@@ -28,7 +28,7 @@ function logOut() {
     <h1 id="profile-name"> {{ fromStorage.user.username }} Profile</h1>
     <hr>
     <div class="profile" v-if="fromStorage.user.isLoggedIn">
-      <img :src="crown" alt="">
+      <img :src="crown" alt="crown-icon">
       <h1>Username: {{ fromStorage.user.username }}</h1>
       <h1>Latest Score: {{ userScore }}</h1>
       <button @click="logOut">Log out</button>
