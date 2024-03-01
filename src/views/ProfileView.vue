@@ -3,9 +3,6 @@
 import { useStorage } from '../storage'
 import { useRouter } from 'vue-router'
 import crown from '../assets/icons/crown-icon.png'
-import { useStorage } from "../storage";
-import { useRouter } from "vue-router";
-import { ref } from "vue";
 
 const fromStorage = useStorage();
 const router = useRouter()
@@ -28,7 +25,7 @@ function logOut() {
 <template>
 
   <div class="container">
-    <h1> {{ fromStorage.user.username }} Profile</h1>
+    <h1 id="profile-name"> {{ fromStorage.user.username }} Profile</h1>
     <hr>
     <div class="profile" v-if="fromStorage.user.isLoggedIn">
       <img :src="crown" alt="">
@@ -50,6 +47,10 @@ function logOut() {
   align-items: center;
   justify-content: center;
   border-radius: 40px;
+}
+
+#profile-name {
+  color: var(--Main-color);
 }
 
 img {

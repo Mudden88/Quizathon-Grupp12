@@ -36,7 +36,7 @@ export default createRouter({
     },
     {
       component: QuizView,
-      path: "/randomQuiz/:type/:id?/:difficulty?",
+      path: "/Quiz/:type/:id?/:difficulty?",
     },
     {
       path: "/StartQuiz/:categoryId",
