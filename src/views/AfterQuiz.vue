@@ -6,6 +6,9 @@ import { useRouter } from "vue-router";
 let userScore = ref(null);
 const scoreMessage = ref("");
 
+console.log(userScore.value);
+// console.log(localStorage.getItem(user));
+
 if (userScore.value === null) {
   userScore.value = Number(localStorage.getItem("userScore"));
 }
