@@ -84,6 +84,7 @@ function addUser(username, password, email) {
     username: username,
     password: password,
     email: email,
+    totalscore: 0,
   });
 }
 
