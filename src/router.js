@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import HomeView from "./views/HomeView.vue";
 import StartQuiz from "./components/StartQuiz.vue";
-import RandomQuiz from "./views/RandomQuiz.vue";
+import QuizView from "./views/QuizView.vue";
 import LogInView from "./views/LogInView.vue";
 import ContactView from "./views/ContactView.vue";
 import InstructionsView from "./views/InstructionsView.vue";
@@ -35,8 +35,8 @@ export default createRouter({
       path: "/profile",
     },
     {
-      component: RandomQuiz,
-      path: "/randomQuiz/:type/:id?/:difficulty?",
+      component: QuizView,
+      path: "/Quiz/:type/:id?/:difficulty?",
     },
     {
       path: "/StartQuiz/:categoryId",

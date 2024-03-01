@@ -13,8 +13,6 @@ const props = defineProps({
   }
 })
 
-
-
 function switchButton() {
   displayConfirm.value = false
   displayNext.value = true

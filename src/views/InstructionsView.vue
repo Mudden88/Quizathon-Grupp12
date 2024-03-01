@@ -14,7 +14,7 @@
       srcset="/src/assets/instructions_img/desktopstart.png"
       media="(min-width: 800px)"
     />
-    <img src="/src/assets/instructions_img/mobilestart.png" alt="" />
+    <img src="/src/assets/instructions_img/mobilestart.png" alt="Screenshot of mobile-version" />
   </picture>
   <hr />
   <p>
@@ -25,7 +25,7 @@
   <img
     class="desktop-img"
     src="/src/assets/instructions_img/selectdifficulty.png"
-    alt=""
+    alt="Screenshot of how to select difficulty"
   />
   <hr />
   <p>3. Now, select your answer by clicking on one of the provided options.</p>
@@ -37,7 +37,7 @@
     <img
       class="desktop-img-alt"
       src="/src/assets/instructions_img/quizstart.png"
-      alt=""
+      alt="Screenshot of started quiz"
     />
   </picture>
   <hr />
@@ -52,7 +52,7 @@
     <img
       class="desktop-img-alt"
       src="/src/assets/instructions_img/quizselect.png"
-      alt=""
+      alt="Screenshot of selected quiz"
     />
   </picture>
   <hr />
@@ -69,7 +69,7 @@
     <img
       class="desktop-img-alt"
       src="/src/assets/instructions_img/quizcorrect.png"
-      alt=""
+      alt="Screenshot of right answer"
     />
   </picture>
   <p class="description">Incorrect answer</p>
@@ -81,7 +81,7 @@
     <img
       class="desktop-img-alt"
       src="/src/assets/instructions_img/quizwrong.png"
-      alt=""
+      alt="Screenshot of wrong answer"
     />
   </picture>
   <hr />
@@ -92,7 +92,7 @@
   <img
     class="desktop-img"
     src="/src/assets/instructions_img/quizsummary.png"
-    alt=""
+    alt="Screenshot of Quiz-summary"
   />
 </template>
 

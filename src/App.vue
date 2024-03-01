@@ -9,10 +9,5 @@ const fromStorage = useStorage();
 
 <template>
   <NavBar />
-
-  <h1 v-if="fromStorage.user.isLoggedIn">
-    Welcome {{ fromStorage.user.username }}!
-  </h1>
-
   <RouterView></RouterView>
 </template>
