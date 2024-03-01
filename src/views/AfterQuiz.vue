@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
 import { useRouter } from "vue-router";
+import ConfettiExplosion from "vue-confetti-explosion";
 
 let userScore = ref(null);
 const scoreMessage = ref("");
