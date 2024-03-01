@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import router from "../router.js";
 import { useStorage } from "../storage";
+
 import InputField from "../components/InputField.vue";
 // import users from "../users.json";
 import { usersRef } from "../firebase";
@@ -13,10 +14,13 @@ const data = ref(null);
 onValue(usersRef, (snapshot) => {
   data.value = snapshot.val();
 });
+import users from "../users.json";
 
 const error = ref(false),
   inputUserName = ref(""),
   inputPassword = ref("");
+
+const loggedIn = ref(false)
 
 function logIn(e) {
   e.preventDefault;
@@ -26,7 +30,13 @@ function logIn(e) {
     if (inputPassword.value === user.password) {
       fromStorage.user.username = user.username;
       fromStorage.user.isLoggedIn = true;
-      router.push("/");
+      loggedIn.value = true
+      if (loggedIn.value) {
+        setTimeout(() => {
+        loggedIn.value = false
+        router.push("/");
+        }, 2500)
+      }
     } else {
       error.value = true;
     }
@@ -46,15 +56,22 @@ function setPassword(input) {
 function guestUser() {
   fromStorage.user.username = "Guest";
   fromStorage.user.isLoggedIn = true;
-  router.push("/");
-}
-
-function goToSignup() {
-  router.push("/register");
+  loggedIn.value = true
+  if (loggedIn.value) {
+    setTimeout(() => {
+    loggedIn.value = false
+    router.push("/");
+    }, 2500)
+  }
 }
 </script>
 
 <template>
+  <div class="message" v-show="loggedIn">
+      <h1>Welcome {{ fromStorage.user.username }} !</h1>
+      <h2>Get redy to Quiz!</h2>
+      <ConfettiExplosion v-if="loggedIn" :particleCount="200" :force="0.6" :stageHeight="1000" :stageWidth="800" />
+  </div>
   <section class="container">
     <h1 class="heading">Log in</h1>
     <form
@@ -101,6 +118,20 @@ function goToSignup() {
 </template>
 
 <style scoped>
+
+.message {
+  background-color: var(--Accent-color);
+  color: var(--Main-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 370px;
+  box-shadow: 10px 10px 10px var(--Main-color);
+  border-radius: 40px;
+  margin-bottom: 30px;
+}
 .container {
   display: flex;
   flex-direction: column;

@@ -50,7 +50,7 @@ console.log("Kategori-ID:", categoryId);
     <button @click="selectDifficulty('medium')">Medium</button>
     <button @click="selectDifficulty('hard')">Hard</button>
   </div>
-  <RouterLink :to="`/randomQuiz/category/${categoryId}/${selectedDifficulty}`">
+  <RouterLink :to="`/Quiz/category/${categoryId}/${selectedDifficulty}`">
     <a>
       <button class="start-quiz-btn">Start Quiz</button>
     </a>

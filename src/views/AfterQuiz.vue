@@ -31,9 +31,9 @@ const router = useRouter();
 function playAgain() {
   let playAgainUrl;
   if (savedSettings.type === "random") {
-    playAgainUrl = "/randomQuiz/random";
+    playAgainUrl = "/Quiz/random";
   } else {
-    playAgainUrl = `/randomQuiz/category/${savedSettings.categoryId}/${savedSettings.difficulty}`;
+    playAgainUrl = `/Quiz/category/${savedSettings.categoryId}/${savedSettings.difficulty}`;
   }
   router.push(playAgainUrl);
 }

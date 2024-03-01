@@ -1,7 +1,8 @@
 <script setup>
-import { useStorage } from "../storage";
-import { useRouter } from "vue-router";
-import { ref } from "vue";
+
+import { useStorage } from '../storage'
+import { useRouter } from 'vue-router'
+import crown from '../assets/icons/crown-icon.png'
 
 const fromStorage = useStorage();
 const router = useRouter()
@@ -14,20 +15,22 @@ function logOut() {
     score: null,
   };
   setTimeout(() => {
-    router.push('/')
-  }, 2500)
+    router.push('/login')
+  }, 1500)
 }
 
 
 </script>
 
 <template>
+
   <div class="container">
-    <h1>Profile</h1>
+    <h1 id="profile-name"> {{ fromStorage.user.username }} Profile</h1>
     <hr>
-    <div v-if="fromStorage.user.isLoggedIn">
-      <h2>Username: {{ fromStorage.user.username }}</h2>
-      <h2>Latest Score: {{ userScore }}</h2>
+    <div class="profile" v-if="fromStorage.user.isLoggedIn">
+      <img :src="crown" alt="crown-icon">
+      <h1>Username: {{ fromStorage.user.username }}</h1>
+      <h1>Latest Score: {{ userScore }}</h1>
       <button @click="logOut">Log out</button>
     </div>
     <h2 v-else>Please wait. You are being redirected...</h2>
@@ -36,19 +39,45 @@ function logOut() {
 
 <style scoped>
 .container {
+  color: #272727;
+  width: 370px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: fit-content;
+  border-radius: 40px;
+}
+
+#profile-name {
+  color: var(--Main-color);
+}
+
+img {
+  height: 36px;
+}
+.profile {
+  background-color: var(--Main-lighter-color);
+  color: var(--Light-color);
+  width: 370px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+}
+
+h1, h2 {
+  padding: 20px;
 }
 
 button {
   width: 291px;
   height: 63px;
   border-radius: 20px;
-  background-color: var(--Main-lighter-color);
-  color: var(--Light-color);
+  background-color: var(--Accent-color);
+  color: var(--Main-color);
   font-size: 36px;
   display: flex;
   justify-content: center;
