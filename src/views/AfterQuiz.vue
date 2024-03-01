@@ -42,6 +42,11 @@ function playAgain() {
 <template>
   <div class="container">
     <h1>{{ scoreMessage }}</h1>
+    <ConfettiExplosion
+      :particleCount="2000"
+      :force="0.8"
+      :stageHeight="1000"
+      :stageWidth="1200" />
     <hr />
     <h2>Your score is {{ userScore }}/10</h2>
     <button @click="playAgain">Play Again</button>
