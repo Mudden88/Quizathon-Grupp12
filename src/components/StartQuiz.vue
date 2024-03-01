@@ -128,6 +128,14 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #daafba;
+}
+
+button:active {
+  transform: scale(1.1);
+}
+
 button:focus {
   background-color: #daafba;
 }

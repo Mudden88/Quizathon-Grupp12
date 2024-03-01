@@ -3,6 +3,9 @@
 import { useStorage } from '../storage'
 import { useRouter } from 'vue-router'
 import crown from '../assets/icons/crown-icon.png'
+import { useStorage } from "../storage";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
 
 const fromStorage = useStorage();
 const router = useRouter()
@@ -18,6 +21,8 @@ function logOut() {
     router.push('/login')
   }, 1500)
 }
+
+
 </script>
 
 <template>

@@ -9,6 +9,7 @@ import InstructionsView from "./views/InstructionsView.vue";
 import LeaderboardView from "./views/LeaderboardView.vue";
 import ProfileView from "./views/ProfileView.vue";
 import AfterQuiz from "./views/AfterQuiz.vue";
+import RegisterView from "./views/RegisterView.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -49,6 +50,10 @@ export default createRouter({
     {
       component: LogInView,
       path: "/login",
+    },
+    {
+      component: RegisterView,
+      path: "/register",
     },
   ],
 });

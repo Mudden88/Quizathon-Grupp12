@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import router from "../router.js";
 import { useStorage } from "../storage";
-import ConfettiExplosion from "vue-confetti-explosion";
 
 import InputField from "../components/InputField.vue";
 import users from "../users.json";
@@ -57,7 +56,6 @@ function guestUser() {
     }, 2500)
   }
 }
-
 </script>
 
 <template>
@@ -68,24 +66,22 @@ function guestUser() {
   </div>
   <section class="container">
     <h1 class="heading">Log in</h1>
-    <form
-      class="login-form"
-      id="login-form">
+    <form class="login-form" id="login-form">
       <InputField
         label-prop="Username"
         placeholder-prop="Username"
         id-prop="username"
         type-prop="text"
-        @onInput="setUsername" />
+        @onInput="setUsername"
+      />
       <InputField
         label-prop="Password"
         placeholder-prop="Password"
         id-prop="password"
         type-prop="password"
-        @onInput="setPassword" />
-      <p
-        v-if="error"
-        class="error-msg">
+        @onInput="setPassword"
+      />
+      <p v-if="error" class="error-msg">
         Wrong username or password. Please try again!
       </p>
       <button
@@ -93,15 +89,14 @@ function guestUser() {
         type="submit"
         form="login-form"
         value="LogIn"
-        @click="logIn">
+        @click="logIn"
+      >
         Log in
       </button>
     </form>
-    <button
-      class="guest-btn"
-      @click="guestUser">
-      Continue as guest
-    </button>
+    <button class="guest-btn" @click="guestUser">Continue as guest</button>
+    <p class="small-text">Don't have an account?</p>
+    <button class="signup-btn" @click="goToSignup">Sign up</button>
   </section>
 </template>
 
@@ -131,6 +126,7 @@ function guestUser() {
   color: var(--Main-color);
   font-size: 2rem;
 }
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -151,13 +147,17 @@ function guestUser() {
   border: none;
   border-radius: 20px;
   background-color: var(--Main-lighter-color);
-
+  cursor: pointer;
   color: var(--Light-color);
   font-size: 2.25rem;
 
   &:focus {
     outline: 3px solid var(--Accent-color);
   }
+}
+
+.login-btn:active {
+  transform: scale(1.1);
 }
 
 .guest-btn {
@@ -167,9 +167,37 @@ function guestUser() {
   border: none;
   border-radius: 13px;
   background-color: var(--Accent-color);
-
+  cursor: pointer;
   &:focus {
     outline: 3px solid var(--Accent-color);
   }
+}
+
+.guest-btn:active {
+  transform: scale(1.1);
+}
+
+.small-text {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.7rem;
+  color: var(--Dark-color);
+  margin-block: 14px;
+}
+
+.signup-btn {
+  font-size: 1.4rem;
+  background-color: var(--Light-color);
+  border: 3px solid var(--Main-color);
+  border-radius: 13px;
+  color: var(--Main-color);
+  padding: 8px 50px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 4px 4px 6px #27272730 inset;
+  }
+}
+
+.signup-btn:active {
+  transform: scale(1.1);
 }
 </style>

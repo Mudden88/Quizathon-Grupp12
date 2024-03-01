@@ -85,6 +85,10 @@ button:hover {
   background-color: #debfc7;
 }
 
+button:active {
+  transform: scale(1.1);
+}
+
 @media (max-width: 750px) {
   .cat-container {
     grid-template-columns: repeat(2, 1fr);

@@ -201,6 +201,7 @@ hr {
 p {
   font-size: 32px;
   margin: 0;
+  color: var(--Dark-color);
 }
 
 .main-question {
@@ -271,15 +272,18 @@ h3 {
 }
 
 .correct-answer {
-  border: 6px solid var(--Main-color);
+  background-color: var(--Main-color) !important;
+  color: white;
 }
 
 .wrong-answer {
-  border: 6px solid #872e2e;
+  background-color: var(--Error-color) !important;
+  color: white;
 }
 
 .correct-unselected {
-  border: 6px solid var(--Main-lighter-color);
+  background-color: var(--Main-color) !important;
+  color: white;
 }
 
 @media (min-width: 900px) {

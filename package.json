@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "axios": "^1.6.7",
+    "firebase": "^10.8.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.11",
     "vue-confetti-explosion": "^1.0.2",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vuefire": "^3.1.23"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
