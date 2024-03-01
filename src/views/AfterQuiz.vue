@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
 import { useRouter } from "vue-router";
+import ConfettiExplosion from "vue-confetti-explosion";
 
 let userScore = ref(null);
 const scoreMessage = ref("");
@@ -42,6 +43,11 @@ function playAgain() {
 <template>
   <div class="container">
     <h1>{{ scoreMessage }}</h1>
+    <ConfettiExplosion
+      :particleCount="1400"
+      :force="0.8"
+      :stageHeight="1000"
+      :stageWidth="1200" />
     <hr />
     <h2>Your score is {{ userScore }}/10</h2>
     <button @click="playAgain">Play Again</button>
