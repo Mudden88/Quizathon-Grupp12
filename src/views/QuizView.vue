@@ -4,6 +4,8 @@ import { ref, computed } from "vue";
 import ConfirmButton from "../components/ConfirmButton.vue";
 import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
+import { update, onValue, ref as dbref } from "firebase/database";
+import { db, usersRef } from "../firebase";
 
 const url = ref("");
 const route = useRoute();
@@ -18,7 +20,7 @@ const currentScore = ref(0);
 const router = useRouter();
 const emit = defineEmits(["changedisabled"]);
 const disabledButton = ref(true);
-const disableAnswers = ref(false) //ta bort, används ej
+const disableAnswers = ref(false); //ta bort, används ej
 
 const shuffledAnswers = computed(() => {
   if (
@@ -68,11 +70,29 @@ function shuffleArray(array) {
 function answerOnClick(index) {
   selectedAnswerIndex.value = index;
   disabledButton.value = false;
-
-
-
 }
 
+// Funktion som lägger till poäng till firebase
+const user = ref(JSON.parse(localStorage.getItem("user"))),
+  username = ref(user.value.user.username),
+  userScore = ref(JSON.parse(localStorage.getItem("userScore"))),
+  data = ref(null),
+  oldScore = ref(null),
+  totalScore = ref(null);
+
+onValue(usersRef, (snapshot) => {
+  data.value = snapshot.val();
+  oldScore.value = data.value[username.value].totalscore;
+});
+
+function setTotalScore() {
+  totalScore.value = oldScore.value + userScore.value;
+
+  const updates = {};
+  updates[`/users/${username.value}/totalscore`] = totalScore.value;
+
+  return update(dbref(db), updates);
+}
 
 //Öka siffra efter varje fråga
 function newIndex() {
@@ -86,11 +106,12 @@ function getNewIndex() {
   if (currentIndex.value != 10) {
     selectedAnswerIndex.value = null;
     disabledButton.value = true;
-    isDisabled.value = false
+    isDisabled.value = false;
     newIndex();
   }
   if (currentIndex.value === 10) {
     router.push("/AfterQuiz");
+    setTotalScore();
   }
 }
 //Logik för knappen, är svaret rätt. ökas currentScore,
@@ -100,7 +121,7 @@ function getNewIndex() {
 //annars får den ett nytt index och ny fråga dyker upp.
 const correctAnswerIndex = ref(null);
 const userAnswerCorrect = ref(null);
-const isDisabled = ref(false) // Svarsalternativen blir disabled efter tryck på confirm.
+const isDisabled = ref(false); // Svarsalternativen blir disabled efter tryck på confirm.
 
 function confirmClick() {
   const question = questions.value[currentIndex.value];
@@ -110,7 +131,7 @@ function confirmClick() {
   );
 
   correctAnswerIndex.value = correctIndex;
-  isDisabled.value = true
+  isDisabled.value = true;
 
   if (selectedAnswer === question.correct_answer) {
     currentScore.value += 1;
@@ -136,20 +157,32 @@ clearScore();
 <template>
   <div class="container">
     <ul v-if="questions.length > 0">
-      <li v-for="(question, index) in questions" :key="question.question">
-        <div class="check-index" v-if="index === currentIndex">
+      <li
+        v-for="(question, index) in questions"
+        :key="question.question">
+        <div
+          class="check-index"
+          v-if="index === currentIndex">
           <p>
             Question: {{ index + 1 }}/10
-            <span class="difficulty" v-html="question.difficulty"></span>
+            <span
+              class="difficulty"
+              v-html="question.difficulty"></span>
           </p>
           <p class="category">
             Category: <span v-html="question.category"></span>
           </p>
           <p class="currentScore">Score: {{ currentScore }} /10</p>
           <hr />
-          <p class="main-question" v-html="question.question"></p>
+          <p
+            class="main-question"
+            v-html="question.question"></p>
           <div class="answer-container">
-            <button id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer" :disabled="isDisabled"
+            <button
+              id="answer"
+              v-for="(answer, answerIndex) in shuffledAnswers"
+              :key="answer"
+              :disabled="isDisabled"
               :class="{
                 selected: answerIndex === selectedAnswerIndex,
                 'correct-answer':
@@ -161,14 +194,23 @@ clearScore();
                 'correct-unselected':
                   correctAnswerIndex === answerIndex &&
                   userAnswerCorrect === false,
-              }" @click="() => answerOnClick(answerIndex)" v-html="answer"></button>
+              }"
+              @click="() => answerOnClick(answerIndex)"
+              v-html="answer"></button>
           </div>
-          <ConfirmButton :disabledButton="disabledButton" @Confirm="confirmClick" @nextquestion="getNewIndex" />
+          <ConfirmButton
+            :disabledButton="disabledButton"
+            @Confirm="confirmClick"
+            @nextquestion="getNewIndex" />
         </div>
       </li>
     </ul>
 
-    <p class="loading" v-else>Loading question...</p>
+    <p
+      class="loading"
+      v-else>
+      Loading question...
+    </p>
   </div>
 </template>
 
@@ -257,10 +299,6 @@ h3 {
   cursor: default;
   transform: none;
 }
-
-
-
-
 
 .difficulty {
   font-size: 20px;
