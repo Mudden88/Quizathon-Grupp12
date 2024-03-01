@@ -133,13 +133,17 @@ function goToSignup() {
   border: none;
   border-radius: 20px;
   background-color: var(--Main-lighter-color);
-
+  cursor: pointer;
   color: var(--Light-color);
   font-size: 2.25rem;
 
   &:focus {
     outline: 3px solid var(--Accent-color);
   }
+}
+
+.login-btn:active {
+  transform: scale(1.1);
 }
 
 .guest-btn {
@@ -149,10 +153,14 @@ function goToSignup() {
   border: none;
   border-radius: 13px;
   background-color: var(--Accent-color);
-
+  cursor: pointer;
   &:focus {
     outline: 3px solid var(--Accent-color);
   }
+}
+
+.guest-btn:active {
+  transform: scale(1.1);
 }
 
 .small-text {
@@ -169,9 +177,13 @@ function goToSignup() {
   border-radius: 13px;
   color: var(--Main-color);
   padding: 8px 50px;
-
+  cursor: pointer;
   &:hover {
     box-shadow: 4px 4px 6px #27272730 inset;
   }
+}
+
+.signup-btn:active {
+  transform: scale(1.1);
 }
 </style>

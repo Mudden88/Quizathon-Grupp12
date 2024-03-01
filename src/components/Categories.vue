@@ -32,6 +32,9 @@ function selectCategory() {
   box-shadow: 6px 5px 5px rgba(45, 78, 72, 0.25);
   cursor: pointer;
 }
+.container:active {
+  transform: scale(1.1);
+}
 
 h2 {
   color: var(--Light-color);
