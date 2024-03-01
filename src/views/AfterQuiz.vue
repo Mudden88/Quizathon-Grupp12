@@ -109,6 +109,10 @@ a {
   &:focus {
     outline: 3px solid var(--Accent-color);
   }
+
+  &:active {
+    transform: scale(1.1);
+  }
 }
 
 .textBox {
