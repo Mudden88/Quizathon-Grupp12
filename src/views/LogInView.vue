@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import router from "../router.js";
 import { useStorage } from "../storage";
-
+import ConfettiExplosion from "vue-confetti-explosion";
 import InputField from "../components/InputField.vue";
 // import users from "../users.json";
 import { usersRef } from "../firebase";
