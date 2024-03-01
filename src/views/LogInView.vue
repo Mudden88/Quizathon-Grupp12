@@ -20,7 +20,7 @@ const error = ref(false),
   inputUserName = ref(""),
   inputPassword = ref("");
 
-const loggedIn = ref(false)
+const loggedIn = ref(false);
 
 function logIn(e) {
   e.preventDefault;
@@ -30,12 +30,12 @@ function logIn(e) {
     if (inputPassword.value === user.password) {
       fromStorage.user.username = user.username;
       fromStorage.user.isLoggedIn = true;
-      loggedIn.value = true
+      loggedIn.value = true;
       if (loggedIn.value) {
         setTimeout(() => {
-        loggedIn.value = false
-        router.push("/");
-        }, 2500)
+          loggedIn.value = false;
+          router.push("/");
+        }, 2500);
       }
     } else {
       error.value = true;
@@ -56,21 +56,32 @@ function setPassword(input) {
 function guestUser() {
   fromStorage.user.username = "Guest";
   fromStorage.user.isLoggedIn = true;
-  loggedIn.value = true
+  loggedIn.value = true;
   if (loggedIn.value) {
     setTimeout(() => {
-    loggedIn.value = false
-    router.push("/");
-    }, 2500)
+      loggedIn.value = false;
+      router.push("/");
+    }, 2500);
   }
+}
+
+function goToSignup() {
+  router.push("/register");
 }
 </script>
 
 <template>
-  <div class="message" v-show="loggedIn">
-      <h1>Welcome {{ fromStorage.user.username }} !</h1>
-      <h2>Get redy to Quiz!</h2>
-      <ConfettiExplosion v-if="loggedIn" :particleCount="200" :force="0.6" :stageHeight="1000" :stageWidth="800" />
+  <div
+    class="message"
+    v-show="loggedIn">
+    <h1>Welcome {{ fromStorage.user.username }} !</h1>
+    <h2>Get redy to Quiz!</h2>
+    <ConfettiExplosion
+      v-if="loggedIn"
+      :particleCount="200"
+      :force="0.6"
+      :stageHeight="1000"
+      :stageWidth="800" />
   </div>
   <section class="container">
     <h1 class="heading">Log in</h1>
@@ -118,7 +129,6 @@ function guestUser() {
 </template>
 
 <style scoped>
-
 .message {
   background-color: var(--Accent-color);
   color: var(--Main-color);
