@@ -18,7 +18,7 @@ const currentScore = ref(0);
 const router = useRouter();
 const emit = defineEmits(["changedisabled"]);
 const disabledButton = ref(true);
-const disableAnswers = ref(false)
+const disableAnswers = ref(false) //ta bort, används ej
 
 const shuffledAnswers = computed(() => {
   if (
