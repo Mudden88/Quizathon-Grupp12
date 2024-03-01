@@ -18,6 +18,7 @@ const currentScore = ref(0);
 const router = useRouter();
 const emit = defineEmits(["changedisabled"]);
 const disabledButton = ref(true);
+const disableAnswers = ref(false)
 
 const shuffledAnswers = computed(() => {
   if (
@@ -67,7 +68,11 @@ function shuffleArray(array) {
 function answerOnClick(index) {
   selectedAnswerIndex.value = index;
   disabledButton.value = false;
+
+
+
 }
+
 
 //Öka siffra efter varje fråga
 function newIndex() {
@@ -81,6 +86,7 @@ function getNewIndex() {
   if (currentIndex.value != 10) {
     selectedAnswerIndex.value = null;
     disabledButton.value = true;
+    isDisabled.value = false
     newIndex();
   }
   if (currentIndex.value === 10) {
@@ -94,6 +100,7 @@ function getNewIndex() {
 //annars får den ett nytt index och ny fråga dyker upp.
 const correctAnswerIndex = ref(null);
 const userAnswerCorrect = ref(null);
+const isDisabled = ref(false) // Svarsalternativen blir disabled efter tryck på confirm.
 
 function confirmClick() {
   const question = questions.value[currentIndex.value];
@@ -103,6 +110,7 @@ function confirmClick() {
   );
 
   correctAnswerIndex.value = correctIndex;
+  isDisabled.value = true
 
   if (selectedAnswer === question.correct_answer) {
     currentScore.value += 1;
@@ -141,10 +149,7 @@ clearScore();
           <hr />
           <p class="main-question" v-html="question.question"></p>
           <div class="answer-container">
-            <p
-              id="answer"
-              v-for="(answer, answerIndex) in shuffledAnswers"
-              :key="answer"
+            <button id="answer" v-for="(answer, answerIndex) in shuffledAnswers" :key="answer" :disabled="isDisabled"
               :class="{
                 selected: answerIndex === selectedAnswerIndex,
                 'correct-answer':
@@ -156,16 +161,9 @@ clearScore();
                 'correct-unselected':
                   correctAnswerIndex === answerIndex &&
                   userAnswerCorrect === false,
-              }"
-              @click="() => answerOnClick(answerIndex)"
-              v-html="answer"
-            ></p>
+              }" @click="() => answerOnClick(answerIndex)" v-html="answer"></button>
           </div>
-          <ConfirmButton
-            :disabledButton="disabledButton"
-            @Confirm="confirmClick"
-            @nextquestion="getNewIndex"
-          />
+          <ConfirmButton :disabledButton="disabledButton" @Confirm="confirmClick" @nextquestion="getNewIndex" />
         </div>
       </li>
     </ul>
@@ -237,6 +235,8 @@ h3 {
   margin: 10px;
   font-size: 36px;
   padding: 10px;
+  outline: 0;
+  border: none;
 }
 
 #answer:hover {
@@ -251,6 +251,16 @@ h3 {
   background-color: var(--Pop-color);
   box-shadow: 6px 5px 5px rgba(45, 78, 72, 0.25);
 }
+
+#answer:disabled {
+  background-color: var(--Accent-color);
+  cursor: default;
+  transform: none;
+}
+
+
+
+
 
 .difficulty {
   font-size: 20px;
