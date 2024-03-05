@@ -14,29 +14,35 @@
 
 <script>
 
-import users from "../users.json";
+import { usersRef } from "../firebase";
+import { onValue } from "firebase/database";
 
-export default {
+  export default {
   data() {
     return {
+      data: null,
       leaderboard: []
     };
   },
-  mounted() {
-    //Rendera leaderboard med data från JSON
-    for (const key in users) {
-      if (Object.hasOwnProperty.call(users, key)) {
-        const user = users[key];
+
+  created(){                                    //Rendera leaderboard med data från Firebase i realtid
+    onValue(usersRef, (snapshot) => {
+    this.data = snapshot.val();
+    console.log(this.data)
+    this.leaderboard = []
+    for (const key in this.data) {
+      console.log(key)
+      const user = this.data[key]
+      console.log(user)
         this.leaderboard.push({
           username: user.username,
           score: user.totalscore
         });
-      }
+        this.leaderboard.sort((a, b) => b.score - a.score);         //Sorterar användare i ordning efter poäng
     }
+})
+  },
 
-    //Sorterar användare i ordning efter poäng
-    this.leaderboard.sort((a, b) => b.score - a.score);
-  }
 };
 </script>
 
