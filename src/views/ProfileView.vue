@@ -1,36 +1,45 @@
 <script setup>
-
-import { useStorage } from '../storage'
-import { useRouter } from 'vue-router'
-import crown from '../assets/icons/crown-icon.png'
+import { useStorage } from "../storage";
+import { useRouter } from "vue-router";
+import { usersRef } from "../firebase";
+import { onValue } from "firebase/database";
+import { ref } from "vue";
+import crown from "../assets/icons/crown-icon.png";
 
 const fromStorage = useStorage();
-const router = useRouter()
-const userScore = JSON.parse(localStorage.getItem('userScore'))
+const router = useRouter();
+const userScore = JSON.parse(localStorage.getItem("userScore"));
+
+const data = ref(null);
+onValue(usersRef, (snapshot) => {
+  data.value = snapshot.val();
+});
 
 function logOut() {
   fromStorage.user = {
-    username: '',
+    username: "",
     isLoggedIn: false,
     score: null,
   };
   setTimeout(() => {
-    router.push('/login')
-  }, 1500)
+    router.push("/login");
+  }, 1500);
 }
-
-
 </script>
 
 <template>
-
   <div class="container">
-    <h1 id="profile-name"> {{ fromStorage.user.username }} Profile</h1>
-    <hr>
-    <div class="profile" v-if="fromStorage.user.isLoggedIn">
-      <img :src="crown" alt="crown-icon">
+    <h1 id="profile-name">Profile</h1>
+    <hr />
+    <div
+      class="profile"
+      v-if="fromStorage.user.isLoggedIn">
+      <img
+        :src="crown"
+        alt="crown-icon" />
       <h1>Username: {{ fromStorage.user.username }}</h1>
-      <h1>Latest Score: {{ userScore }}</h1>
+      <h2>Latest Score: {{ userScore }}</h2>
+      <h2>Total Score: {{ data[fromStorage.user.username].totalscore }}</h2>
       <button @click="logOut">Log out</button>
     </div>
     <h2 v-else>Please wait. You are being redirected...</h2>
@@ -41,7 +50,6 @@ function logOut() {
 .container {
   color: #272727;
   width: 370px;
-  height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +76,8 @@ img {
   border-radius: 40px;
 }
 
-h1, h2 {
+h1,
+h2 {
   padding: 20px;
 }
 
