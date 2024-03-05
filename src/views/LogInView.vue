@@ -73,7 +73,7 @@ function goToSignup() {
     class="message"
     v-show="loggedIn">
     <h1>Welcome {{ fromStorage.user.username }} !</h1>
-    <h2>Get redy to Quiz!</h2>
+    <h2>Get ready to Quiz!</h2>
     <ConfettiExplosion
       v-if="loggedIn"
       :particleCount="200"
