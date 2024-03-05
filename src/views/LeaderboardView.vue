@@ -51,7 +51,7 @@ li {
   display: flex;
   flex-direction: row;
   width: 300px;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .wrapper {
