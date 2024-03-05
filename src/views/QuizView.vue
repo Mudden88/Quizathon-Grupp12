@@ -20,7 +20,6 @@ const currentScore = ref(0);
 const router = useRouter();
 const emit = defineEmits(["changedisabled"]);
 const disabledButton = ref(true);
-const disableAnswers = ref(false); //ta bort, används ej
 
 const shuffledAnswers = computed(() => {
   if (
@@ -66,7 +65,6 @@ function shuffleArray(array) {
 }
 
 // tar emot index från svaren och tilldelar index som värde för att kunna hantera vilket svar som är klickat på.
-//Git-Ellen fixade disable button
 function answerOnClick(index) {
   selectedAnswerIndex.value = index;
   disabledButton.value = false;
@@ -149,7 +147,6 @@ function clearScore() {
   localStorage.removeItem("userScore");
 }
 setTimeout(fetchData, 3000);
-// fetchData();
 clearScore();
 </script>
 
@@ -167,16 +164,16 @@ clearScore();
             <span
               class="difficulty"
               v-html="question.difficulty"></span>
-            </p>
-            <div class="inner-container">
-          <p class="category">
-            <span v-html="question.category"></span>
           </p>
-          <p class="currentScore">Score: {{ currentScore }}</p>
-        </div>
+          <div class="inner-container">
+            <p class="category">
+              <span v-html="question.category"></span>
+            </p>
+            <p class="currentScore">Score: {{ currentScore }}</p>
+          </div>
           <hr />
           <div class="main-question">
-          <p v-html="question.question"></p>
+            <p v-html="question.question"></p>
           </div>
           <div class="answer-container">
             <button
@@ -317,7 +314,8 @@ h3 {
   transform: none;
 }
 
-.difficulty, question {
+.difficulty,
+question {
   font-size: 20px;
   color: #272727a3;
   margin-left: 12px;
@@ -332,7 +330,8 @@ h3 {
   flex-direction: column;
 }
 
-.currentScore, .category {
+.currentScore,
+.category {
   width: fit-content;
   padding: 0 10px;
   border-radius: 10px;
@@ -369,7 +368,7 @@ h3 {
   .main-question {
     width: 670px;
     text-align: center;
-}
+  }
 
   .question {
     width: 400px;

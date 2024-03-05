@@ -41,19 +41,27 @@ function playAgain() {
 }
 
 if (window.innerWidth <= 900) {
-  mobile.value = true
+  mobile.value = true;
 } else {
-  mobile.value = false
+  mobile.value = false;
 }
-
-
 </script>
 
 <template>
   <div class="container">
     <h1>{{ scoreMessage }}</h1>
-    <ConfettiExplosion v-if="mobile" :particleCount="200" :force="0.8" :stageHeight="500" :stageWidth="390" />
-    <ConfettiExplosion v-if="!mobile" :particleCount="800" :force="0.8" :stageHeight="1000" :stageWidth="1200" />
+    <ConfettiExplosion
+      v-if="mobile"
+      :particleCount="200"
+      :force="0.8"
+      :stageHeight="500"
+      :stageWidth="390" />
+    <ConfettiExplosion
+      v-if="!mobile"
+      :particleCount="800"
+      :force="0.8"
+      :stageHeight="1000"
+      :stageWidth="1200" />
     <hr />
     <h2>Your score is {{ userScore }}/10</h2>
     <button @click="playAgain">Play Again</button>

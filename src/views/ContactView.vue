@@ -30,8 +30,7 @@ function refreshPage() {
         label-prop="Name*"
         placeholder-prop="Name"
         id-prop="Name"
-        type-prop="text"
-      />
+        type-prop="text" />
     </div>
     <div>
       <InputField
@@ -39,15 +38,23 @@ function refreshPage() {
         placeholder-prop="Email"
         id-prop="email"
         type-prop="email"
-        @onInput="setEmail"
-      />
-      <p v-if="emailError" class="error-msg">Not a valid email</p>
+        @onInput="setEmail" />
+      <p
+        v-if="emailError"
+        class="error-msg">
+        Not a valid email
+      </p>
     </div>
     <div class="input-wrapper">
       <label class="label">Message*</label>
-      <textarea class="input-field" placeholder="Message"></textarea>
+      <textarea
+        class="input-field"
+        placeholder="Message"></textarea>
     </div>
-    <button type="button" class="send-btn" @click="refreshPage()">
+    <button
+      type="button"
+      class="send-btn"
+      @click="refreshPage()">
       Send Message
     </button>
   </form>

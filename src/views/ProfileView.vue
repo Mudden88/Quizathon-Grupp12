@@ -17,8 +17,6 @@ onValue(usersRef, (snapshot) => {
   totalscore.value = data.value[fromStorage.user.username].totalscore;
 });
 
-// console.log(user);
-
 function logOut() {
   fromStorage.user = {
     username: "",
@@ -52,7 +50,7 @@ function logOut() {
 
 <style scoped>
 .container {
-  color: #272727;
+  color: var(--Dark-color);
   width: 370px;
   display: flex;
   flex-direction: column;

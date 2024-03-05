@@ -7,8 +7,6 @@ import App from "./App.vue";
 import router from "./router";
 import { firebaseApp } from "./firebase";
 
-
-
 const pinia = createPinia();
 
 watch(

@@ -190,7 +190,6 @@ h1 {
   border: none;
   border-radius: 20px;
   background-color: var(--Main-lighter-color);
-
   color: var(--Light-color);
   font-size: 2.25rem;
 

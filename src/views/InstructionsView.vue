@@ -12,9 +12,10 @@
   <picture>
     <source
       srcset="/src/assets/instructions_img/desktopstart.png"
-      media="(min-width: 800px)"
-    />
-    <img src="/src/assets/instructions_img/mobilestart.png" alt="Screenshot of mobile-version" />
+      media="(min-width: 800px)" />
+    <img
+      src="/src/assets/instructions_img/mobilestart.png"
+      alt="Screenshot of mobile-version" />
   </picture>
   <hr />
   <p>
@@ -25,20 +26,17 @@
   <img
     class="desktop-img"
     src="/src/assets/instructions_img/selectdifficulty.png"
-    alt="Screenshot of how to select difficulty"
-  />
+    alt="Screenshot of how to select difficulty" />
   <hr />
   <p>3. Now, select your answer by clicking on one of the provided options.</p>
   <picture>
     <source
       srcset="/src/assets/instructions_img/quizstartdesktop.png"
-      media="(min-width: 800px)"
-    />
+      media="(min-width: 800px)" />
     <img
       class="desktop-img-alt"
       src="/src/assets/instructions_img/quizstart.png"
-      alt="Screenshot of started quiz"
-    />
+      alt="Screenshot of started quiz" />
   </picture>
   <hr />
   <p>
@@ -47,13 +45,11 @@
   <picture>
     <source
       srcset="/src/assets/instructions_img/quizselectdesktop.png"
-      media="(min-width: 800px)"
-    />
+      media="(min-width: 800px)" />
     <img
       class="desktop-img-alt"
       src="/src/assets/instructions_img/quizselect.png"
-      alt="Screenshot of selected quiz"
-    />
+      alt="Screenshot of selected quiz" />
   </picture>
   <hr />
   <p>
@@ -64,25 +60,21 @@
   <picture>
     <source
       srcset="/src/assets/instructions_img/quizcorrectdesktop.png"
-      media="(min-width: 800px)"
-    />
+      media="(min-width: 800px)" />
     <img
       class="desktop-img-alt"
       src="/src/assets/instructions_img/quizcorrect.png"
-      alt="Screenshot of right answer"
-    />
+      alt="Screenshot of right answer" />
   </picture>
   <p class="description">Incorrect answer</p>
   <picture>
     <source
       srcset="/src/assets/instructions_img/quizwrongdesktop.png"
-      media="(min-width: 800px)"
-    />
+      media="(min-width: 800px)" />
     <img
       class="desktop-img-alt"
       src="/src/assets/instructions_img/quizwrong.png"
-      alt="Screenshot of wrong answer"
-    />
+      alt="Screenshot of wrong answer" />
   </picture>
   <hr />
   <p>
@@ -92,8 +84,7 @@
   <img
     class="desktop-img"
     src="/src/assets/instructions_img/quizsummary.png"
-    alt="Screenshot of Quiz-summary"
-  />
+    alt="Screenshot of Quiz-summary" />
 </template>
 
 <style scoped>
@@ -134,17 +125,8 @@ hr {
 img {
   width: 300px;
   padding: 20px;
-  /* border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-  border: solid 2px var(--Main-color); */
   margin-bottom: 10px;
 }
-
-/* @media (min-width: 900px) {
-  p {
-    font-size: 20px;
-    width: 40rem;
-  }
-} */
 
 @media (min-width: 800px) {
   p {

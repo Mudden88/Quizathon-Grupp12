@@ -193,6 +193,7 @@ function goToSignup() {
   border-radius: 13px;
   background-color: var(--Accent-color);
   cursor: pointer;
+
   &:focus {
     outline: 3px solid var(--Accent-color);
   }
@@ -217,6 +218,7 @@ function goToSignup() {
   color: var(--Main-color);
   padding: 8px 50px;
   cursor: pointer;
+
   &:hover {
     box-shadow: 4px 4px 6px #27272730 inset;
   }

@@ -28,12 +28,9 @@ async function fetchCategoryName() {
     `https://opentdb.com/api.php?amount=1&category=${categoryId}`
   );
   categoryName.value = response.data.results[0].category;
-  console.log("Kategorinamn:", categoryName.value);
 }
 
 onMounted(fetchCategoryName);
-
-console.log("Kategori-ID:", categoryId);
 </script>
 
 <template>
@@ -100,7 +97,7 @@ console.log("Kategori-ID:", categoryId);
 
 .instructions {
   font-size: 18px;
-  color: #272727;
+  color: var(--Dark-color);
   width: 300px;
   text-align: center;
 }

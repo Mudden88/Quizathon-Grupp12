@@ -43,8 +43,7 @@ onMounted(fetchCategories);
         :key="category.id"
         :id="category.id"
         :title="category.name"
-        @selectCategory="handleCategorySelect"
-      />
+        @selectCategory="handleCategorySelect" />
     </div>
   </div>
 </template>

@@ -13,7 +13,7 @@ defineProps({
 h2 {
   margin-top: 40px;
   margin-bottom: 10px;
-  color: #272727;
+  color: var(--Dark-color);
   font-size: 30px;
 }
 

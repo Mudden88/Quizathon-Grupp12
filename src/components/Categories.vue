@@ -13,7 +13,9 @@ function selectCategory() {
 </script>
 
 <template>
-  <div class="container" @click="selectCategory">
+  <div
+    class="container"
+    @click="selectCategory">
     <h2>{{ title }}</h2>
   </div>
 </template>

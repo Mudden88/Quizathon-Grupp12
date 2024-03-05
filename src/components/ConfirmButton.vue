@@ -1,35 +1,42 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 
-const displayConfirm = ref(true)
-const displayNext = ref(false)
-// const disabledButton = ref(true)
+const displayConfirm = ref(true);
+const displayNext = ref(false);
 
-
-const emit = defineEmits(['confirm', 'nextquestion'])
+const emit = defineEmits(["confirm", "nextquestion"]);
 const props = defineProps({
   disabledButton: {
-    type: Boolean
-  }
-})
+    type: Boolean,
+  },
+});
 
 function switchButton() {
-  displayConfirm.value = false
-  displayNext.value = true
-  emit('confirm')
+  displayConfirm.value = false;
+  displayNext.value = true;
+  emit("confirm");
 }
 
 function emitNext() {
-  emit('nextquestion')
+  emit("nextquestion");
 }
-
 </script>
 
 <template>
   <div>
-    <button id="button" :disabled="disabledButton" @click="switchButton" v-if="displayConfirm">Confirm
+    <button
+      id="button"
+      :disabled="disabledButton"
+      @click="switchButton"
+      v-if="displayConfirm">
+      Confirm
     </button>
-    <button id="button" @click="emitNext" v-if="displayNext">Next</button>
+    <button
+      id="button"
+      @click="emitNext"
+      v-if="displayNext">
+      Next
+    </button>
   </div>
 </template>
 
@@ -53,8 +60,6 @@ function emitNext() {
     opacity: 30%;
   }
 }
-
-
 
 #button:active {
   transform: scale(1.1);

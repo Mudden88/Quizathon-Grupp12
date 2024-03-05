@@ -20,7 +20,6 @@ async function fetchCategories() {
   try {
     const response = await axios.get("https://opentdb.com/api_category.php");
     categories.value = response.data.trivia_categories;
-    // console.log(categories.value);
   } catch (error) {
     console.error("Error fetching categories:", error);
   }
@@ -40,19 +39,19 @@ onMounted(fetchCategories);
 <template>
   <div class="container">
     <SectionHeader header="All Categories" />
-    <div class="cat-container" ref="catContainer">
+    <div
+      class="cat-container"
+      ref="catContainer">
       <Categories
         v-for="category in displayedCategories"
         :key="category.id"
         :id="category.id"
         :title="category.name"
-        @selectCategory="handleCategorySelect"
-      />
+        @selectCategory="handleCategorySelect" />
     </div>
     <button
       @click="showMoreCategories"
-      v-if="visibleCategories < categories.length"
-    >
+      v-if="visibleCategories < categories.length">
       Show more
     </button>
   </div>
@@ -78,7 +77,6 @@ button {
   background-color: var(--Accent-color);
   border: none;
   cursor: pointer;
-  /* box-shadow: 3px 3px 3px rgba(45, 78, 72, 0.25); */
 }
 
 button:hover {

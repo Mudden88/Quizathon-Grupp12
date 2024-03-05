@@ -45,7 +45,6 @@ const props = defineProps({
   font-size: 1.1rem;
   color: var(--Dark-color);
   padding: 12px;
-
   width: 290px;
   height: 54px;
   border: none;

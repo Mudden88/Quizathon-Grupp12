@@ -1,39 +1,41 @@
 <script setup>
-import { ref, } from "vue";
+import { ref } from "vue";
 import { usersRef } from "../firebase";
 import { onValue } from "firebase/database";
 
-const data = ref(null)
-const leaderboard = ref([])
-
+const data = ref(null);
+const leaderboard = ref([]);
 
 onValue(usersRef, (snapshot) => {
   data.value = snapshot.val();
   for (const key in data.value) {
-    const user = data.value[key]
+    const user = data.value[key];
     leaderboard.value.push({
       username: user.username,
-      score: user.totalscore
+      score: user.totalscore,
     });
-    leaderboard.value.sort((a, b) => b.score - a.score);         //Sorterar användare i ordning efter poäng
+    leaderboard.value.sort((a, b) => b.score - a.score); //Sorterar användare i ordning efter poäng
   }
-})
-
+});
 </script>
 
 <template>
   <div>
     <h1>Leaderboard</h1>
-    <hr>
+    <hr />
     <div class="wrapper">
-      <ul class="leaderboard" v-for="(user, index) in leaderboard" :key="index">
+      <ul
+        class="leaderboard"
+        v-for="(user, index) in leaderboard"
+        :key="index">
         <li>
-
-          <p class="position">{{ index + 1 }}.</p> <!--Position/Rankning-->
-          <p class="username">{{ user.username }}</p> <!--Användarnamn-->
+          <p class="position">{{ index + 1 }}.</p>
+          <!--Position/Rankning-->
+          <p class="username">{{ user.username }}</p>
+          <!--Användarnamn-->
           <p class="score">{{ user.score }}p</p>
         </li>
-        <hr class="hr2">
+        <hr class="hr2" />
       </ul>
     </div>
   </div>
@@ -58,7 +60,7 @@ li {
   background-color: var(--Main-lighter-color);
   padding: 30px;
   border-radius: 30px;
-  color: #EEF1EF;
+  color: #eef1ef;
 }
 
 .hr2 {

@@ -68,21 +68,23 @@ window.addEventListener("click", clickOutside);
           @click="toggleBurgerNav"
           :src="icon"
           alt="Burger-icon"
-          v-show="mobile"
-        />
+          v-show="mobile" />
         <img
           @click="goHome"
           id="logo"
           src="../assets/quizathon-logo.png"
-          alt="Logo"
-        />
+          alt="Logo" />
 
-        <ul class="navigation" v-show="!mobile">
+        <ul
+          class="navigation"
+          v-show="!mobile">
           <div class="desktop-links">
             <li>
               <RouterLink to="/"
                 >Home
-                <img src="../assets/icons/house-icon.png" alt="House-icon" />
+                <img
+                  src="../assets/icons/house-icon.png"
+                  alt="House-icon" />
               </RouterLink>
             </li>
           </div>
@@ -90,14 +92,19 @@ window.addEventListener("click", clickOutside);
             <li>
               <RouterLink to="/instructions"
                 >Instructions
-                <img src="../assets/icons/instructions-icon.png" alt="Book-icon" />
+                <img
+                  src="../assets/icons/instructions-icon.png"
+                  alt="Book-icon" />
               </RouterLink>
             </li>
           </div>
           <div class="desktop-links">
             <li>
               <a @click="userLogin"
-                >Profile <img src="../assets/icons/profile-icon.png" alt="Profile-icon"
+                >Profile
+                <img
+                  src="../assets/icons/profile-icon.png"
+                  alt="Profile-icon"
               /></a>
             </li>
           </div>
@@ -105,7 +112,9 @@ window.addEventListener("click", clickOutside);
             <li>
               <RouterLink to="/leaderboard"
                 >Leaderboard
-                <img src="../assets/icons/crown-icon.png" alt="Crown-icon" />
+                <img
+                  src="../assets/icons/crown-icon.png"
+                  alt="Crown-icon" />
               </RouterLink>
             </li>
           </div>
@@ -113,7 +122,9 @@ window.addEventListener("click", clickOutside);
             <li>
               <RouterLink to="/contact"
                 >Contact
-                <img src="../assets/icons/letter-icon.png" alt="Letter-icon" />
+                <img
+                  src="../assets/icons/letter-icon.png"
+                  alt="Letter-icon" />
               </RouterLink>
             </li>
           </div>
@@ -122,38 +133,56 @@ window.addEventListener("click", clickOutside);
           <img
             id="profile"
             src="../assets/icons/profile-outline-icon.png"
-            alt="Profile-icon"
-          >
+            alt="Profile-icon" />
         </a>
       </div>
 
-      <ul class="dropdown-nav" v-show="mobileNav">
-        <li @click="toggleBurgerNav" class="icons">
+      <ul
+        class="dropdown-nav"
+        v-show="mobileNav">
+        <li
+          @click="toggleBurgerNav"
+          class="icons">
           <RouterLink to="/"
-            >Home<img src="../assets/icons/house-icon.png" alt="House-icon" />
+            >Home<img
+              src="../assets/icons/house-icon.png"
+              alt="House-icon" />
           </RouterLink>
         </li>
-        <li @click="toggleBurgerNav" class="icons">
+        <li
+          @click="toggleBurgerNav"
+          class="icons">
           <RouterLink to="/instructions"
             >Instructions<img
               src="../assets/icons/instructions-icon.png"
-              alt="Book-icon"
-            />
+              alt="Book-icon" />
           </RouterLink>
         </li>
-        <li @click="toggleBurgerNav" class="icons">
+        <li
+          @click="toggleBurgerNav"
+          class="icons">
           <a @click="userLogin"
-            >Profile<img src="../assets/icons/profile-icon.png" alt="Profile-icon" />
+            >Profile<img
+              src="../assets/icons/profile-icon.png"
+              alt="Profile-icon" />
           </a>
         </li>
-        <li @click="toggleBurgerNav" class="icons">
+        <li
+          @click="toggleBurgerNav"
+          class="icons">
           <RouterLink to="/leaderboard"
-            >Leaderboard<img src="../assets/icons/crown-icon.png" alt="Crown-icon" />
+            >Leaderboard<img
+              src="../assets/icons/crown-icon.png"
+              alt="Crown-icon" />
           </RouterLink>
         </li>
-        <li @click="toggleBurgerNav" class="icons">
+        <li
+          @click="toggleBurgerNav"
+          class="icons">
           <RouterLink to="/contact"
-            >Contact<img src="../assets/icons/letter-icon.png" alt="Letter-icon"
+            >Contact<img
+              src="../assets/icons/letter-icon.png"
+              alt="Letter-icon"
           /></RouterLink>
         </li>
       </ul>
@@ -206,7 +235,6 @@ li:active {
 
 .logos {
   position: sticky;
-  /* width: 100vw; */
   display: flex;
   align-items: center;
   justify-content: space-between;
