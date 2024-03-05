@@ -63,16 +63,18 @@ li {
 
 .hr2 {
   margin: 5px 0 10px 0;
-  }
+  width: inherit;
+}
+
 .score {
   margin-left: auto;
 }
 
 .position {
-  width: 50px;
+  margin-right: 10px;
 }
+
 .leaderboard {
-  position: relative;
   display: flex;
   width: 300px;
   flex-direction: column;
