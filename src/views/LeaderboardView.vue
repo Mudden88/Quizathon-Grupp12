@@ -23,18 +23,47 @@ onValue(usersRef, (snapshot) => {
 <template>
   <div>
     <h1>Leaderboard</h1>
-    <ul class="leaderboard">
-      <li v-for="(user, index) in leaderboard" :key="index" class="leaderboard-item">
-        <div class="position">{{ index + 1 }}.</div> <!--Position/Rankning-->
-        <div class="picture"></div> <!--Profilbild-->
-        <div class="username">{{ user.username }}</div> <!--Användarnamn-->
-        <div class="score">{{ user.score }}p</div> <!--Poäng-->
-      </li>
-    </ul>
+    <hr>
+    <div class="wrapper">
+      <ul class="leaderboard" v-for="(user, index) in leaderboard" :key="index">
+        <li>
+
+          <p class="position">{{ index + 1 }}.</p> <!--Position/Rankning-->
+          <p class="username">{{ user.username }}</p> <!--Användarnamn-->
+          <p class="score">{{ user.score }}p</p>
+        </li>
+        <hr class="hr2">
+      </ul>
+    </div>
   </div>
 </template>
 
 <style scoped>
+hr {
+  margin: 10px;
+  height: 1px;
+  color: var(--Main-color);
+  opacity: 30%;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  font-size: 20px;
+}
+
+.wrapper {
+  background-color: var(--Main-lighter-color);
+  padding: 30px;
+  border-radius: 30px;
+  color: #EEF1EF;
+}
+
+.hr2 {
+  margin: 5px 0 10px 0;
+}
+
 h1 {
   color: var(--Main-color);
   font-size: 32px;
@@ -46,21 +75,6 @@ h1 {
 }
 
 .position {
-  width: 50px;
-}
-
-.leaderboard {
-  position: relative;
-  display: flex;
-  width: 300px;
-  flex-direction: column;
-  padding: 10px;
-
-}
-
-.leaderboard-item {
-  display: flex;
-  border-bottom: 1px solid #ccc;
-  padding: 10px;
+  margin-right: 10px;
 }
 </style>
