@@ -75,7 +75,6 @@ function answerOnClick(index) {
 // Funktion som lägger till poäng till firebase
 const user = ref(JSON.parse(localStorage.getItem("user"))),
   username = ref(user.value.user.username),
-  userScore = ref(JSON.parse(localStorage.getItem("userScore"))),
   data = ref(null),
   oldScore = ref(null),
   totalScore = ref(null);
@@ -86,7 +85,7 @@ onValue(usersRef, (snapshot) => {
 });
 
 function setTotalScore() {
-  totalScore.value = oldScore.value + userScore.value;
+  totalScore.value = oldScore.value + currentScore.value;
 
   const updates = {};
   updates[`/users/${username.value}/totalscore`] = totalScore.value;
