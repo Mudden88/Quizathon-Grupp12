@@ -18,6 +18,7 @@ onValue(usersRef, (snapshot) => {
     leaderboard.value.sort((a, b) => b.score - a.score);         //Sorterar användare i ordning efter poäng
   }
 })
+
 </script>
 
 <template>
@@ -62,19 +63,25 @@ li {
 
 .hr2 {
   margin: 5px 0 10px 0;
+  }
+.score {
+  margin-left: auto;
+}
+
+.position {
+  width: 50px;
+}
+.leaderboard {
+  position: relative;
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  padding: 10px;
 }
 
 h1 {
   color: var(--Main-color);
   font-size: 32px;
   text-align: center;
-}
-
-.score {
-  margin-left: auto;
-}
-
-.position {
-  margin-right: 10px;
 }
 </style>

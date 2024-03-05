@@ -162,20 +162,22 @@ clearScore();
         <div
           class="check-index"
           v-if="index === currentIndex">
-          <p>
+          <p class="question">
             Question: {{ index + 1 }}/10
             <span
               class="difficulty"
               v-html="question.difficulty"></span>
-          </p>
+            </p>
+            <div class="inner-container">
           <p class="category">
-            Category: <span v-html="question.category"></span>
+            <span v-html="question.category"></span>
           </p>
-          <p class="currentScore">Score: {{ currentScore }} /10</p>
+          <p class="currentScore">Score: {{ currentScore }}</p>
+        </div>
           <hr />
-          <p
-            class="main-question"
-            v-html="question.question"></p>
+          <div class="main-question">
+          <p v-html="question.question"></p>
+          </div>
           <div class="answer-container">
             <button
               id="answer"
@@ -224,6 +226,12 @@ clearScore();
   margin-top: 10px;
 }
 
+.inner-container {
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+}
+
 ul {
   list-style-type: none;
 }
@@ -239,12 +247,22 @@ hr {
 
 p {
   font-size: 32px;
+  font-weight: 300;
   margin: 0;
   color: var(--Dark-color);
+  text-align: center;
 }
 
 .main-question {
-  color: var(--Main-color);
+  background-color: var(--Main-lighter-color);
+  width: 320px;
+  padding: 30px;
+  border-radius: 25px;
+}
+
+.main-question > p {
+  color: var(--Light-color);
+  font-weight: 400;
 }
 
 h3 {
@@ -266,7 +284,7 @@ h3 {
 
 #answer {
   width: 321px;
-  min-height: 63px;
+  min-height: 60px;
   background-color: var(--Accent-color);
   border-radius: 20px;
   display: flex;
@@ -274,7 +292,7 @@ h3 {
   align-items: center;
   cursor: pointer;
   margin: 10px;
-  font-size: 36px;
+  font-size: 32px;
   padding: 10px;
   outline: 0;
   border: none;
@@ -299,23 +317,27 @@ h3 {
   transform: none;
 }
 
-.difficulty {
+.difficulty, question {
   font-size: 20px;
-  color: var(--Accent-color);
+  color: #272727a3;
+  margin-left: 12px;
 }
 
-.currentScore {
+.question {
   background-color: var(--Pop-color);
+  color: #272727;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.currentScore, .category {
   width: fit-content;
   padding: 0 10px;
   border-radius: 10px;
   margin: auto;
   margin-top: 8px;
-}
-
-.category {
-  font-size: 25px;
-  margin-top: 6px;
 }
 
 .correct-answer {
@@ -342,6 +364,15 @@ h3 {
 
   .container {
     width: 100%;
+  }
+
+  .main-question {
+    width: 670px;
+    text-align: center;
+}
+
+  .question {
+    width: 400px;
   }
 }
 </style>
