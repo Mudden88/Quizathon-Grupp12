@@ -4,7 +4,6 @@ import router from "../router.js";
 import { useStorage } from "../storage";
 import ConfettiExplosion from "vue-confetti-explosion";
 import InputField from "../components/InputField.vue";
-// import users from "../users.json";
 import { usersRef } from "../firebase";
 import { onValue } from "firebase/database";
 
@@ -14,7 +13,6 @@ const data = ref(null);
 onValue(usersRef, (snapshot) => {
   data.value = snapshot.val();
 });
-import users from "../users.json";
 
 const error = ref(false),
   inputUserName = ref(""),
