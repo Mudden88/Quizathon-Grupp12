@@ -9,11 +9,15 @@ import crown from "../assets/icons/crown-icon.png";
 const fromStorage = useStorage();
 const router = useRouter();
 const userScore = JSON.parse(localStorage.getItem("userScore"));
+const totalscore = ref(null);
 
 const data = ref(null);
 onValue(usersRef, (snapshot) => {
   data.value = snapshot.val();
+  totalscore.value = data.value[fromStorage.user.username].totalscore;
 });
+
+// console.log(user);
 
 function logOut() {
   fromStorage.user = {
@@ -39,7 +43,7 @@ function logOut() {
         alt="crown-icon" />
       <h1>Username: {{ fromStorage.user.username }}</h1>
       <h2>Latest Score: {{ userScore }}</h2>
-      <h2>Total Score: {{ data[fromStorage.user.username].totalscore }}</h2>
+      <h2>Total Score: {{ totalscore }}</h2>
       <button @click="logOut">Log out</button>
     </div>
     <h2 v-else>Please wait. You are being redirected...</h2>
