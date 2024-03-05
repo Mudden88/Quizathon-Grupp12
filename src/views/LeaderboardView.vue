@@ -1,65 +1,54 @@
+<script setup>
+import { ref, } from "vue";
+import { usersRef } from "../firebase";
+import { onValue } from "firebase/database";
+
+const data = ref(null)
+const leaderboard = ref([])
+
+
+onValue(usersRef, (snapshot) => {
+  data.value = snapshot.val();
+  for (const key in data.value) {
+    const user = data.value[key]
+    leaderboard.value.push({
+      username: user.username,
+      score: user.totalscore
+    });
+    leaderboard.value.sort((a, b) => b.score - a.score);         //Sorterar användare i ordning efter poäng
+  }
+})
+</script>
+
 <template>
   <div>
     <h1>Leaderboard</h1>
     <ul class="leaderboard">
       <li v-for="(user, index) in leaderboard" :key="index" class="leaderboard-item">
-      <div class="position">{{ index + 1 }}.</div>        <!--Position/Rankning-->
-      <div class="picture"></div>                         <!--Profilbild-->
-      <div class="username">{{ user.username }}</div>     <!--Användarnamn-->
-      <div class="score">{{ user.score }}p</div>          <!--Poäng-->
-    </li>
-  </ul>
+        <div class="position">{{ index + 1 }}.</div> <!--Position/Rankning-->
+        <div class="picture"></div> <!--Profilbild-->
+        <div class="username">{{ user.username }}</div> <!--Användarnamn-->
+        <div class="score">{{ user.score }}p</div> <!--Poäng-->
+      </li>
+    </ul>
   </div>
 </template>
 
-<script>
-
-import { usersRef } from "../firebase";
-import { onValue } from "firebase/database";
-
-  export default {
-  data() {
-    return {
-      data: null,
-      leaderboard: []
-    };
-  },
-
-  created(){                                    //Rendera leaderboard med data från Firebase i realtid
-    onValue(usersRef, (snapshot) => {
-    this.data = snapshot.val();
-    console.log(this.data)
-    this.leaderboard = []
-    for (const key in this.data) {
-      console.log(key)
-      const user = this.data[key]
-      console.log(user)
-        this.leaderboard.push({
-          username: user.username,
-          score: user.totalscore
-        });
-        this.leaderboard.sort((a, b) => b.score - a.score);         //Sorterar användare i ordning efter poäng
-    }
-})
-  },
-
-};
-</script>
-
 <style scoped>
-/* Style lokal */
 h1 {
-  color: #333;
-  font-size: 24px;
+  color: var(--Main-color);
+  font-size: 32px;
+  text-align: center;
 }
 
-.score{
+.score {
   margin-left: auto;
 }
 
-.position{
+.position {
   width: 50px;
 }
+
 .leaderboard {
   position: relative;
   display: flex;
